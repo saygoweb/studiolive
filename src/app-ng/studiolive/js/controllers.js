@@ -8,7 +8,7 @@ function projectIdFromLocation(location) {
 
 /* Controllers */
 var app = angular.module(
-		'projectAdmin.controllers',
+		'sgwStudioLive.controllers',
 		[ 'sf.services', 'palaso.ui.listview', 'palaso.ui.typeahead', 'ui.bootstrap' ]
 	)
 	.controller('ProjectUsersCtrl', ['$scope', '$location', 'userService', 'projectService', function($scope, $location, userService, projectService) {

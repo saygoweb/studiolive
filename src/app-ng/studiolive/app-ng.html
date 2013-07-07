@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" ng-app="sgwStudioLive">
+<head>
+	<meta charset="utf-8">
+	<title>Studio Live</title>
+	<link rel="stylesheet" href="css/app.css" />
+	<script src="/js/lib/jquery-1.8.0.min.js"></script></head>
+</head>
+<body>
+  <ul class="menu">
+    <li><a href="#/view1">view1</a></li>
+    <li><a href="#/view2">view2</a></li>
+  </ul>
+
+  <div ng-view></div>
+
+  <div>Angular seed app: v<span app-version></span></div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  -->
+<script	src="/js/lib/angular_stable_1.0.7/angular.js"></script>
+<script	src="/js/lib/ng-ui-bootstrap-tpls-0.4.0.js"></script>
+
+<script src="/app-ng/common/js/error.js"></script>
+<script src="/app-ng/common/js/jsonrpc.js"></script>
+<script src="/app-ng/common/js/listview.js"></script>
+<script src="/app-ng/common/js/services.js"></script>
+<script src="/app-ng/common/js/typeahead.js"></script>
+
+<script	src="/app-ng/studiolive/js/app.js"></script>
+<script	src="/app-ng/studiolive/js/controllers.js"></script>
+<script	src="/app-ng/studiolive/js/directives.js"></script>
+<script	src="/app-ng/studiolive/js/filters.js"></script>
+<script	src="/app-ng/studiolive/js/services.js"></script>
+</body>
+</html>
