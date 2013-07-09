@@ -1,18 +1,11 @@
 'use strict';
 
-function projectIdFromLocation(location) {
-	var url = location.absUrl();
-	var slashIndex = url.lastIndexOf('/');
-	return url.substr(slashIndex + 1);
-}
-
 /* Controllers */
 var app = angular.module(
 		'sgwStudioLive.controllers',
-		[ 'sf.services', 'palaso.ui.listview', 'palaso.ui.typeahead', 'ui.bootstrap' ]
+		[ 'sl.services', 'palaso.ui.listview', 'palaso.ui.typeahead', 'ui.bootstrap' ]
 	)
-	.controller('ProjectUsersCtrl', ['$scope', '$location', 'userService', 'projectService', function($scope, $location, userService, projectService) {
-		$scope.projectId = projectIdFromLocation($location);
+	.controller('ShowsCtrl', ['$scope', 'showService', function($scope, showService) {
 		$scope.selected = [];
 		$scope.updateSelection = function(event, item) {
 			var selectedIndex = $scope.selected.indexOf(item);
@@ -27,29 +20,29 @@ var app = angular.module(
 			return item != null && $scope.selected.indexOf(item) >= 0;
 		};
 		
-		$scope.users = [];
-		$scope.queryProjectUsers = function() {
-			projectService.listUsers($scope.projectId, function(result) {
+		$scope.shows = [];
+		$scope.queryShows = function() {
+			showService.list(function(result) {
 				if (result.ok) {
-					$scope.projectusers = result.data.entries;
-					$scope.projectUserCount = result.data.count;
+					$scope.shows = result.data.entries;
+					$scope.showCount = result.data.count;
 				}
 			});
 		};
 		
-		$scope.removeProjectUsers = function() {
-			console.log("removeUsers");
-			var userIds = [];
+		$scope.removeShows = function() {
+			console.log("removeShows");
+			var showIds = [];
 			for(var i = 0, l = $scope.selected.length; i < l; i++) {
-				userIds.push($scope.selected[i].id);
+				showIds.push($scope.selected[i].id);
 			}
 			if (l == 0) {
 				// TODO ERROR
 				return;
 			}
-			projectService.removeUsers($scope.projectId, userIds, function(result) {
+			showService.removeShows(showIds, function(result) {
 				if (result.ok) {
-					$scope.queryProjectUsers();
+					$scope.queryShows();
 					// TODO
 				}
 			});
@@ -59,7 +52,6 @@ var app = angular.module(
 			console.log("Called selectUser(", item, ")");
 		};
 		
-	    $scope.users = [];
 	    $scope.addModes = {
 	    	'addNew': { 'en': 'Create New', 'icon': 'icon-user'},
 	    	'addExisting' : { 'en': 'Add Existing', 'icon': 'icon-user'},

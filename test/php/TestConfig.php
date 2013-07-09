@@ -4,17 +4,13 @@ $rootPath = realpath(dirname(__FILE__) . '/../../') . '/';
 
 //define('TestMode', true);
 
-define('TestPath', $rootPath . 'test/php/');
-define('TestLibPath', $rootPath . 'test/lib/');
-define('SimpleTestPath', $rootPath . 'test/lib/simpletest/');
-define('SourcePath', $rootPath . 'src/');
+define('TEST_PATH', $rootPath . 'test/php/');
+define('TEST_LIB_PATH', $rootPath . 'test/lib/');
+define('SIMPLE_TEST_PATH', $rootPath . 'test/lib/simpletest/');
 
-// Fake some CodeIgniter path defines
-define('APPPATH', $rootPath . 'src/');
-define('BASEPATH', $rootPath . 'lib/CodeIgniter_2.1.3/system/');
+define('SL_DATABASE', 'studiolive_test');
 
-require_once(APPPATH . 'helpers/loader_helper.php');
+require_once($rootPath . 'src/api/Config.php');
 
-define('SF_DATABASE', 'scriptureforge_test');
 
 ?>

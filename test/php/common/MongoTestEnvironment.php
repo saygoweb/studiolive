@@ -1,7 +1,5 @@
 <?php
 
-require_once(APPPATH . 'libraries/sf/MongoMapper.php');
-
 class MongoTestEnvironment
 {
 	
@@ -12,7 +10,7 @@ class MongoTestEnvironment
 	
 	public function __construct()
 	{
-		$this->_db = \libraries\sf\MongoStore::connect(SF_DATABASE);
+		$this->_db = \models\mapper\MongoStore::connect(SL_DATABASE);
 	}
 
 	/**
@@ -52,17 +50,6 @@ class MongoTestEnvironment
 		$userModel->name = $name;
 		$userModel->email = $email;
 		return $userModel->write();
-	}
-	
-	/**
-	 * Writes a project to the projects collection.
-	 * @param strinbg $name
-	 * @return string id
-	 */
-	public function createProject($name) {
-		$projectModel = new models\ProjectModel();
-		$projectModel->projectname = $name;
-		return $projectModel->write();
 	}
 	
 	public function inhibitErrorDisplay() {

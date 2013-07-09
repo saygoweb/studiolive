@@ -1,136 +1,63 @@
 <?php
 
-require_once(APPPATH . 'libraries/Bcrypt.php');
+require_once(dirname(__FILE__) . '/Config.php');
 
-require_once(APPPATH . 'models/UserModel.php');
-require_once(APPPATH . 'models/ProjectModel.php');
+use lib\JsonRpcServer;
 
-use libraries\sf\JsonRpcServer;
-
-class Sf
+class StudioLiveAPI
 {
 	
 	public function __construct()
 	{
-		$CI =& get_instance();
-		$CI->load->library('bcrypt',8); // Might increase this at some future date to increase PW hashing time
-		// TODO put in the LanguageForge style error handler for logging / jsonrpc return formatting etc. CP 2013-07
+		// TODO put in the LF style error handler for logging / jsonrpc return formatting etc. CP 2013-07
 		ini_set('display_errors', 0);
 	}
 
 	/**
 	 * Create/Update a User
-	 * @param UserModel $json
+	 * @param ShowModel $json
 	 * @return string Id of written object
 	 */
-	public function user_update($params) {
-		$user = new \models\UserModel();
-		JsonRpcServer::decode($user, $params);
-		$result = $user->write();
+	public function show_update($params) {
+		$show = new \models\ShowModel();
+		JsonRpcServer::decode($show, $params);
+		$result = $show->write();
 		return $result;
 	}
 
 	/**
-	 * Read a user from the given $id
+	 * Read a show from the given $id
 	 * @param string $id
 	 */
-	public function user_read($id) {
-		$user = new \models\UserModel($id);
-		return $user;
+	public function show_read($id) {
+		$show = new \models\ShowModel($id);
+		return $show;
 	}
 	
 	/**
-	 * Delete a user record
+	 * Delete a show
 	 * @param string $id
 	 * @return string Id of deleted record
 	 */
- 	public function user_delete($id) {
- 		\models\UserModel::remove($id);
-		return true;
- 	}
-
-	// TODO Pretty sure this is going to want some paging params
-	public function user_list() {
-		$list = new \models\UserListModel();
-		$list->read();
-		return $list;
-	}
-	
-	public function user_typeahead($term) {
-		$list = new \models\UserTypeaheadModel($term);
-		$list->read();
-		return $list;
-	}
-	
-	/**
-	 * Create/Update a Project
-	 * @param ProjectModel $json
-	 * @return string Id of written object
-	 */
-	public function project_update($object) {
-		$project = new \models\ProjectModel();
-		JsonRpcServer::decode($project, $object);
-		$result = $project->write();
+ 	public function show_delete($id) {
+ 		$result = \models\ShowModel::remove($id);
 		return $result;
-	}
-
-	/**
-	 * Read a project from the given $id
-	 * @param string $id
-	 */
-	public function project_read($id) {
-		$project = new \models\ProjectModel($id);
-		return $project;
-	}
-	
-	/**
-	 * Delete a project record
-	 * @param string $id
-	 * @return string Id of deleted record
-	 */
- 	public function project_delete($id) {
- 		\models\ProjectModel::remove($id);
-		return true;
  	}
 
 	// TODO Pretty sure this is going to want some paging params
-	public function project_list() {
-		$list = new \models\ProjectListModel();
+	public function show_list() {
+		$list = new \models\ShowListModel();
 		$list->read();
 		return $list;
 	}
-	
-	public function change_password($userid, $newPassword) {
-		$user = new \models\PasswordModel($userid);
-		$bcrypt = new Bcrypt();
-		$user->password = $bcrypt->hash($newPassword);
-		$user->remember_code = null;
-		$user->write();
-	}
-	
-	public function project_readUser($projectId, $userId) {
-		throw new \Exception("project_readUser NYI");
-	}
-	
-	public function project_updateUser($projectId, $object) {
-		
-		$projectModel = new \models\ProjectModel($projectId);
-		$command = new \libraries\api\ProjectUserCommands($projectModel);
-		return $command->addUser($object);
-	}
-	
-	public function project_deleteUsers($projectId, $userIds) {
-		// This removes the user from the project.
-		$projectModel = new \models\ProjectModel($projectId);
-		foreach ($userIds as $userId) {
-			$projectModel->removeUser($userId);
-			$projectModel->write();
-		}
-	}
-	
-	public function project_listUsers($projectId) {
-		$projectModel = new \models\ProjectModel($projectId);
-		return $projectModel->listUsers();
-	}
-	
+
 }
+
+function main() {
+	$api = new StudioLiveAPI();
+	JsonRpcServer::handle($api);
+}
+
+main();
+
+?>
