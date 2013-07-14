@@ -1,5 +1,9 @@
 <?php
 
+use models\SceneModel;
+
+use commands\ShowCommands;
+
 require_once(dirname(__FILE__) . '/Config.php');
 
 use lib\JsonRpcServer;
@@ -13,14 +17,18 @@ class StudioLiveAPI
 		ini_set('display_errors', 0);
 	}
 
+	//---------------------------------------------------------------
+	// SHOW API
+	//---------------------------------------------------------------
+	
 	/**
 	 * Create/Update a User
-	 * @param ShowModel $json
+	 * @param ShowModel $object
 	 * @return string Id of written object
 	 */
-	public function show_update($params) {
+	public function show_update($object) {
 		$show = new \models\ShowModel();
-		JsonRpcServer::decode($show, $params);
+		JsonRpcServer::decode($show, $object);
 		$result = $show->write();
 		return $result;
 	}
@@ -35,12 +43,12 @@ class StudioLiveAPI
 	}
 	
 	/**
-	 * Delete a show
-	 * @param string $id
-	 * @return string Id of deleted record
+	 * Delete multiple shows
+	 * @param array<string> $showIds
+	 * @return int Total number of deleted shows.
 	 */
- 	public function show_delete($id) {
- 		$result = \models\ShowModel::remove($id);
+ 	public function show_delete($showIds) {
+ 		$result = ShowCommands::deleteShows($showIds);
 		return $result;
  	}
 
@@ -49,6 +57,27 @@ class StudioLiveAPI
 		$list = new \models\ShowListModel();
 		$list->read();
 		return $list;
+	}
+	
+	//---------------------------------------------------------------
+	// SCENE API
+	//---------------------------------------------------------------
+	
+	public function scene_read($showId, $sceneId) {
+		$scene = new \models\SceneModel($showId, $sceneId);
+		return $scene;
+	}
+	
+	public function scene_update($showId, $object) {
+		$scene = new \models\SceneModel($showId);
+		JsonRpcServer::decode($scene, $object);
+		$result = $scene->write();
+		return $result;
+	}
+	
+	public function scene_delete($showId, $sceneIds) {
+ 		$result = ShowCommands::deleteScenes($showId, $sceneIds);
+		return $result;
 	}
 
 }

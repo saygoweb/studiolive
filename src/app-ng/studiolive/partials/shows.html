@@ -1,14 +1,27 @@
 <legend>Shows</legend>
+<a ng-click="newShowCollapsed = !newShowCollapsed">Create a New Show</a>
+</p>
+<div collapse="newShowCollapsed">
+	<form class="well form-inline">
+	<label>Name</label>
+	<input ng-model="name" type="text" />
+	<button class="btn" ng-click="addShow()"><i class="icon-plus"></i>Add New</button>
+	</form>
+</div>
+<form class="control-bar form-inline">
+<button class="btn" ng-click="removeShows()"><i class="icon-remove"></i>Remove</button>
+<button class="btn" ng-click=""><i class="icon-copy"></i>Copy</button>
+</form>
 <div listview search="queryShows()" select="">
 <table class="table" style="width: 100%">
 	<thead>
 	<tr>
-		<th></th>
+		<th width="16px"></th>
 		<th>Show</th>
 	</tr>
 	</thead>
 	<tbody>
-	<tr ng-repeat="show in shows" ng-class="{active: isSelected(show)} ng-click="selectShow(show)" >
+	<tr ng-repeat="show in shows" ng-class="{active: isSelected(show)}" ng-click="selectShow(show)" >
 		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(show)" ng-click="updateSelection($event, show)" /></td>
 		<td><a href="#/show/{{show.id}}">{{show.name}}</a></td>
 	</tr>

@@ -17,7 +17,7 @@ class ShowAPITestEnvironment
 	private $_idAdded = array();
 	
 	function __construct() {
-		$this->_api = new jsonRPCClient("http://scriptureforge.local/api/sf", true);
+		$this->_api = new jsonRPCClient("http://studiolive.local/api/studiolive.php", true);
 	}
 	
 	/**
@@ -37,9 +37,7 @@ class ShowAPITestEnvironment
 	}
 	
 	function dispose() {
-		foreach($this->_idAdded as $id) {
-			$this->_api->show_delete($id);
-		}
+		$this->_api->show_delete($this->_idAdded);
 	}
 }
 
@@ -50,6 +48,11 @@ class TestShowAPI extends UnitTestCase {
 	
 	function testShowCRUD_CRUDOK() {
 		$api = new jsonRPCClient("http://studiolive.local/api/studiolive.php", false);
+		
+		// List
+		$result = $api->show_list();
+		$showCount = $result['count'];
+		$this->assertTrue($showCount >= 0);
 		
 		// Create
 		$param = array(
@@ -78,16 +81,15 @@ class TestShowAPI extends UnitTestCase {
 		
 		// List
 		$result = $api->show_list();
-		$showCount = $result['count'];
-		$this->assertTrue($showCount > 0);
+		$this->assertEqual($showCount + 1, $result['count']);
 		
 		// Delete
- 		$result = $api->show_delete($id);
+ 		$result = $api->show_delete(array($id));
  		$this->assertEqual(1, $result);
  		
  		// List to check delete
 		$result = $api->show_list();
-		$this->assertEqual($showCount - 1, $result['count']);
+		$this->assertEqual($showCount, $result['count']);
 	}
 	
 /*

@@ -2,11 +2,11 @@
 
 namespace models;
 
-class ShowModel extends mapper\MapperModel
+class ActionModel extends mapper\MapperModel
 {
 	public function __construct($id = NULL)
 	{
-		$this->scenes = new \stdClass();
+		$this->scenes = array();
 		parent::__construct(ShowModelMongoMapper::instance(), $id);
 	}
 
@@ -24,7 +24,7 @@ class ShowModel extends mapper\MapperModel
 
 	public $name;
 	
-	public $scenes;
+	public $commands;
 
 }
 

@@ -38,6 +38,11 @@ class MongoMapper
 	{
 	}
 
+	public function makeId() {
+		$id = new \MongoId();
+		return (string)$id;
+	}
+	
 	/**
 	 * Returns the name of the database.
 	 * @return string
@@ -67,7 +72,7 @@ class MongoMapper
 	{
 		if (!is_string($id) || empty($id)) {
 			$type = get_class($id);
-			throw new Exception("Bad id '$id' ($type)");
+			throw new \Exception("Bad id '$id' ($type)");
 		}		
 		$data = $this->_collection->findOne(array("_id" => new \MongoId($id)));
 		if ($data === NULL)
@@ -83,6 +88,37 @@ class MongoMapper
 		return $this->update($this->_collection, $data, $model->id);
 	}
 
+	public function readSubDocument($model, $rootId, $property, $id) {
+		if (!is_string($rootId) || empty($rootId)) {
+			$type = get_class($rootId);
+			throw new \Exception("Bad root id '$rootId' ($type)");
+		}		
+		if (!is_string($id) || empty($id)) {
+			$type = get_class($id);
+			throw new \Exception("Bad id '$id' ($type)");
+		}
+		$data = $this->_collection->findOne(array("_id" => new \MongoId($rootId)), array($property . '.' . $id));
+		if ($data === NULL)
+		{
+			throw new \Exception("Could not find $property=$id in $rootId");
+		}
+		$data = $data[$property][$id];
+		$data['_id'] = $id;
+		error_log(var_export($data, true));
+		$this->decode($model, $data);
+	}
+	
+	public function writeSubDocument($model, $rootId, $property) {
+		$data = $this->encode($model);
+		$idKey = $this->_idKey;
+		$id = $model->$idKey;
+		if (empty($id)) {
+			$id = MongoStore::makeKey($model->keyString());
+		}
+		$id = $this->updateSubDocument($this->_collection, $data, $rootId, $property, $id);
+		return $id;
+	}
+	
 	/**
 	 * Sets the public properties of $model to values from $values[propertyName]
 	 * @param object $model
@@ -133,7 +169,9 @@ class MongoMapper
 
 	public function remove($id)
 	{
-		assert(is_string($id) && !empty($id));
+		if (!is_string($id) || empty($id)) {
+			throw new \Exception("Invalid id '$id'");
+		}
 		$result = $this->_collection->remove(
 			array('_id' => new \MongoId($id)),
 			array('safe' => true)
@@ -141,19 +179,37 @@ class MongoMapper
 		return $result['n'];
 	}
 	
+	public function removeSubDocument($rootId, $property, $id) {
+		if (!is_string($rootId) || empty($rootId)) {
+			throw new \Exception("Invalid rootId '$rootId'");
+		}
+		if (!is_string($id) || empty($id)) {
+			throw new \Exception("Invalid id '$id'");
+		}
+		$result = $this->_collection->update(
+				array('_id' => new \MongoId($rootId)),
+				array('$unset' => array($property . '.' . $id => '')),
+				array('multiple' => false, 'safe' => true)
+		);
+		// TODO Have a closer look at $result and throw if things go wrong CP 2013-07
+		return $result['ok'] ? $result['n'] : 0;
+	}
+	
 	/**
-	 *
 	 * @param MongoCollection $collection
 	 * @param array $data
-	 * @param MongoId $id
-	 * @return MongoId
+	 * @param string $id
+	 * @return string
 	 */
 	protected function update($collection, $data, $id)
 	{
+		if (!is_string($id) && !empty($id)) {
+			$type = get_class($id);
+			throw new \Exception("Bad id '$id' ($type)");
+		}
 		if (!$id) {
 			$id = NULL;
 		}
-		assert($id === NULL || is_string($id));
 		$result = $collection->update(
 				array('_id' => new \MongoId($id)),
 				array('$set' => $data),
@@ -161,6 +217,34 @@ class MongoMapper
 		);
 		return isset($result['upserted']) ? $result['upserted'].$id : $id;
 	}
+	
+	/**
+	 * @param MongoCollection $collection
+	 * @param array $data
+	 * @param string $rootId
+	 * @param string $property
+	 * @param string $id
+	 * @return string
+	 */
+	protected function updateSubDocument($collection, $data, $rootId, $property, $id)
+	{
+		if (!is_string($rootId)) {
+			$type = get_class($rootId);
+			throw new \Exception("Bad root id '$rootId' ($type)");
+		}		
+		if (!is_string($id)) {
+			$type = get_class($id);
+			throw new \Exception("Bad id '$id' ($type)");
+		}
+		$result = $collection->update(
+				array('_id' => new \MongoId($rootId)),
+				array('$set' => array($property . '.' . $id => $data)),
+				array('upsert' => false, 'multiple' => false, 'safe' => true)
+		);
+		// TODO REVIEW Pretty sure this doesn't count as an upsert.  The $rootId document *must* exist therefore isn't an upsert.
+		return isset($result['upserted']) ? $result['upserted'].$id : $id;
+	}
+	
 
 }
 

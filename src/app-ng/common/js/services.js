@@ -12,8 +12,8 @@ angular.module('sl.services', ['jsonRpc'])
 		this.update = function(model, callback) {
 			jsonRpc.call('show_update', [model], callback);
 		};
-		this.remove = function(id, callback) {
-			jsonRpc.call('show_delete', [id], callback);
+		this.remove = function(showIds, callback) {
+			jsonRpc.call('show_delete', [showIds], callback);
 		};
 		this.list = function(callback) {
 			// TODO Paging CP 2013-07

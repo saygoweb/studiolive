@@ -3,10 +3,9 @@
 // Declare app level module which depends on filters, and services
 angular.module('sgwStudioLive', 
 		[
-		 'sgwStudioLive.filters', 
-		 'sgwStudioLive.services', 
-		 'sgwStudioLive.directives', 
-		 'sgwStudioLive.controllers'
+		 'sl.services', 
+		 'sl.shows',
+		 'sl.show'
 		])
 	.config(['$routeProvider', function($routeProvider) {
 	    $routeProvider.when(

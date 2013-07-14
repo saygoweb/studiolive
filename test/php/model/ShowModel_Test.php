@@ -8,10 +8,13 @@ require_once(TEST_PATH . 'common/MongoTestEnvironment.php');
 
 use models\ShowModel;
 
+require_once(dirname(__FILE__) . '/../TestConfig.php');
+require_once(SIMPLE_TEST_PATH . 'autorun.php');
+
+require_once(TEST_PATH . 'common/MongoTestEnvironment.php');
+
 class TestShowModel extends UnitTestCase {
 
-	private $_someShowId;
-	
 	function __construct()
 	{
 		$e = new MongoTestEnvironment();
@@ -26,27 +29,39 @@ class TestShowModel extends UnitTestCase {
 
 		$this->assertNotNull($id);
 		$this->assertIsA($id, 'string');
+		$this->assertEqual($id, $model->id);
 		
 		$otherModel = new ShowModel($id);
 		$this->assertEqual($id, $otherModel->id);
 		$this->assertEqual('Some User', $otherModel->name);
-		
-		$this->_someShowId = $id;
 	}
 
-	function testShowList_HasCountAndEntries()
-	{
-		$model = new ShowListModel();
-		$model->read();
+	function testWriteRemove_ListCorrect() {
+		$e = new MongoTestEnvironment();
+		$e->clean();
+
+		$list = new ShowListModel();
+		$list->read();
+		$this->assertEqual(0, $list->count);
+		$this->assertEqual(null, $list->entries);
 		
-		$this->assertEqual(1, $model->count);
-		$this->assertNotNull($model->entries);
+		$show = new ShowModel();
+		$show->name = "Some Name";
+		$id = $show->write();
+
+		$list = new ShowListModel();
+		$list->read();
+		$this->assertEqual(1, $list->count);
+		$this->assertEqual(array(array('name' => 'Some Name', 'id' => $id)), $list->entries);
+
+		ShowModel::remove($id);
+		
+		$list = new ShowListModel();
+		$list->read();
+		$this->assertEqual(0, $list->count);
+		$this->assertEqual(null, $list->entries);
 	}
 	
-	function testRemove_Removes() {
-		$result = ShowModel::remove($this->_someShowId);
-		$this->assertEqual(1, $result);
-	}
 	
 }
 

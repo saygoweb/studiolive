@@ -43,6 +43,11 @@ class MongoStore
 		return count($result) != 0;
 	}
 	
+	public static function makeKey($s) {
+		$s = str_replace(array(' ', '-', '_'), '', $s);
+		return $s;
+	}
+	
 }
 
 ?>

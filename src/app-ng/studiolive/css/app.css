@@ -1,3 +1,15 @@
+
+/* Buttons with icons */
+button i {
+	margin-right: 8px;
+	color: #666;
+}
+
+i.icon-remove {
+	color: #f66;
+}
+
+/* Original seed app below here */
 /* app css stylesheet */
 
 .menu {
