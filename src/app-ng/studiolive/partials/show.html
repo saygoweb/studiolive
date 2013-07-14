@@ -1,10 +1,12 @@
 <legend>Show: {{show.name}}</legend>
+<tabset>
+<tab heading="Scenes">
 <a ng-click="newSceneCollapsed = !newSceneCollapsed">Create a New Scene</a>
 </p>
 <div collapse="!newSceneCollapsed">
 	<form class="well form-inline">
 	<label>Name</label>
-	<input ng-model="sceneName" type="text" placeholder="Scene Name" />
+	<input name="sceneName" ng-model="sceneName" type="text" placeholder="Scene Name" />
 	<button class="btn" ng-click="addScene()"><i class="icon-plus"></i>Add New</button>
 	</form>
 </div>
@@ -28,3 +30,22 @@
 	</tbody>
 </table>		
 </div>
+</tab>
+<!-- 
+<tab heading="Data">
+</tab>
+ -->
+<tab heading="Actions">
+<form class="control-bar form-inline well">
+<select>
+<option>Cam 1 in Desktop</option>
+<option>Cam 2 in Desktop</option>
+<option>Cam 1 Full</option>
+<option>Cam 2 Full</option>
+<option>Desktop Full</option>
+</select>
+<button class="btn" ng-click=""><i class="icon-remove"></i>Remove</button>
+<input type="text" placeholder="Add New" />
+<button class="btn" ng-click=""><i class="icon-plus"></i>Add New</button>
+</form>
+</tab>

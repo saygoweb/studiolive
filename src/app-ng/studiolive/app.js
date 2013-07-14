@@ -5,7 +5,8 @@ angular.module('sgwStudioLive',
 		[
 		 'sl.services', 
 		 'sl.shows',
-		 'sl.show'
+		 'sl.show',
+		 'sl.scene'
 		])
 	.config(['$routeProvider', function($routeProvider) {
 	    $routeProvider.when(
@@ -22,6 +23,13 @@ angular.module('sgwStudioLive',
 	    			controller: 'ShowCtrl'
 	    		}
 	    	);
+		    $routeProvider.when(
+		    		'/show/:showId/:sceneId', 
+		    		{
+		    			templateUrl: '/app-ng/studiolive/partials/scene.html', 
+		    			controller: 'SceneCtrl'
+		    		}
+		    	);
 	    $routeProvider.otherwise({redirectTo: '/shows'});
 	}])
 	;

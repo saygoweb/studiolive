@@ -2,10 +2,10 @@
 
 /* Controllers */
 var app = angular.module(
-		'sl.show',
+		'sl.scene',
 		[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 	)
-	.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
+	.controller('SceneCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
 		$scope.show = {};
 		$scope.show.id = $routeParams.showId;
 		// Selection
@@ -55,7 +55,7 @@ var app = angular.module(
 		$scope.addScene = function() {
 			var model = {};
 			model.id = '';
-			model.name = this.sceneName;
+			model.name = $scope.sceneName;
 			console.log("addScene ", model);
 			sceneService.update($scope.show.id, model, function(result) {
 				if (result.ok) {
