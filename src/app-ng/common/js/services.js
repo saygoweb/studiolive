@@ -20,4 +20,20 @@ angular.module('sl.services', ['jsonRpc'])
 			jsonRpc.call('show_list', [], callback);
 		};
 	}])
+	.service('sceneService', ['jsonRpc', function(jsonRpc) {
+		jsonRpc.connect('/api/studiolive.php'); // Note this doesn't actually 'connect', it simply sets the connection url.
+
+		this.readShow = function(showId, callback) {
+			jsonRpc.call('show_read', [showId], callback);
+		};
+		this.read = function(showId, sceneId, callback) {
+			jsonRpc.call('scene_read', [showId, sceneId], callback);
+		};
+		this.update = function(showId, model, callback) {
+			jsonRpc.call('scene_update', [showId, model], callback);
+		};
+		this.remove = function(showId, sceneIds, callback) {
+			jsonRpc.call('scene_delete', [showId, sceneIds], callback);
+		};
+	}])
 	;

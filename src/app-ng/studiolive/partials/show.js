@@ -5,7 +5,7 @@ var app = angular.module(
 		'sl.show',
 		[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 	)
-	.controller('ShowCtrl', ['$scope', 'showService', '$routeParams', function($scope, showService, $routeParams) {
+	.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
 		$scope.show = {};
 		$scope.show.id = $routeParams.showId;
 		// Selection
@@ -25,7 +25,7 @@ var app = angular.module(
 		
 		// Read
 		$scope.queryShow = function() {
-			showService.read($scope.show.id, function(result) {
+			sceneService.readShow($scope.show.id, function(result) {
 				if (result.ok) {
 					$scope.show = result.data;
 				}
@@ -37,14 +37,18 @@ var app = angular.module(
 		$scope.removeScenes = function() {
 			console.log("removeScenes");
 			var sceneIds = [];
-			for(var l = $scope.selected.length, i = l; i >= 0; i--) {
-				sceneIds.push($scope.selected[i].id);
+			for(var i = 0, l = $scope.selected.length; i < l; i++) {
+				sceneIds.push($scope.selected[i]);
 			}
 			if (l == 0) {
 				// TODO ERROR
 				return;
 			}
-			// TODO remove from show
+			sceneService.remove($scope.show.id, sceneIds, function(result) {
+				if (result.ok) {
+					$scope.queryShow();
+				}
+			});
 		};
 		
 		// Add Scene
@@ -53,6 +57,11 @@ var app = angular.module(
 			model.id = '';
 			model.name = $scope.sceneName;
 			console.log("addScene ", model);
+			sceneService.update($scope.show.id, model, function(result) {
+				if (result.ok) {
+					$scope.queryShow();
+				}
+			});
 		};
 		
 		/*

@@ -1,10 +1,10 @@
 <legend>Shows</legend>
 <a ng-click="newShowCollapsed = !newShowCollapsed">Create a New Show</a>
 </p>
-<div collapse="newShowCollapsed">
+<div collapse="!newShowCollapsed">
 	<form class="well form-inline">
 	<label>Name</label>
-	<input ng-model="name" type="text" />
+	<input ng-model="name" type="text" placeholder="Show Name"/>
 	<button class="btn" ng-click="addShow()"><i class="icon-plus"></i>Add New</button>
 	</form>
 </div>

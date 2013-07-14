@@ -1,10 +1,10 @@
 <legend>Show: {{show.name}}</legend>
 <a ng-click="newSceneCollapsed = !newSceneCollapsed">Create a New Scene</a>
 </p>
-<div collapse="newSceneCollapsed">
+<div collapse="!newSceneCollapsed">
 	<form class="well form-inline">
 	<label>Name</label>
-	<input ng-model="sceneName" type="text" />
+	<input ng-model="sceneName" type="text" placeholder="Scene Name" />
 	<button class="btn" ng-click="addScene()"><i class="icon-plus"></i>Add New</button>
 	</form>
 </div>
@@ -21,9 +21,9 @@
 	</tr>
 	</thead>
 	<tbody>
-	<tr ng-repeat="scene in show.scenes" ng-class="{active: isSelected(scene)}" ng-click="selectScene(scene)" >
-		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(scene)" ng-click="updateSelection($event, show)" /></td>
-		<td><a href="#/show/{{show.id}}/{{$index}}">{{scene.name}}</a></td>
+	<tr ng-repeat="(id, scene) in show.scenes" ng-class="{active: isSelected(id)}" ng-click="selectScene(scene)" >
+		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(id)" ng-click="updateSelection($event, id)" /></td>
+		<td><a href="#/show/{{show.id}}/{{id}}">{{scene.name}}</a></td>
 	</tr>
 	</tbody>
 </table>		
