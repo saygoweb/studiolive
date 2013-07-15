@@ -2,9 +2,9 @@
 use commands\ShowCommands;
 
 require_once(dirname(__FILE__) . '/../TestConfig.php');
-require_once(SimpleTestPath . 'autorun.php');
+require_once(SIMPLE_TEST_PATH . 'autorun.php');
 
-require_once(TestPath . 'common/MongoTestEnvironment.php');
+require_once(TEST_PATH . 'common/MongoTestEnvironment.php');
 
 class TestUserCommands extends UnitTestCase {
 
