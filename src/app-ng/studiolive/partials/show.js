@@ -8,6 +8,21 @@ var app = angular.module(
 	.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
 		$scope.show = {};
 		$scope.show.id = $routeParams.showId;
+		// Read
+		$scope.queryShow = function() {
+			sceneService.readShow($scope.show.id, function(result) {
+				if (result.ok) {
+					$scope.show = result.data;
+					$scope.show.actions = [
+					                       {"name": "Action 1", "x": "xxxx"}, 
+					                       {"name": "Action 2", "x": "yyyy"}
+					                      ];
+				}
+			});
+		};
+		$scope.queryShow();
+	}])
+	.controller('ShowScenesCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
 		// Selection
 		$scope.selected = [];
 		$scope.updateSelection = function(event, item) {
@@ -23,16 +38,6 @@ var app = angular.module(
 			return item != null && $scope.selected.indexOf(item) >= 0;
 		};
 		
-		// Read
-		$scope.queryShow = function() {
-			sceneService.readShow($scope.show.id, function(result) {
-				if (result.ok) {
-					$scope.show = result.data;
-				}
-			});
-		};
-		$scope.queryShow();
-
 		// Remove
 		$scope.removeScenes = function() {
 			console.log("removeScenes");
@@ -62,6 +67,36 @@ var app = angular.module(
 					$scope.queryShow();
 				}
 			});
+		};
+		
+		/*
+		$scope.imageSource = function(avatarRef) {
+			return avatarRef ? '/images/avatar/' + avatarRef : '/images/avatar/anonymous02.png';
+		};
+		*/
+	
+	}])
+	.controller('ShowActionsCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
+		//$scope.isActive = true;
+		//$scope.currentAction = {"name": "Action 2"};
+		$scope.bugText = 'Bug Text';
+		
+		// Watch action select
+		$scope.$watch('currentAction', function(newValue, oldValue) {
+			$scope.bugText = newValue;
+		});
+		
+		$scope.addAction = function() {
+			console.log("addAction()");
+			var action = {};
+			action.name = $scope.newActionName;
+			$scope.show.actions.push(action);
+		};
+		
+		$scope.removeAction = function() {
+			console.log("removeAction()");
+			var selectedIndex = $scope.show.actions.indexOf($scope.currentAction);
+			$scope.show.actions.splice(selectedIndex, 1);
 		};
 		
 		/*

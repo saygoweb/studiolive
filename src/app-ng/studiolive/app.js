@@ -19,7 +19,7 @@ angular.module('sgwStudioLive',
 		    $routeProvider.when(
 	    		'/show/:showId', 
 	    		{
-	    			templateUrl: '/app-ng/studiolive/partials/show.html', 
+	    			templateUrl: '/app-ng/studiolive/partials/show.html' ,
 	    			controller: 'ShowCtrl'
 	    		}
 	    	);
