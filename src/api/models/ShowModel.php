@@ -7,6 +7,7 @@ class ShowModel extends mapper\MapperModel
 	public function __construct($id = NULL)
 	{
 		$this->scenes = new \stdClass();
+		$this->actions = array();
 		parent::__construct(ShowModelMongoMapper::instance(), $id);
 	}
 
@@ -25,6 +26,8 @@ class ShowModel extends mapper\MapperModel
 	public $name;
 	
 	public $scenes;
+	
+	public $actions;
 
 }
 
