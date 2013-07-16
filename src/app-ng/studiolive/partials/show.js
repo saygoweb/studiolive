@@ -6,7 +6,6 @@ var module = angular.module(
 	[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 );
 module.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
-	$scope.isActive=true;
 	$scope.show = {};
 	$scope.show.id = $routeParams.showId;
 	// Read
