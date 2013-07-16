@@ -51,7 +51,7 @@ json_rpc.factory('jsonRpc', ['$http', 'error', function($http, error) {
 		var http_request = {
 			"url": this.params.url,
 			"method": "POST",
-			"data": JSON.stringify(json_request),
+			"data": angular.toJson(json_request),
 			"headers": {"Content-Type": "application/json"} // Might not be necessary, since this appears to be the default for Angular's $http service
 		};
 		var result = {};
