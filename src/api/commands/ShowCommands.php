@@ -34,7 +34,8 @@ class ShowCommands
 			$count++;
 		}
 		$sceneIndex = new \models\ShowSceneIndexModel($showId);
-		$sceneIndex->scenesIndex = array_diff($sceneIndex->scenesIndex, $sceneIds);
+		// Note: we use array_values here to normalize the array. see http://stackoverflow.com/questions/369602/how-to-delete-an-element-from-an-array-in-php
+		$sceneIndex->scenesIndex = array_values(array_diff($sceneIndex->scenesIndex, $sceneIds));
 		$sceneIndex->write();
 		return $count;
 	}
