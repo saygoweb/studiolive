@@ -10,7 +10,7 @@ class MapperModel
 		$this->_mapper = $mapper;
 		if (!empty($id))
 		{
-			$this->_mapper->read($this, $id);
+			$this->read($id);
 		}
 	}
 	
@@ -18,8 +18,8 @@ class MapperModel
 	 * Reads the model from the mongo collection
 	 * @see MongoMapper::read()
 	 */
-	function read() {
-		return $this->_mapper->read($this);
+	public function read($id) {
+		return $this->_mapper->read($this, $id);
 	}
 	
 	/**
@@ -27,7 +27,7 @@ class MapperModel
 	 * @return string The unique id of the object written
 	 * @see MongoMapper::write()
 	 */
-	function write() {
+	public function write() {
 		$this->id = $this->_mapper->write($this);
 		return $this->id;
 	}

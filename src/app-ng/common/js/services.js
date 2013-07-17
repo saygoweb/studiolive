@@ -35,5 +35,8 @@ angular.module('sl.services', ['jsonRpc'])
 		this.remove = function(showId, sceneIds, callback) {
 			jsonRpc.call('scene_delete', [showId, sceneIds], callback);
 		};
+		this.updateScenesIndex = function(showId, sceneIds, callback) {
+			jsonRpc.call('show_updateScenesIndex', [showId, sceneIds], callback);
+		};
 	}])
 	;

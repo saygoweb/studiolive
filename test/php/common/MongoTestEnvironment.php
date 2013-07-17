@@ -44,12 +44,16 @@ class MongoTestEnvironment
 	 * @param string $email
 	 * @return string id
 	 */
-	public function createUser($username, $name, $email) {
-		$userModel = new models\UserModel();
-		$userModel->username = $username;
-		$userModel->name = $name;
-		$userModel->email = $email;
-		return $userModel->write();
+	public function createShow($name) {
+		$showModel = new models\ShowModel();
+		$showModel->name = $name;
+		return $showModel->write();
+	}
+	
+	public function createScene($showId, $sceneName) {
+		$sceneModel = new models\SceneModel($showId);
+		$sceneModel->name = $sceneName;
+		return $sceneModel->write();
 	}
 	
 	public function inhibitErrorDisplay() {

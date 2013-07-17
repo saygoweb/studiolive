@@ -1,11 +1,5 @@
 <?php
 use models\ShowListModel;
-
-require_once(dirname(__FILE__) . '/../TestConfig.php');
-require_once(SIMPLE_TEST_PATH . 'autorun.php');
-
-require_once(TEST_PATH . 'common/MongoTestEnvironment.php');
-
 use models\ShowModel;
 
 require_once(dirname(__FILE__) . '/../TestConfig.php');

@@ -24,13 +24,13 @@
 		<th>Scene</th>
 	</tr>
 	</thead>
-	<tbody ui-sortable>
-	<tr ng-repeat="(id, scene) in show.scenes" ng-class="{active: isSelected(id)}" ng-click="selectScene(scene)" >
-		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(id)" ng-click="updateSelection($event, id)" /></td>
-		<td><a href="#/show/{{show.id}}/{{id}}">{{scene.name}}</a></td>
+	<tbody ui-sortable ng-model="scenesIndex">
+	<tr ng-repeat="proxy in scenesIndex" ng-class="{active: isSelected(proxy.id)}" ng-click="selectScene(proxy.id)" >
+		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(proxy.id)" ng-click="updateSelection($event, proxy.id)" /></td>
+		<td><a href="#/show/{{show.id}}/{{proxy.id}}">{{proxy.name}}</a></td>
 	</tr>
 	</tbody>
-</table>		
+</table>
 </div>
 </div>
 </tab>

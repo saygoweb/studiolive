@@ -1,12 +1,13 @@
 <?php
 
-use models\SceneModel;
+use models\ShowSceneIndexModel;
 
 use commands\ShowCommands;
+use lib\JsonRpcServer;
+use models\SceneModel;
 
 require_once(dirname(__FILE__) . '/Config.php');
 
-use lib\JsonRpcServer;
 
 class StudioLiveAPI
 {
@@ -59,6 +60,19 @@ class StudioLiveAPI
 		return $list;
 	}
 	
+	public function show_updateScenesIndex($showId, $scenesIndex) {
+		$sceneIndex = new ShowSceneIndexModel($showId);
+		// Check that the length is the same. Should really check that the contents are the same but this will do.
+		$expected = count($sceneIndex->scenesIndex);
+		$actual = count($scenesIndex);
+		if ($actual != $expected) {
+			throw new \Exception("Expected $expected items in index, $actual given.");
+		}
+		$sceneIndex->scenesIndex = $scenesIndex;
+		$sceneIndex->write();
+		return true;
+	}
+	
 	//---------------------------------------------------------------
 	// SCENE API
 	//---------------------------------------------------------------
@@ -69,10 +83,7 @@ class StudioLiveAPI
 	}
 	
 	public function scene_update($showId, $object) {
-		$scene = new \models\SceneModel($showId);
-		JsonRpcServer::decode($scene, $object);
-		$result = $scene->write();
-		return $result;
+		return ShowCommands::updateScene($showId, $object);
 	}
 	
 	public function scene_delete($showId, $sceneIds) {
