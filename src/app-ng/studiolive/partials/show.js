@@ -162,6 +162,7 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 	$scope.allCommands = 
 		[
 		 {'cat': 'Input',  'type': 'Camera'},
+		 {'cat': 'Input',  'type': 'Flash Template'},
 		 {'cat': 'Input',  'type': 'Image'},
 		 {'cat': 'Input',  'type': 'Stream'},
 		 {'cat': 'Input',  'type': 'Video'},
