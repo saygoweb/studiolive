@@ -6,7 +6,8 @@ angular.module('sgwStudioLive',
 		 'sl.services', 
 		 'sl.shows',
 		 'sl.show',
-		 'sl.scene'
+		 'sl.scene',
+		 'ui.sortable'
 		])
 	.config(['$routeProvider', function($routeProvider) {
 	    $routeProvider.when(

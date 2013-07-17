@@ -24,7 +24,7 @@
 		<th>Scene</th>
 	</tr>
 	</thead>
-	<tbody>
+	<tbody ui-sortable>
 	<tr ng-repeat="(id, scene) in show.scenes" ng-class="{active: isSelected(id)}" ng-click="selectScene(scene)" >
 		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(id)" ng-click="updateSelection($event, id)" /></td>
 		<td><a href="#/show/{{show.id}}/{{id}}">{{scene.name}}</a></td>
