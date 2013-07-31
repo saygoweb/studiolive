@@ -2,23 +2,26 @@
 
 namespace models\mapper;
 
+use libraries\palaso\CodeGuard;
+
 class MapperModel
 {
 	protected $_mapper;
 
-	protected function __construct($mapper, $id = NULL) {
+	protected function __construct($mapper, $id = '') {
 		$this->_mapper = $mapper;
-		if (!empty($id))
-		{
+		CodeGuard::checkTypeAndThrow($id, 'string');
+		if (!empty($id)) {
 			$this->read($id);
 		}
 	}
 	
 	/**
 	 * Reads the model from the mongo collection
+	 * @param string $id
 	 * @see MongoMapper::read()
 	 */
-	public function read($id) {
+	function read($id) {
 		return $this->_mapper->read($this, $id);
 	}
 	
@@ -27,11 +30,11 @@ class MapperModel
 	 * @return string The unique id of the object written
 	 * @see MongoMapper::write()
 	 */
-	public function write() {
-		$this->id = $this->_mapper->write($this);
-		return $this->id;
+	function write() {
+		CodeGuard::checkTypeAndThrow($this->id, 'models\mapper\Id');
+		$this->id->id = $this->_mapper->write($this);
+		return $this->id->id;
 	}
-	
 }
 
 ?>

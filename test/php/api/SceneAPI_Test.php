@@ -52,6 +52,7 @@ class TestSceneAPI extends UnitTestCase {
 		
 		// List
 		$result = $api->show_read($showId);
+		var_dump($result);
 		$sceneCount = count($result['scenes']);
 		$this->assertTrue($sceneCount >= 0);
 		

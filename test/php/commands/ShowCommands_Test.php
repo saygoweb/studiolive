@@ -38,12 +38,12 @@ class TestShowCommands extends UnitTestCase {
 		$sceneId = ShowCommands::updateScene($showId, $object);
 		
 		$sceneIndex = new ShowSceneIndexModel($showId);
-		$this->assertTrue(in_array($sceneId, $sceneIndex->scenesIndex));
+		$this->assertTrue(in_array($sceneId, $sceneIndex->scenesIndex->data));
 		
  		ShowCommands::deleteScenes($showId, array($sceneId));
 
  		$sceneIndex = new ShowSceneIndexModel($showId);
- 		$this->assertFalse(in_array($sceneId, $sceneIndex->scenesIndex));
+ 		$this->assertFalse(in_array($sceneId, $sceneIndex->scenesIndex->data));
 		
 	}
 	

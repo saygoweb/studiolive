@@ -2,12 +2,10 @@
 
 namespace models;
 
-class CommandModel extends mapper\MapperModel
+class CommandModel
 {
-	public function __construct($id = NULL)
-	{
+	public function __construct() {
 		$this->scenes = array();
-		parent::__construct(ShowModelMongoMapper::instance(), $id);
 	}
 
 	/**
@@ -15,12 +13,18 @@ class CommandModel extends mapper\MapperModel
 	 * @param string $id
 	 * @return int The number of records removed from the collection.
 	 */
-	public static function remove($id)
-	{
+	public static function remove($id) {
 		return ShowModelMongoMapper::instance()->remove($id);
 	}
+	
+	public static function createCommand($type) {
+		switch ($type) {
+			default:
+				throw new \Exception("Unsupported type '$type'");
+		}
+	}
 
-	public $id;
+// 	public $id;
 
 	public $type;
 	

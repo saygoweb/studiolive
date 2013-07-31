@@ -9,14 +9,12 @@ require_once(TEST_PATH . 'common/MongoTestEnvironment.php');
 
 class TestShowModel extends UnitTestCase {
 
-	function __construct()
-	{
+	function __construct() {
 		$e = new MongoTestEnvironment();
 		$e->clean();
 	}
 	
-	function testWrite_ReadBackSame()
-	{
+	function testWrite_ReadBackSame() {
 		$model = new ShowModel();
 		$model->name = "Some User";
 		$id = $model->write();

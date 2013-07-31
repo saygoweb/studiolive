@@ -12,26 +12,23 @@ require_once(TEST_PATH . 'common/MongoTestEnvironment.php');
 
 class TestShowSceneIndexModel extends UnitTestCase {
 
-	function __construct()
-	{
+	function __construct() {
 		$e = new MongoTestEnvironment();
 		$e->clean();
 	}
 	
-	function testWrite_SomeShow_ReadBackOnlyIndexChanged()
-	{
+	function testWrite_SomeShow_ReadBackOnlyIndexChanged() {
 		$show = new ShowModel();
 		$show->name = "Some User";
-		$show->scenes = array('index1' => '', 'index2' => '');
-		$show->scenesIndex[] = 'index1';
-		$show->scenesIndex[] = 'index2';
+		$show->scenesIndex->append('index1');
+		$show->scenesIndex->append('index2');
 		$id = $show->write();
 		
 		// Update index
 		$model = new ShowSceneIndexModel($id);
 		$this->assertEqual($show->scenesIndex, $model->scenesIndex);
-		$model->scenesIndex[0] = 'index2';
-		$model->scenesIndex[1] = 'index1';
+		$model->scenesIndex->data[0] = 'index2';
+		$model->scenesIndex->data[1] = 'index1';
 		$model->write();
 		
 		// Read back index

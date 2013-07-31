@@ -5,7 +5,12 @@ var app = angular.module(
 		'sl.scene',
 		[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 	)
-	.controller('SceneCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
+	.controller('SceneCtrl', ['$scope', 'sceneService', '$routeParams', '$timeout', function($scope, sceneService, $routeParams, $timeout) {
+		$scope.debug = {};
+		$timeout(function() {
+		  $scope.debug.actionsTab = true;  
+		}, 0);
+
 		$scope.show = {};
 		$scope.show.id = $routeParams.showId;
 		// Selection

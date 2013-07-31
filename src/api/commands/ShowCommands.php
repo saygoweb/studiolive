@@ -2,7 +2,9 @@
 
 namespace commands;
 
-use lib\JsonRpcServer;
+use libraries\palaso\CodeGuard;
+
+use models\mapper\JsonDecoder;
 use models\SceneModel;
 use models\ShowModel;
 use models\ShowSceneIndexModel;
@@ -28,26 +30,28 @@ class ShowCommands
 	 * @return int Total number of scenes removed.
 	 */
 	public static function deleteScenes($showId, $sceneIds) {
+		CodeGuard::checkTypeAndThrow($sceneIds, 'array');
 		$count = 0;
 		foreach ($sceneIds as $sceneId) {
+			CodeGuard::checkTypeAndThrow($sceneId, 'string');
 			SceneModel::remove($showId, $sceneId);
 			$count++;
 		}
 		$sceneIndex = new \models\ShowSceneIndexModel($showId);
 		// Note: we use array_values here to normalize the array. see http://stackoverflow.com/questions/369602/how-to-delete-an-element-from-an-array-in-php
-		$sceneIndex->scenesIndex = array_values(array_diff($sceneIndex->scenesIndex, $sceneIds));
+		$sceneIndex->scenesIndex->data = array_values(array_diff($sceneIndex->scenesIndex->data, $sceneIds));
 		$sceneIndex->write();
 		return $count;
 	}
 
 	public static function updateScene($showId, $object) {
 		$scene = new \models\SceneModel($showId);
-		JsonRpcServer::decode($scene, $object);
+		JsonDecoder::decode($scene, $object);
 		$newScene = empty($scene->id);
 		$sceneId = $scene->write();
 		if ($newScene) {
 			$sceneIndex = new \models\ShowSceneIndexModel($showId);
-			$sceneIndex->scenesIndex[] = $sceneId;
+			$sceneIndex->scenesIndex->append($sceneId);
 			$sceneIndex->write();
 		}
 		return $sceneId;

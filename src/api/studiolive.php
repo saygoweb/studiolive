@@ -1,21 +1,20 @@
 <?php
 
-use models\ShowSceneIndexModel;
-
 use commands\ShowCommands;
-use lib\JsonRpcServer;
+use libraries\palaso\JsonRpcServer;
 use models\SceneModel;
+use models\ShowSceneIndexModel;
+use models\mapper\JsonDecoder;
+use models\mapper\JsonEncoder;
 
 require_once(dirname(__FILE__) . '/Config.php');
-
 
 class StudioLiveAPI
 {
 	
-	public function __construct()
-	{
+	public function __construct() {
 		// TODO put in the LF style error handler for logging / jsonrpc return formatting etc. CP 2013-07
-		ini_set('display_errors', 0);
+		//ini_set('display_errors', 0);
 	}
 
 	//---------------------------------------------------------------
@@ -29,7 +28,7 @@ class StudioLiveAPI
 	 */
 	public function show_update($object) {
 		$show = new \models\ShowModel();
-		JsonRpcServer::decode($show, $object);
+		JsonDecoder::decode($show, $object);
 		$result = $show->write();
 		return $result;
 	}
@@ -40,7 +39,7 @@ class StudioLiveAPI
 	 */
 	public function show_read($id) {
 		$show = new \models\ShowModel($id);
-		return $show;
+		return JsonEncoder::encode($show);
 	}
 	
 	/**
