@@ -6,6 +6,14 @@ use libraries\palaso\CodeGuard;
 class JsonDecoder {
 	
 	/**
+	 * @param array $array
+`	 * @return bool
+	 */
+	public static function is_assoc($array) {
+		return (bool)count(array_filter(array_keys($array), 'is_string'));
+	}
+	
+	/**
 	 * Sets the public properties of $model to values from $values[propertyName]
 	 * @param object $model
 	 * @param array $values A mixed array of JSON (like) data.
