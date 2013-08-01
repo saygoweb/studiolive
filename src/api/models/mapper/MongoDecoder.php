@@ -19,7 +19,7 @@ class MongoDecoder extends JsonDecoder {
 	 * @param array $values
 	 */
 	public function decodeIdReference($key, $model, $values) {
-		$model->$key = new Id((string)$values[$key]);
+		$model->$key->id = (string)$values[$key];
 	}
 	
 	/**
@@ -37,7 +37,7 @@ class MongoDecoder extends JsonDecoder {
 		if (!isset($values[$mongoKey])) {
 			throw new \Exception("MongoId not set in '$mongoKey'");
 		}
-		$model->$key = new Id((string)$values[$mongoKey]);
+		$model->$key->id = (string)$values[$mongoKey];
 	}
 	
 	/**
@@ -53,7 +53,7 @@ class MongoDecoder extends JsonDecoder {
 		foreach ($data as $item) {
 			if ($model->getType() == ArrayOf::OBJECT) {
 				$object = $model->generate($item);
-				$this->decode($object, $item, false);
+				$this->_decode($object, $item, false);
 				$model->data[] = $object;
 			} else if ($model->getType() == ArrayOf::VALUE) {
 				if (is_array($item)) {
