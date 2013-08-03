@@ -34,7 +34,7 @@ class ShowCommands
 		$count = 0;
 		foreach ($sceneIds as $sceneId) {
 			CodeGuard::checkTypeAndThrow($sceneId, 'string');
-			SceneModel::remove($showId, $sceneId);
+			ShowModel::removeScene($showId, $sceneId);
 			$count++;
 		}
 		$sceneIndex = new \models\ShowSceneIndexModel($showId);
@@ -48,7 +48,7 @@ class ShowCommands
 		$scene = new \models\SceneModel($showId);
 		JsonDecoder::decode($scene, $object);
 		$newScene = empty($scene->id);
-		$sceneId = $scene->write();
+		$sceneId = ShowModel::writeScene($showId, $scene);
 		if ($newScene) {
 			$sceneIndex = new \models\ShowSceneIndexModel($showId);
 			$sceneIndex->scenesIndex->append($sceneId);

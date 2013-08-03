@@ -3,8 +3,8 @@
 namespace models;
 
 use models\mapper\MongoMapper;
-
 use models\mapper\ArrayOf;
+use models\mapper\MapOf;
 
 use models\mapper\Id;
 
@@ -12,10 +12,13 @@ class ShowModel extends mapper\MapperModel
 {
 	public function __construct($id = '') {
 		$this->id = new Id();
-		$this->scenesIndex = new ArrayOf(ArrayOf::VALUE);
 		$this->actions = new ArrayOf(ArrayOf::OBJECT, function($data) {
 			return new ActionModel();
 		});
+		$this->scenes = new MapOf(function($data) {
+			return new SceneModel();
+		});
+		$this->scenesIndex = new ArrayOf(ArrayOf::VALUE);
 		parent::__construct(ShowModelMongoMapper::instance(), $id);
 	}
 
@@ -60,7 +63,7 @@ class ShowModel extends mapper\MapperModel
 	 */
 	public static function writeScene($showId, $sceneModel) {
 		$mapper = ShowModelMongoMapper::instance();
-		$id = ShowModelMongoMapper::mongoID($sceneModel->name);
+		$id = ShowModelMongoMapper::makeKey($sceneModel->name);
 		$mapper->write($sceneModel, $id, MongoMapper::ID_IN_KEY, $showId, 'scenes');
 		return $id;
 	}
