@@ -4,9 +4,9 @@ namespace models;
 
 use models\mapper\MongoMapper;
 use models\mapper\ArrayOf;
-use models\mapper\MapOf;
-
 use models\mapper\Id;
+use models\mapper\MapOf;
+use models\ActionModel;
 
 class ShowModel extends mapper\MapperModel
 {

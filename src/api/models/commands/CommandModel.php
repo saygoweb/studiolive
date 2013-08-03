@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace models\commands;
 
 class CommandModel
 {

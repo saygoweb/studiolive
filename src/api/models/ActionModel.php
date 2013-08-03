@@ -1,6 +1,8 @@
 <?php
+namespace models;
 
-use models\CommandModel;
+use models\commands\CommandModel;
+use models\mapper\ArrayOf;
 
 class ActionModel
 {

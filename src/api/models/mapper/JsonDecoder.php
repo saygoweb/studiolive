@@ -6,7 +6,7 @@ use libraries\palaso\CodeGuard;
 class JsonDecoder {
 	
 	/**
-	 * The currend id being decoded
+	 * The current id being decoded
 	 * @var string
 	 */
 	protected $_id;
