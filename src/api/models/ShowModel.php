@@ -63,7 +63,10 @@ class ShowModel extends mapper\MapperModel
 	 */
 	public static function writeScene($showId, $sceneModel) {
 		$mapper = ShowModelMongoMapper::instance();
-		$id = ShowModelMongoMapper::makeKey($sceneModel->name);
+		$id = $sceneModel->id->asString();
+		if (empty($id)) {
+			$id = ShowModelMongoMapper::makeKey($sceneModel->name);
+		}
 		$mapper->write($sceneModel, $id, MongoMapper::ID_IN_KEY, $showId, 'scenes');
 		return $id;
 	}

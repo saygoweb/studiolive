@@ -2,6 +2,8 @@
 
 namespace commands;
 
+use models\mapper\Id;
+
 use libraries\palaso\CodeGuard;
 
 use models\mapper\JsonDecoder;
@@ -45,9 +47,9 @@ class ShowCommands
 	}
 
 	public static function updateScene($showId, $object) {
-		$scene = new \models\SceneModel($showId);
+		$scene = new SceneModel();
 		JsonDecoder::decode($scene, $object);
-		$newScene = empty($scene->id);
+		$newScene = Id::isEmpty($scene->id);
 		$sceneId = ShowModel::writeScene($showId, $scene);
 		if ($newScene) {
 			$sceneIndex = new \models\ShowSceneIndexModel($showId);

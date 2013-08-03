@@ -17,7 +17,7 @@ class ShowAPITestEnvironment
 	private $_idAdded = array();
 	
 	function __construct() {
-		$this->_api = new jsonRPCClient("http://studiolive.local/api/studiolive.php", true);
+		$this->_api = new jsonRPCClient("http://studiolive.local/api/studiolive.php", false);
 	}
 	
 	/**

@@ -1,5 +1,8 @@
 <?php
 
+use \models\SceneModel;
+use \models\ShowModel;
+
 class MongoTestEnvironment
 {
 	
@@ -51,9 +54,9 @@ class MongoTestEnvironment
 	}
 	
 	public function createScene($showId, $sceneName) {
-		$sceneModel = new models\SceneModel($showId);
+		$sceneModel = new models\SceneModel();
 		$sceneModel->name = $sceneName;
-		return $sceneModel->write();
+		return ShowModel::writeScene($showId, $sceneModel);
 	}
 	
 	public function inhibitErrorDisplay() {

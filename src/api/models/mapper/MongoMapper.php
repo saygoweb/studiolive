@@ -91,7 +91,7 @@ class MongoMapper
 			throw new \Exception("Could not find id '$id'");
 		}
 		try {
-			MongoDecoder::decode($model, $data);
+			MongoDecoder::decode($model, $data, $id);
 		} catch (\Exception $ex) {
 			throw new \Exception("Exception thrown while reading '$id'", $ex->getCode(), $ex);
 		}
@@ -104,10 +104,10 @@ class MongoMapper
 		if ($data === NULL) {
 			throw new \Exception("Could not find $property=$id in $rootId");
 		}
+		// TODO Check this out on nested sub docs > 1
 		$data = $data[$property][$id];
-		$data['_id'] = $id;
 		error_log(var_export($data, true));
-		MongoDecoder::decode($model, $data);
+		MongoDecoder::decode($model, $data, $id);
 	}
 	
 	/**

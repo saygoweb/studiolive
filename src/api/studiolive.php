@@ -3,6 +3,7 @@
 use commands\ShowCommands;
 use libraries\palaso\JsonRpcServer;
 use models\SceneModel;
+use models\ShowModel;
 use models\ShowSceneIndexModel;
 use models\mapper\JsonDecoder;
 use models\mapper\JsonEncoder;
@@ -77,8 +78,8 @@ class StudioLiveAPI
 	//---------------------------------------------------------------
 	
 	public function scene_read($showId, $sceneId) {
-		$scene = new \models\SceneModel($showId, $sceneId);
-		return $scene;
+		$scene = ShowModel::readScene($showId, $sceneId);
+		return JsonEncoder::encode($scene);
 	}
 	
 	public function scene_update($showId, $object) {
