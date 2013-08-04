@@ -169,6 +169,7 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 		 {'cat': 'Mixer',  'type': 'Geometry'},
 		 {'cat': 'Mixer',  'type': 'Opacity'},
 		 {'cat': 'Mixer',  'type': 'Chroma'},
+		 {'cat': 'Mixer',  'type': 'Route'},
 		 {'cat': 'Output', 'type': 'File'}
 		];
 	$scope.newCommandType = $scope.allCommands[0];

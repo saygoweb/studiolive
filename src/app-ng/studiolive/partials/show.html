@@ -159,6 +159,18 @@
 			</table>
 			</fieldset>
 		</form>
+		<form ng-switch-when="Route" class="well">
+			<fieldset>
+			<legend>{{currentCommand.type}} Properties</legend>
+			<table>
+			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
+			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
+			<tr><th><label>Layer</label></th><td><input ng-model="currentCommand.layer" type="number" min="0" max="100" placeholder="Layer #" /></td></tr>
+			<tr><th><label>Source Channel</label></th><td><input ng-model="currentCommand.srcChannel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
+			<tr><th><label>Source Layer</label></th><td><input ng-model="currentCommand.srcLayer" type="number" min="0" max="100" placeholder="Layer #" /></td></tr>
+			</table>
+			</fieldset>
+		</form>
 		<form ng-switch-when="File" class="well">
 			<fieldset>
 			<legend>{{currentCommand.type}} Properties</legend>

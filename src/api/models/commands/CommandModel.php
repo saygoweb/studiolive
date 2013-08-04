@@ -34,6 +34,8 @@ class CommandModel
 				return new OpacityMixerCommandModel();
 			case 'Chroma':
 				return new ChromaMixerCommandModel();
+			case 'Route':
+				return new RouteMixerCommandModel();
 			case 'File':
 				return new VideoFileOutputCommandModel();
 			default:
