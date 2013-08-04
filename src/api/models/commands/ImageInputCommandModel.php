@@ -2,7 +2,7 @@
 
 namespace models\commands;
 
-class VideoFileCommandModel extends CommandModel
+class ImageInputCommandModel extends InputCommandModel
 {
 
 	public $resourceName;

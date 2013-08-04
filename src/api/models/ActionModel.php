@@ -12,6 +12,8 @@ class ActionModel
 		});
 	}
 	
+	public $name;
+	
 	public $commands;
 }
 

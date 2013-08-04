@@ -63,12 +63,12 @@ class StudioLiveAPI
 	public function show_updateScenesIndex($showId, $scenesIndex) {
 		$sceneIndex = new ShowSceneIndexModel($showId);
 		// Check that the length is the same. Should really check that the contents are the same but this will do.
-		$expected = count($sceneIndex->scenesIndex);
+		$expected = $sceneIndex->scenesIndex->count();
 		$actual = count($scenesIndex);
 		if ($actual != $expected) {
 			throw new \Exception("Expected $expected items in index, $actual given.");
 		}
-		$sceneIndex->scenesIndex = $scenesIndex;
+		$sceneIndex->scenesIndex->data = $scenesIndex;
 		$sceneIndex->write();
 		return true;
 	}
