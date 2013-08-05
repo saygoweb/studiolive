@@ -13,67 +13,34 @@ var app = angular.module(
 
 		$scope.show = {};
 		$scope.show.id = $routeParams.showId;
-		// Selection
-		$scope.selected = [];
-		$scope.updateSelection = function(event, item) {
-			var selectedIndex = $scope.selected.indexOf(item);
-			var checkbox = event.target;
-			if (checkbox.checked && selectedIndex == -1) {
-				$scope.selected.push(item);
-			} else if (!checkbox.checked && selectedIndex != -1) {
-				$scope.selected.splice(selectedIndex, 1);
-			}
-		};
-		$scope.isSelected = function(item) {
-			return item != null && $scope.selected.indexOf(item) >= 0;
-		};
-		
+
 		// Read
 		$scope.queryShow = function() {
 			sceneService.readShow($scope.show.id, function(result) {
 				if (result.ok) {
 					$scope.show = result.data;
+					$scope.showActions = $scope.show.actions.slice(0); // Shallow clone the array.
+					$scope.sceneActions = [];
+					
+//					$scope.showActions = ['a', 'b', 'c'];
+//					$scope.sceneActions = [];
 				}
 			});
 		};
 		$scope.queryShow();
-
-		// Remove
-		$scope.removeScenes = function() {
-			console.log("removeScenes");
-			var sceneIds = [];
-			for(var i = 0, l = $scope.selected.length; i < l; i++) {
-				sceneIds.push($scope.selected[i]);
-			}
-			if (l == 0) {
-				// TODO ERROR
-				return;
-			}
-			sceneService.remove($scope.show.id, sceneIds, function(result) {
-				if (result.ok) {
-					$scope.queryShow();
+		
+		// Sort
+		$scope.sortOptions = {
+			update: function(e, ui) {
+				if (e.target.id == 'destList') {
+					console.log("update: " + e.target.id);
+					console.log("update: " + $scope.sceneActions.id);
 				}
-			});
+			},
+			connectWith: "ul.actionList",
+			cursor: "pointer",
+			dropOnEmpty: true
 		};
 		
-		// Add Scene
-		$scope.addScene = function() {
-			var model = {};
-			model.id = '';
-			model.name = $scope.sceneName;
-			console.log("addScene ", model);
-			sceneService.update($scope.show.id, model, function(result) {
-				if (result.ok) {
-					$scope.queryShow();
-				}
-			});
-		};
-		
-		/*
-		$scope.imageSource = function(avatarRef) {
-			return avatarRef ? '/images/avatar/' + avatarRef : '/images/avatar/anonymous02.png';
-		};
-		*/
-	
 	}])
 	;

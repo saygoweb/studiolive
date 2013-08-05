@@ -105,6 +105,7 @@ angular.module('ui.sortable', [])
               // Create sortable
 
             element.sortable(opts);
+            element.disableSelection();
           }
         };
       }

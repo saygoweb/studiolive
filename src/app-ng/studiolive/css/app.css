@@ -9,6 +9,31 @@ i.icon-remove {
 	color: #f66;
 }
 
+h3 {
+	font-size: 1.2em;
+	line-height: 20px;
+}
+
+ul.actionList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.actionList li {
+	margin: 0 3px 3px 3px;
+	padding: 0.4em;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+	border: 1px solid #d3d3d3;
+	background: #e6e6e6 url(/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+	font-weight: normal;
+	color: #555555;
+}
+
 /* Original seed app below here */
 /* app css stylesheet */
 
