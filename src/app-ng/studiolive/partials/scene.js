@@ -51,8 +51,8 @@ var app = angular.module(
 			$scope.scene = $scope.show.scenes[$scope.scene.id];
 			var showActions = [];
 			var sceneActions = [];
-			for (var i = 0, l = $scope.show.actions.length; i < l; i++) {
-				var action = $scope.show.actions[i];
+			for (var id in $scope.show.actions) {
+				var action = $scope.show.actions[id];
 				if ($scope.scene.actions.indexOf(action.id) != -1) {
 					// if action in scene actions then add to sceneActions
 					sceneActions.push(action);
