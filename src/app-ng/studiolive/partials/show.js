@@ -143,15 +143,24 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 	$scope.addAction = function() {
 		console.log("addAction()");
 		var model = {};
+		model.id = '';
 		model.name = $scope.newActionName;
-		$scope.show.actions.push(model);
-		$scope.currentAction = model;
+		showService.updateAction($scope.show.id, model, function(result) {
+			if (result.ok) {
+				model.id = result.data;
+				$scope.show.actions[model.id] = model;
+				$scope.currentAction = model;
+			}
+		});
 	};
 	
 	$scope.removeAction = function() {
 		console.log("removeAction()");
-		var selectedIndex = $scope.show.actions.indexOf($scope.currentAction);
-		$scope.show.actions.splice(selectedIndex, 1);
+		showService.removeAction($scope.show.id, $scope.currentAction.id, function(result) {
+			if (result.ok) {
+				delete $scope.show.actions[$scope.currentAction.id];
+			}
+		});
 	};
 	
 	//---------------------------------------------------------------

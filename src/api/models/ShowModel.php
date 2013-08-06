@@ -12,7 +12,7 @@ class ShowModel extends mapper\MapperModel
 {
 	public function __construct($id = '') {
 		$this->id = new Id();
-		$this->actions = new ArrayOf(ArrayOf::OBJECT, function($data) {
+		$this->actions = new MapOf(function($data) {
 			return new ActionModel();
 		});
 		$this->scenes = new MapOf(function($data) {
@@ -79,6 +79,39 @@ class ShowModel extends mapper\MapperModel
 	public static function removeScene($showId, $id) {
 		$mapper = ShowModelMongoMapper::instance();
 		return $mapper->removeSubDocument($showId, 'scenes', $id);
+	}
+	
+	/**
+	 * @param ActionModel $action
+	 * @return string
+	 */
+	public static function updateAction($action) {
+		if (Id::isEmpty($action->id)) {
+			$action->id->id = MongoMapper::makeId();
+		}
+		$this->actions->data[$action->id->asString()] = $action;
+		return $action->id->asString();
+	}
+	
+	/**
+	 * Writes (Updates) an ActionModel
+	 * @param string $showId
+	 * @param ActionModel $actionModel
+	 * @return string
+	 */
+	public static function writeAction($showId, $actionModel) {
+		$mapper = ShowModelMongoMapper::instance();
+		$id = $actionModel->id->asString();
+		if (empty($id)) {
+			$id = ShowModelMongoMapper::makeId();
+		}
+		$mapper->write($actionModel, $id, MongoMapper::ID_IN_KEY, $showId, 'actions');
+		return $id;
+	}
+	
+	public static function removeAction($showId, $actionId) {
+		$mapper = ShowModelMongoMapper::instance();
+		return $mapper->removeSubDocument($showId, 'actions', $actionId);
 	}
 	
 	public $id;

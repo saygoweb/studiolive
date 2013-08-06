@@ -42,7 +42,7 @@
 <div ng-controller="ShowActionsCtrl">
 <!-- <p>{{show.id}}</p> -->
 	<form class="control-bar form-inline well">
-		<select ng-model="currentAction" ng-options="action.name for action in show.actions" ng-disabled="show.actions.length == 0"></select>
+		<select ng-model="currentAction" ng-options="action.name for (id, action) in show.actions" ng-disabled="show.actions.length == 0"></select>
 		<button class="btn" ng-click="removeAction()"><i class="icon-remove"></i>Remove</button>
 		<input ng-model="newActionName" type="text" placeholder="Action Name" />
 		<button class="btn" ng-click="addAction()"><i class="icon-plus"></i>Add New</button>

@@ -19,6 +19,12 @@ angular.module('sl.services', ['jsonRpc'])
 			// TODO Paging CP 2013-07
 			jsonRpc.call('show_list', [], callback);
 		};
+		this.updateAction = function(showId, model, callback) {
+			jsonRpc.call('show_updateAction', [showId, model], callback);
+		};
+		this.removeAction = function(showId, actionId, callback) {
+			jsonRpc.call('show_removeAction', [showId, actionId], callback);
+		};
 	}])
 	.service('sceneService', ['jsonRpc', function(jsonRpc) {
 		jsonRpc.connect('/api/studiolive.php'); // Note this doesn't actually 'connect', it simply sets the connection url.

@@ -122,7 +122,7 @@ class jsonRPCClient {
 		$request = json_encode($request);
 		
 		$debug = '';
-		$this->debug && $debug.='***** Request *****'."\n".$request."\n".'***** End Of request *****'."\n\n";
+		$this->debug && $debug.='***** Request *****'."\n".$request."\n".'***** End Of request *****'."\n";
 		
 		// performs the HTTP POST
 		$opts = array ('http' => array (
@@ -136,7 +136,7 @@ class jsonRPCClient {
 			while($row = fgets($fp)) {
 				$response.= trim($row)."\n";
 			}
-			$this->debug && $debug.='***** Server response *****'."\n".$response.'***** End of server response *****'."\n";
+			$this->debug && $debug.='***** Server response *****'."\n".$response.'***** End of server response *****'."\n\n";
 			$response = json_decode($response,true);
 		} else {
 			throw new Exception('Unable to connect to '.$this->url);

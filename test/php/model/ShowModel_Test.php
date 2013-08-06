@@ -1,4 +1,6 @@
 <?php
+use models\ActionModel;
+
 use models\ShowListModel;
 use models\ShowModel;
 
@@ -14,46 +16,44 @@ class TestShowModel extends UnitTestCase {
 		$e->clean();
 	}
 	
-	function testWrite_ReadBackSame() {
-		$model = new ShowModel();
-		$model->name = "Some User";
-		$id = $model->write();
-
+	function testCRUD_Ok() {
+		// List
+		$list = new ShowListModel();
+		$list->read();
+		$this->assertEqual(0, $list->count);
+		
+		// Create
+		$show = new ShowModel();
+		$show->name = "Some Show";
+		$id = $show->write();
 		$this->assertNotNull($id);
 		$this->assertIsA($id, 'string');
-		$this->assertEqual($id, $model->id);
+		$this->assertEqual($id, $show->id->asString());
 		
-		$otherModel = new ShowModel($id);
-		$this->assertEqual($id, $otherModel->id);
-		$this->assertEqual('Some User', $otherModel->name);
-	}
-
-	function testWriteRemove_ListCorrect() {
-		$e = new MongoTestEnvironment();
-		$e->clean();
-
-		$list = new ShowListModel();
-		$list->read();
-		$this->assertEqual(0, $list->count);
-		$this->assertEqual(null, $list->entries);
+		// Read back
+		$otherShow = new ShowModel($id);
+		$this->assertEqual($id, $otherShow->id->asString());
+		$this->assertEqual('Some Show', $otherShow->name);
 		
-		$show = new ShowModel();
-		$show->name = "Some Name";
-		$id = $show->write();
+		// Update
+		$otherShow->name = 'Other Show';
+		$otherShow->write();
 
-		$list = new ShowListModel();
+		// Read back
+		$otherShow = new ShowModel($id);
+		$this->assertEqual('Other Show', $otherShow->name);
+		
+		// List
 		$list->read();
 		$this->assertEqual(1, $list->count);
-		$this->assertEqual(array(array('name' => 'Some Name', 'id' => $id)), $list->entries);
 
+		// Delete
 		ShowModel::remove($id);
 		
-		$list = new ShowListModel();
+		// List
 		$list->read();
-		$this->assertEqual(0, $list->count);
-		$this->assertEqual(null, $list->entries);
+		$this->assertEqual(0, $list->count);	
 	}
-	
 	
 }
 

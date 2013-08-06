@@ -92,19 +92,56 @@ class TestShowAPI extends UnitTestCase {
 		$this->assertEqual($showCount, $result['count']);
 	}
 	
-/*
-	function testShowTypeahead_Ok() {
-		$e = new ShowAPITestEnvironment();
-		$e->addShow('Some Show');
+	function testActionsCRUD_Ok() {
+		$api = new jsonRPCClient("http://studiolive.local/api/studiolive.php", false);
 		
-		$api = new jsonRPCClient("http://scriptureforge.local/api/sf", false);
-		$result = $api->show_typeahead('ome');
+		// Create Show
+		$param = array(
+				'id' => '',
+				'name' =>'SomeShow'
+		);
+		$showId = $api->show_update($param);
+		$this->assertNotNull($showId);
+		$this->assertEqual(24, strlen($showId));
 		
-		$this->assertTrue($result['count'] > 0);
+		// List (via show)
+		$result = $api->show_read($showId);
+		$this->assertNotNull($result['id']);
+		$this->assertEqual(0, count($result['actions']));
+
+		// Create
+		$param = array(
+				'id' => '',
+				'name' => 'Some Action'
+		);
+		$actionId = $api->show_updateAction($showId, $param);
+		$this->assertNotNull($actionId);
+		$this->assertEqual(24, strlen($actionId));
 		
-		$e->dispose();
+		// Read back (via show)
+		$result = $api->show_read($showId);
+		$result = $result['actions'][$actionId];
+		$this->assertEqual('Some Action', $result['name']);
+		
+		// Update
+		$result['name'] = 'Other Action';
+		$otherActionId = $api->show_updateAction($showId, $result);
+		$this->assertEqual($actionId, $otherActionId);
+		
+		// Read back (via show)
+		$result = $api->show_read($showId);
+		$this->assertEqual('Other Action', $result['actions'][$actionId]['name']);
+		
+		// List (via show above)
+		$this->assertEqual(1, count($result['actions']));
+		
+		// Delete
+		$result = $api->show_removeAction($showId, $actionId);
+			
+		// List to check delete
+		$result = $api->show_read($showId);
+		$this->assertEqual(0, count($result['actions']));
 	}
-	*/
 	
 }
 

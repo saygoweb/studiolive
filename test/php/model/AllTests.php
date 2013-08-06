@@ -8,6 +8,7 @@ class AllModelTests extends TestSuite {
         parent::__construct();
  		$this->addFile(TEST_PATH . 'model/ShowModel_Test.php');
  		$this->addFile(TEST_PATH . 'model/SceneModel_Test.php');
+ 		$this->addFile(TEST_PATH . 'model/ActionModel_Test.php');
  		$this->addFile(TEST_PATH . 'model/ShowSceneIndexModel_Test.php');
     }
 

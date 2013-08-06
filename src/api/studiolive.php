@@ -1,5 +1,7 @@
 <?php
 
+use models\ActionModel;
+
 use commands\ShowCommands;
 use libraries\palaso\JsonRpcServer;
 use models\SceneModel;
@@ -58,6 +60,16 @@ class StudioLiveAPI
 		$list = new \models\ShowListModel();
 		$list->read();
 		return $list;
+	}
+	
+	public function show_updateAction($showId, $action) {
+		$actionModel = new ActionModel();
+		JsonDecoder::decode($actionModel, $action);
+		return ShowModel::writeAction($showId, $actionModel);
+	}
+	
+	public function show_removeAction($showId, $actionId) {
+		return ShowModel::removeAction($showId, $actionId);
 	}
 	
 	public function show_updateScenesIndex($showId, $scenesIndex) {
