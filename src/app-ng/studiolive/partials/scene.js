@@ -51,19 +51,20 @@ var app = angular.module(
 			$scope.scene = $scope.show.scenes[$scope.scene.id];
 			var showActions = [];
 			var sceneActions = [];
+			for (var i = 0, l = $scope.scene.actions.length; i < l; i++) {
+				var action = $scope.show.actions[$scope.scene.actions[i]];
+				sceneActions.push(action);
+			}
 			for (var id in $scope.show.actions) {
 				var action = $scope.show.actions[id];
-				if ($scope.scene.actions.indexOf(action.id) != -1) {
-					// if action in scene actions then add to sceneActions
-					sceneActions.push(action);
-				} else {
-					// add action to showActions
+				if ($scope.scene.actions.indexOf(action.id) == -1) {
 					showActions.push(action);
 				}
 			}
 			$scope.showActions = showActions;
 			$scope.sceneActions = sceneActions;
 		});
+		
 		$scope.$watch("sceneActions", function(newValue, oldValue) {
 			console.log('watch sceneActions', newValue);
 			if ($scope.canUpdate == undefined) {
