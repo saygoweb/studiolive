@@ -8,7 +8,7 @@ var app = angular.module(
 	.controller('SceneCtrl', ['$scope', 'sceneService', '$routeParams', '$timeout', function($scope, sceneService, $routeParams, $timeout) {
 		$scope.debug = {};
 		$timeout(function() {
-		  $scope.debug.actionsTab = true;  
+			$scope.debug.setTab = true;  
 		}, 0);
 
 		$scope.show = {};

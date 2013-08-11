@@ -1,11 +1,23 @@
 <legend>Show: {{show.name}} Scene</legend>
 <tabset>
-<tab heading="Show Time">
+<tab heading="Show Time" active="debug.setTab">
+<div id="st-wrapper">
+<div id="st-controls" class="well">
+<h3>Controls</h3>
+<div class="st-control" ng-repeat="action in sceneActions">
+{{action.name}}<div class="right"><button class="btn btn-large">In</button><button class="btn btn-large">Out</button></div>
+</div>
+</div>
+</div>
+<div class="right">
+<div class="st-preview">Preview #1</div>
+<div class="st-preview">Preview #2</div>
+</div>
 </tab>
 <tab heading="Data">
 hello there
 </tab>
-<tab heading="Actions" active="debug.actionsTab">
+<tab heading="Actions">
 <div class="span3 well" style="display:inline-block;">
 	<h3>Actions available</h3>
 	<ul id="srcList" ui-sortable="sortOptions" class="actionList" ng-model="showActions" style="min-height:10px;">

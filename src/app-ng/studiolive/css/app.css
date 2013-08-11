@@ -1,4 +1,12 @@
 
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
 /* Buttons with icons */
 button i {
 	margin-right: 8px;
@@ -64,4 +72,33 @@ ul.actionList li {
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}
+
+/* Show Time */
+.st-preview {
+	width: 480px;
+	height: 270px;
+	border: 1px solid #ccc;
+	margin-bottom: 8px;
+}
+
+div#st-wrapper {
+	float: left;
+	width: 100%;
+	margin-left: -490px; /* 2px for the border currently */
+	smargin-right: 8px;
+}
+
+div#st-controls {
+	margin-left: 490px;
+	min-height: 540px;
+}
+
+div.st-control {
+	height: 54px;
+}
+
+div.st-control button {
+	width: 80px;
+	margin-left: 8px;
 }
