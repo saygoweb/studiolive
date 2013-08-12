@@ -44,5 +44,8 @@ angular.module('sl.services', ['jsonRpc'])
 		this.updateScenesIndex = function(showId, sceneIds, callback) {
 			jsonRpc.call('show_updateScenesIndex', [showId, sceneIds], callback);
 		};
+		this.executeAction = function(showId, sceneId, actionId, callback) {
+			jsonRpc.call('scene_executeAction', [showId, sceneId, actionId], callback);
+		};
 	}])
 	;

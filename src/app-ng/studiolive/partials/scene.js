@@ -84,6 +84,23 @@ var app = angular.module(
 			});
 			
 		}, true);
+		
+		// SHOW TIME
+		$scope.stInClick = function(actionId) {
+			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'in', function(result) {
+				if (result.ok) {
+					console.log('in click ok');
+				}
+			});
+		};
+		$scope.stOutClick = function(actionId) {
+			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'out', function(result) {
+				if (result.ok) {
+					console.log('out click ok');
+				}
+			});
+		};
+
 
 		
 	}])

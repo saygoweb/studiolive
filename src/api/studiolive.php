@@ -17,7 +17,7 @@ class StudioLiveAPI
 	
 	public function __construct() {
 		// TODO put in the LF style error handler for logging / jsonrpc return formatting etc. CP 2013-07
-		//ini_set('display_errors', 0);
+		ini_set('display_errors', 0);
 	}
 
 	//---------------------------------------------------------------
@@ -101,6 +101,10 @@ class StudioLiveAPI
 	public function scene_delete($showId, $sceneIds) {
  		$result = ShowCommands::deleteScenes($showId, $sceneIds);
 		return $result;
+	}
+	
+	public function scene_executeAction($actionId, $op) {
+		throw new \Exception('nyi');
 	}
 
 }

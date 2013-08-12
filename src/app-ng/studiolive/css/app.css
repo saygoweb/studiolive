@@ -86,7 +86,6 @@ div#st-wrapper {
 	float: left;
 	width: 100%;
 	margin-left: -490px; /* 2px for the border currently */
-	smargin-right: 8px;
 }
 
 div#st-controls {
@@ -101,4 +100,8 @@ div.st-control {
 div.st-control button {
 	width: 80px;
 	margin-left: 8px;
+}
+
+div#st-log {
+	border: 1px solid #ccc;
 }

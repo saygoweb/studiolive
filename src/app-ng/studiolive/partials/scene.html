@@ -5,7 +5,7 @@
 <div id="st-controls" class="well">
 <h3>Controls</h3>
 <div class="st-control" ng-repeat="action in sceneActions">
-{{action.name}}<div class="right"><button class="btn btn-large">In</button><button class="btn btn-large">Out</button></div>
+{{action.name}}<div class="right"><button ng-click="stInClick(action.id)" class="btn btn-large">In</button><button ng-click="stOutClick(action.id)" class="btn btn-large">Out</button></div>
 </div>
 </div>
 </div>
@@ -13,6 +13,7 @@
 <div class="st-preview">Preview #1</div>
 <div class="st-preview">Preview #2</div>
 </div>
+<div id="st-log" style="clear: both;">Logs...</div>
 </tab>
 <tab heading="Data">
 hello there
