@@ -1,5 +1,7 @@
 <?php
 
+use models\mapper\caspar\CasparConnection;
+
 use models\ActionModel;
 
 use commands\ShowCommands;
@@ -103,8 +105,25 @@ class StudioLiveAPI
 		return $result;
 	}
 	
-	public function scene_executeAction($actionId, $op) {
-		throw new \Exception('nyi');
+	public function scene_executeAction($showId, $actionId, $operation) {
+		$showModel = new ShowModel($showId);
+		$action = $showModel->actions->data[$actionId];
+		switch ($operation) {
+			case 'in':
+				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
+				foreach ($action->commands->data as $command) {
+					$casparString = $command->casparCommandIn();
+					$caspar->sendString($casparString);
+				}
+				break;
+			case 'out':
+				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
+				foreach ($action->commands->data as $command) {
+					$casparString = $command->casparCommandOut();
+					$caspar->sendString($casparString);
+				}
+				break;
+		} 
 	}
 
 }

@@ -1,6 +1,5 @@
 <?php
 use models\ShowSceneIndexModel;
-
 use commands\ShowCommands;
 
 require_once(dirname(__FILE__) . '/../TestConfig.php');

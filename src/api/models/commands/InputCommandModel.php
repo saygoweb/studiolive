@@ -9,7 +9,7 @@ class InputCommandModel extends CommandModel
 	
 	public $layer;
 	
-	public $resouceName;
+	public $resourceName;
 	
 }
 
