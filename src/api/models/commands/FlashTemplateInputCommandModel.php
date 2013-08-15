@@ -2,7 +2,7 @@
 
 namespace models\commands;
 
-class FlashTemplateInputCommandModel extends InputCommandModel
+class FlashTemplateInputCommandModel extends InputResourceCommandModel
 {
 
 	

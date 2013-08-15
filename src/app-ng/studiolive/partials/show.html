@@ -135,6 +135,16 @@
 			</table>
 			</fieldset>
 		</form>
+		<form ng-switch-when="Grid" class="well">
+			<fieldset>
+			<legend>{{currentCommand.type}} Properties</legend>
+			<table>
+			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
+			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
+			<tr><th><label>Grid Size</label></th><td><input ng-model="currentCommand.gridSize" type="number" placeholder="Grid size" /></td></tr>
+			</table>
+			</fieldset>
+		</form>
 		<form ng-switch-when="Opacity" class="well">
 			<fieldset>
 			<legend>{{currentCommand.type}} Properties</legend>

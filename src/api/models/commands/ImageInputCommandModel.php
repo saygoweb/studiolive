@@ -2,12 +2,8 @@
 
 namespace models\commands;
 
-class ImageInputCommandModel extends InputCommandModel
+class ImageInputCommandModel extends InputResourceCommandModel
 {
-
-	public $resourceName;
-	
-	
 }
 
 ?>

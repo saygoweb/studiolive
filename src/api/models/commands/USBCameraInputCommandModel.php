@@ -2,19 +2,8 @@
 
 namespace models\commands;
 
-class USBCameraInputCommandModel extends InputCommandModel
+class USBCameraInputCommandModel extends InputResourceCommandModel
 {
-
-	public function casparCommandIn() {
-		$result = sprintf('PLAY %d-%d "%s"', $this->channel, $this->layer, $this->resourceName);
-		return $result;
-	}
-	
-	public function casparCommandOut() {
-		$result = sprintf('STOP %d-%d"', $this->channel, $this->layer);
-		return $result;
-	}
-
 }
 
 ?>

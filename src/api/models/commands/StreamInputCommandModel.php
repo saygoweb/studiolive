@@ -2,12 +2,8 @@
 
 namespace models\commands;
 
-class StreamInputCommandModel extends InputCommandModel
+class StreamInputCommandModel extends InputResourceCommandModel
 {
-
-	public $resourceName;
-	
-	
 }
 
 ?>

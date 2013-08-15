@@ -176,6 +176,7 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 		 {'cat': 'Input',  'type': 'Stream'},
 		 {'cat': 'Input',  'type': 'Video'},
 		 {'cat': 'Mixer',  'type': 'Geometry'},
+		 {'cat': 'Mixer',  'type': 'Grid'},
 		 {'cat': 'Mixer',  'type': 'Opacity'},
 		 {'cat': 'Mixer',  'type': 'Chroma'},
 		 {'cat': 'Mixer',  'type': 'Route'},

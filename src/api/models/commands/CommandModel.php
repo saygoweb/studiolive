@@ -36,6 +36,8 @@ class CommandModel
 				return new ChromaMixerCommandModel();
 			case 'Route':
 				return new RouteMixerCommandModel();
+			case 'Grid':
+				return new GridMixerCommandModel();
 			case 'File':
 				return new VideoFileOutputCommandModel();
 			default:
