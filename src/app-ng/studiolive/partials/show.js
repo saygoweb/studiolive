@@ -5,7 +5,12 @@ var module = angular.module(
 	'sl.show',
 	[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 );
-module.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
+module.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', '$timeout', function($scope, sceneService, $routeParams, $timeout) {
+	$scope.debug = {};
+	$timeout(function() {
+		$scope.debug.setTab = true;  
+	}, 0);
+
 	$scope.show = {};
 	$scope.show.id = $routeParams.showId;
 	// Read
@@ -167,6 +172,12 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 	// Commands
 	//---------------------------------------------------------------
 	$scope.currentCommand = undefined;
+	
+	$scope.settings = {
+		cameras: ["dshow://video=Sony Visual Communication Camera",
+		          "dshow://video=Microsoft LifeCam Studio"
+		         ]	
+	};
 	
 	$scope.allCommands = 
 		[

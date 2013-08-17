@@ -7,6 +7,55 @@
 	float: right;
 }
 
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 10px 0;
+  font-family: inherit;
+  xfont-weight: bold;
+  xline-height: 16px;
+  xcolor: inherit;
+  text-rendering: optimizelegibility;
+
+  font-weight: normal;
+  xline-height: 1;
+  color: #333;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 28px;
+}
+
+h1 {
+  font-size: 24.5px;
+}
+
+h2 {
+  font-size: 17.5px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h4 {
+  font-size: 14px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 11.9px;
+}
+
 /* Buttons with icons */
 button i {
 	margin-right: 8px;
@@ -104,4 +153,9 @@ div.st-control button {
 
 div#st-log {
 	border: 1px solid #ccc;
+}
+
+/* Show Actions Tab */
+div.action form {
+	min-height: 400px;
 }

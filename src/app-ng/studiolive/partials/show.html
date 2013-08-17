@@ -1,4 +1,4 @@
-<legend>Show: {{show.name}}</legend>
+<h1>Show: {{show.name}}</h1>
 <tabset>
 <tab heading="Scenes">
 <div ng-controller="ShowScenesCtrl">
@@ -38,7 +38,7 @@
 <tab heading="Data">
 </tab>
  -->
-<tab heading="Actions">
+<tab heading="Actions" active="debug.setTab">
 <div ng-controller="ShowActionsCtrl">
 <!-- <p>{{show.id}}</p> -->
 	<form class="control-bar form-inline well">
@@ -49,8 +49,17 @@
 		<button class="btn" ng-click="saveShow()"><i class="icon-save"></i>Save</button>
 	</form>
 	<fieldset>
-	<legend>Action: <input ng-model="currentAction.name" type="text" placeholder="Action Name" /></legend>
-	<div class="span5" style="display:inline-block">
+	<h2>Action Properties</h2>
+	<form class="span12 form-inline well">
+		<label>Action name:</label>
+		<input ng-model="currentAction.name" type="text" placeholder="Action Name" />
+		<label>Preview:</label>
+		<button ng-click="stInClick(currentAction.id)" class="btn">In</button>
+		<button ng-click="stOutClick(currentAction.id)" class="btn">Out</button>
+	</form>
+	<div style="clear:both;">
+	<h2>Action Commands</h2>
+	<div class="span6 action" style="display:inline-block">
 		<form class="control-bar form-inline well">
 			<select ng-model="newCommandType" ng-options="command.type group by command.cat for command in allCommands"></select>
 			<button class="btn" ng-click="addCommand()" ng-disabled="currentAction == undefined"><i class="icon-plus"></i>Add</button>
@@ -64,22 +73,22 @@
 		</table>
 		</form>
 	</div>
-	<div class="span7" style="display:inline-block">
+	<div class="span6 action" style="display:inline-block">
 		<div ng-switch on="currentCommand.type">
 		<form ng-switch-when="Camera" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
 			<tr><th><label>Layer</label></th><td><input ng-model="currentCommand.layer" type="number" min="0" max="100" placeholder="Layer #" /></td></tr>
-			<tr><th><label>Camera</label></th><td><select ng-model="currentCommand.camera" ng-options="camera.name for camera in settings.cameras"></select></td></tr>
+			<tr><th><label>Camera</label></th><td><select ng-model="currentCommand.resourceName" ng-options="camera for camera in settings.cameras"></select></td></tr>
 			</table>
 			</fieldset>
 		</form>
 		<form ng-switch-when="Flash Template" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -90,7 +99,7 @@
 		</form>
 		<form ng-switch-when="Image" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -101,7 +110,7 @@
 		</form>
 		<form ng-switch-when="Stream" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -112,7 +121,7 @@
 		</form>
 		<form ng-switch-when="Video" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -123,7 +132,7 @@
 		</form>
 		<form ng-switch-when="Geometry" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -137,7 +146,7 @@
 		</form>
 		<form ng-switch-when="Grid" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -147,7 +156,7 @@
 		</form>
 		<form ng-switch-when="Opacity" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -158,7 +167,7 @@
 		</form>
 		<form ng-switch-when="Chroma" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -171,7 +180,7 @@
 		</form>
 		<form ng-switch-when="Route" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
@@ -183,7 +192,7 @@
 		</form>
 		<form ng-switch-when="File" class="well">
 			<fieldset>
-			<legend>{{currentCommand.type}} Properties</legend>
+			<h3>{{currentCommand.type}} Properties</h3>
 			<table>
 			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
 			<tr><th><label>Filename</label></th><td><input ng-model="currentCommand.resourceName" type="text" placeholder="Filename"/></td></tr>
@@ -192,10 +201,11 @@
 		</form>
 		<form ng-switch-default class="well">
 			<fieldset>
-			<legend>No command selected</legend>
+			<h3>No command selected</h3>
 			</fieldset>
 		</form>
 		</div>
+	</div>
 	</div>
 	</fieldset>
 </div>
