@@ -232,7 +232,7 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 		var model = {};
 		model.name = '';
 		model.fieldId = 'f0';
-		model.defaultValue = '';
+		model.value = '';
 		model.useDefaultOnly = false;
 		
 		if ($scope.currentCommand.dataSet == undefined) {

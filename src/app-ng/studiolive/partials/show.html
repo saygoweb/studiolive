@@ -110,7 +110,7 @@
 				<tr ng-repeat="data in currentCommand.dataSet">
 					<td><input style="width:80px" ng-model="data.name" type="text" placeholder="name" /></td>
 					<td><input style="width:16px" ng-model="data.fieldId" type="text" placeholder="id" /></td>
-					<td><input style="width:180px" ng-model="data.defaultValue" type="text" placeholder="default" /></td>
+					<td><input style="width:180px" ng-model="data.value" type="text" placeholder="default" /></td>
 					<td><input ng-model="data.useDefaultOnly" type="checkbox" /></td>
 					<td><a ng-click="removeFlashData($index)"><i class="icon-remove"></i>Remove</a></td>
 				</tr>
