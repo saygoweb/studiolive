@@ -159,3 +159,18 @@ div#st-log {
 div.action form {
 	min-height: 400px;
 }
+
+table.grid td {
+	background-color: #fff
+}
+
+table.grid th, table.grid td {
+	padding: 0;
+}
+
+table.grid input[type="text"] {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	margin-bottom: 0px;
+}

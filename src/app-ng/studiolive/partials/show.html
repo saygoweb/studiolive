@@ -63,9 +63,9 @@
 		<form class="control-bar form-inline well">
 			<select ng-model="newCommandType" ng-options="command.type group by command.cat for command in allCommands"></select>
 			<button class="btn" ng-click="addCommand()" ng-disabled="currentAction == undefined"><i class="icon-plus"></i>Add</button>
-		<table width="100%">
+		<table class="grid" width="100%">
 		<thead><tr>
-			<td>Description</td><td>Command</td><td></td>
+			<th>Description</th><th>Command</th><th></th>
 		</tr></thead>
 		<tbody><tr ng-repeat="command in currentAction.commands" ng-click="selectCommand(command)">
 			<td>{{command.name}}</td><td>{{command.type}}</td><td><a ng-click="removeCommand($index)"><i class="icon-remove"></i>Remove</a></td>
@@ -89,12 +89,36 @@
 		<form ng-switch-when="Flash Template" class="well">
 			<fieldset>
 			<h3>{{currentCommand.type}} Properties</h3>
-			<table>
-			<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
-			<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
-			<tr><th><label>Layer</label></th><td><input ng-model="currentCommand.layer" type="number" min="0" max="100" placeholder="Layer #" /></td></tr>
-			<tr><th><label>Template</label></th><td><input ng-model="currentCommand.resourceName" type="text" placeholder="Template filename"/></td></tr>
-			</table>
+			<tabset>
+			<tab heading="Properties">
+				<table>
+				<tr><th><label>Description</label></th><td><input ng-model="currentCommand.name" type="text" placeholder="Description"/></td></tr>
+				<tr><th><label>Channel</label></th><td><input ng-model="currentCommand.channel" type="number" min="0" max="100" placeholder="Channel #" /></td></tr>
+				<tr><th><label>Layer</label></th><td><input ng-model="currentCommand.layer" type="number" min="0" max="100" placeholder="Layer #" /></td></tr>
+				<tr><th><label>Template</label></th><td><input ng-model="currentCommand.resourceName" type="text" placeholder="Template filename"/></td></tr>
+				</table>
+			</tab>
+			<tab heading="Data">
+				<table class="grid">
+				<thead>
+					<th>Name</th>
+					<th>Id</th>
+					<th>Default</th>
+					<th>Only</th>
+					<th style="width:75px"><button class="btn" ng-click="addFlashData()"><i class="icon-plus"></i>Add</button></th>
+				</thead><tbody>
+				<tr ng-repeat="data in currentCommand.dataSet">
+					<td><input style="width:80px" ng-model="data.name" type="text" placeholder="name" /></td>
+					<td><input style="width:16px" ng-model="data.fieldId" type="text" placeholder="id" /></td>
+					<td><input style="width:180px" ng-model="data.defaultValue" type="text" placeholder="default" /></td>
+					<td><input ng-model="data.useDefaultOnly" type="checkbox" /></td>
+					<td><a ng-click="removeFlashData($index)"><i class="icon-remove"></i>Remove</a></td>
+				</tr>
+				</tbody>
+				</table>
+			</tab>
+			<tab heading="Transition">
+			</tab>
 			</fieldset>
 		</form>
 		<form ng-switch-when="Image" class="well">

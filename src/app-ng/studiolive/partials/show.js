@@ -205,7 +205,8 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 			$scope.currentAction.commands = [];
 		}
 		$scope.currentAction.commands.push(model);
-		$scope.currentCommand = model;		
+		$scope.currentCommand = model;
+		$scope.selectCommand($scope.currentCommand);
 	};
 	
 	$scope.removeCommand = function(index) {
@@ -216,8 +217,37 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 	$scope.selectCommand = function(command) {
 		console.log('selectCommand() ', command);
 		$scope.currentCommand = command;
+		if (command.type == 'Flash Template') {
+			if (command.dataSet == undefined) {
+				command.dataSet = [];
+			}
+			if (command.dataSet.length == 0) {
+				$scope.addFlashData();
+			}
+		}
 	};
 	
+	// Flash Template Command
+	$scope.addFlashData = function() {
+		var model = {};
+		model.name = '';
+		model.fieldId = 'f0';
+		model.defaultValue = '';
+		model.useDefaultOnly = false;
+		
+		if ($scope.currentCommand.dataSet == undefined) {
+			$scope.currentCommand.dataSet = [];
+		}
+		
+		$scope.currentCommand.dataSet.push(model);
+	};
+	
+	$scope.removeFlashData = function(index) {
+		$scope.currentCommand.dataSet.splice(index, 1);
+		if ($scope.currentCommand.dataSet.length == 0) {
+			$scope.addFlashData();
+		}
+	};
 	
 	/*
 	$scope.imageSource = function(avatarRef) {
