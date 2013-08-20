@@ -4,7 +4,7 @@ namespace models\commands;
 
 class InputResourceCommandModel extends InputCommandModel
 {
-	public function casparCommandIn() {
+	public function casparCommandIn($userData) {
 		$result = sprintf('PLAY %d-%d "%s"', $this->channel, $this->layer, $this->resourceName);
 		return $result;
 	}

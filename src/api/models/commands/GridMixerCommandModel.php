@@ -4,7 +4,7 @@ namespace models\commands;
 
 class GridMixerCommandModel extends InputCommandModel
 {
-	public function casparCommandIn() {
+	public function casparCommandIn($userData) {
 		$result = sprintf('MIXER %d GRID %d', $this->channel, $this->gridSize);
 		return $result;
 	}

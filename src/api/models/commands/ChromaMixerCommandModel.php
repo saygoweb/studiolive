@@ -4,7 +4,7 @@ namespace models\commands;
 
 class ChromaMixerCommandModel extends InputCommandModel
 {
-	public function casparCommandIn() {
+	public function casparCommandIn($userData) {
 		$result = sprintf(
 				'MIXER %d-%d CHROMA %s %.3f %.3f',
 				$this->channel, $this->layer,

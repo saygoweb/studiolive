@@ -4,7 +4,7 @@ namespace models\commands;
 
 class OpacityMixerCommandModel extends InputCommandModel
 {
-	public function casparCommandIn() {
+	public function casparCommandIn($userData) {
 		$result = sprintf(
 			'MIXER %d-%d OPACITY %.2f 12',
 			$this->channel, $this->layer,

@@ -105,14 +105,22 @@ class StudioLiveAPI
 		return $result;
 	}
 	
-	public function scene_executeAction($showId, $actionId, $operation) {
+	public function scene_executeAction($showId, $sceneId, $actionId, $operation) {
 		$showModel = new ShowModel($showId);
 		$action = $showModel->actions->data[$actionId];
 		switch ($operation) {
 			case 'in':
+				$sceneUserData = null;
+				if ($sceneId) {
+					$scene = $showModel->scenes->data[$sceneId];
+					if (key_exists($actionId, $scene->dataSet->data)) {
+						$actionDataItem = $scene->dataSet->data[$actionId];
+						$sceneUserData = $actionDataItem->data->data;
+					}
+				}
 				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
 				foreach ($action->commands->data as $command) {
-					$casparString = $command->casparCommandIn();
+					$casparString = $command->casparCommandIn($sceneUserData);
 					$caspar->sendString($casparString);
 				}
 				break;

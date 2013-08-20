@@ -5,7 +5,7 @@ namespace models\commands;
 class RouteMixerCommandModel extends InputCommandModel
 {
 	
-	public function casparCommandIn() {
+	public function casparCommandIn($userData) {
 		if (!empty($this->srcLayer)) {
 			$result = sprintf('ROUTE %d-%d route://%d-%d', $this->channel, $this->layer, $this->srcChannel, $this->srcLayer);
 		} else {

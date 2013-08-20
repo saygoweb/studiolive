@@ -5,7 +5,7 @@ namespace models\commands;
 class GeometryMixerCommandModel extends InputCommandModel
 {
 	
-	public function casparCommandIn() {
+	public function casparCommandIn($userData) {
 		// TODO These need to come from somewhere else. CP 2013-08
 		$channelWidth = 1280;
 		$channelHeight = 720;

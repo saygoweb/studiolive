@@ -25,11 +25,17 @@ class FlashTemplateInputCommandModel extends InputResourceCommandModel
 		});
 	}
 	
-	public function casparCommandIn() {
+	public function casparCommandIn($userData) {
 		$templateData = '<templateData>';
 		foreach ($this->dataSet->data as $dataItem) {
+			$value = $dataItem->value;
+			if (!empty($userData)) {
+				if (key_exists($dataItem->fieldId, $userData)) {
+					$value = $userData[$dataItem->fieldId]->value;
+				}
+			}
 			$componentData = sprintf('<componentData id=\"%s\">', $dataItem->fieldId);
-			$componentData .= sprintf('<data id=\"text\" value=\"%s\"/>', $dataItem->value);
+			$componentData .= sprintf('<data id=\"text\" value=\"%s\"/>', $value);
 			$componentData .= '</componentData>';
 			$templateData .= $componentData;
 		}
