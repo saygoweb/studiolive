@@ -63,6 +63,8 @@ var app = angular.module(
 			}
 			$scope.showActions = showActions;
 			$scope.sceneActions = sceneActions;
+
+			$scope.updateDataSet($scope.sceneActions);
 		});
 		
 		$scope.$watch("sceneActions", function(newValue, oldValue) {
@@ -82,8 +84,49 @@ var app = angular.module(
 					console.log('scene update ok');
 				}
 			});
+			$scope.updateDataSet($scope.sceneActions);
 			
 		}, true);
+		
+		// DATA
+		$scope.updateDataSet = function(sceneActions) {
+			if ($scope.scene.dataSet == undefined) {
+				$scope.scene.dataSet = {};
+			}
+			for (var i = 0, l = $scope.sceneActions.length; i < l; i++) {
+				var action = $scope.sceneActions[i];
+//				if (action.id in $scope.scene.dataSet) {
+//					continue; // A poor optimization.  We may want to rebuild
+//				}
+				for (var j = 0, m = action.commands.length; j < m; j++) {
+					var command = action.commands[j];
+					switch (command.type) {
+					case 'Flash Template':
+						if (!(action.id in $scope.scene.dataSet)) {
+							$scope.scene.dataSet[action.id] = {};
+						}
+						var actionItem = $scope.scene.dataSet[action.id];
+						actionItem['name'] = action.name;
+						if (!('data' in actionItem)) {
+							actionItem['data'] = {};
+						}
+						for (var k = 0, n = command.dataSet.length; k < n; k++) {
+							var dataItem = command.dataSet[k];
+							if (dataItem.fieldId in actionItem.data || dataItem.useDefaultOnly) {
+								continue;
+							}
+							var model = {};
+							model.name = dataItem.name;
+							model.value = dataItem.value;
+							actionItem.data[dataItem.fieldId] = model;
+						}
+						break;
+					}
+					
+				}
+			}
+			console.log('dataSet', $scope.scene.dataSet);
+		};
 		
 		// SHOW TIME
 		$scope.stInClick = function(actionId) {

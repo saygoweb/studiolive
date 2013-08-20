@@ -1,22 +1,33 @@
 <legend>Show: {{show.name}} Scene</legend>
 <tabset>
 <tab heading="Show Time" active="debug.setTab">
-<div id="st-wrapper">
-<div id="st-controls" class="well">
-<h3>Controls</h3>
-<div class="st-control" ng-repeat="action in sceneActions">
-{{action.name}}<div class="right"><button ng-click="stInClick(action.id)" class="btn btn-large">In</button><button ng-click="stOutClick(action.id)" class="btn btn-large">Out</button></div>
-</div>
-</div>
-</div>
-<div class="right">
-<div class="st-preview">Preview #1</div>
-<div class="st-preview">Preview #2</div>
-</div>
-<div id="st-log" style="clear: both;">Logs...</div>
+	<div id="st-wrapper">
+	<div id="st-controls" class="well">
+	<h3>Controls</h3>
+	<div class="st-control" ng-repeat="action in sceneActions">
+	{{action.name}}<div class="right"><button ng-click="stInClick(action.id)" class="btn btn-large">In</button><button ng-click="stOutClick(action.id)" class="btn btn-large">Out</button></div>
+	</div>
+	</div>
+	</div>
+	<div class="right">
+	<div class="st-preview">Preview #1</div>
+	<div class="st-preview">Preview #2</div>
+	</div>
+	<div id="st-log" style="clear: both;">Logs...</div>
 </tab>
 <tab heading="Data">
-hello there
+<div class="span6 well">
+	<h3>Data</h3>
+	<table>
+	<tbody ng:repeat="(aid, actionItem) in scene.dataSet">
+	<tr><td cosspan="2">{{actionItem.name}}</tr>
+	<tr ng:repeat="(did, data) in actionItem.data">
+	<td style="min-width: 100px">{{data.name}}</td>
+	<td><input ng-model="data.value" type="text" placeholder="value" /></td>
+	</tr>
+	</tbody>
+	</table>
+</div>
 </tab>
 <tab heading="Actions">
 <div class="span3 well" style="display:inline-block;">
