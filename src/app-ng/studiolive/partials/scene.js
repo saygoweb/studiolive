@@ -21,15 +21,21 @@ var app = angular.module(
 			sceneService.readShow($scope.show.id, function(result) {
 				if (result.ok) {
 					$scope.show = result.data;
-//					$scope.showActions = $scope.show.actions.slice(0); // Shallow clone the array.
-//					$scope.sceneActions = [];
-					
-//					$scope.showActions = ['a', 'b', 'c'];
-//					$scope.sceneActions = [];
 				}
 			});
 		};
 		$scope.queryShow();
+		
+		$scope.saveScene = function() {
+			console.log('scene update...');
+			sceneService.update($scope.show.id, $scope.scene, function(result) {
+				if (result.ok) {
+					// TODO notify CP 2013-07
+					console.log('scene updated ok');
+				}
+			});
+			
+		};
 		
 		// Sort
 		$scope.sortOptions = {
@@ -44,7 +50,7 @@ var app = angular.module(
 		
 		// Show actions / Scene actions
 		$scope.$watch("show", function(newValue, oldValue) {
-			console.log("watch show", newValue);
+			//console.log("watch show", newValue);
 			if ($scope.show.scenes == undefined) {
 				return;
 			}
@@ -68,7 +74,7 @@ var app = angular.module(
 		});
 		
 		$scope.$watch("sceneActions", function(newValue, oldValue) {
-			console.log('watch sceneActions', newValue);
+			//console.log('watch sceneActions', newValue);
 			if ($scope.canUpdate == undefined) {
 				return;
 			}
@@ -77,13 +83,8 @@ var app = angular.module(
 				sceneActions.push($scope.sceneActions[i].id);
 			}
 			$scope.scene.actions = sceneActions;
-			console.log('updating sceneActions');
-			sceneService.update($scope.show.id, $scope.scene, function(result) {
-				if (result.ok) {
-					// TODO notify CP 2013-07
-					console.log('scene update ok');
-				}
-			});
+			//console.log('updating sceneActions');
+			$scope.saveScene();
 			$scope.updateDataSet($scope.sceneActions);
 			
 		}, true);
@@ -125,7 +126,7 @@ var app = angular.module(
 					
 				}
 			}
-			console.log('dataSet', $scope.scene.dataSet);
+			//console.log('dataSet', $scope.scene.dataSet);
 		};
 		
 		// SHOW TIME
