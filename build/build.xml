@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE project>
-<project name="SFWeb" default="build" basedir="..">
+<project name="StudioLive" default="build" basedir="..">
 
 	<property name="application.name" value="studiolive" />
 
 	<property name="build.number" value="0.0.0.0" />
 	<property name="build.output" value="output" />
 	<property name="build.packageFile" value="${build.output}/${application.name}.tgz" />
+	<property name="build.libJsFile" value="${build.output}/${application.name}.js" />
+	<property name="build.minJsFile" value="${build.output}/${application.name}-min.js" />
+	<property name="build.libPhpFile" value="${build.output}/${application.name}.phar" />
 	<property name="build.installPath" value="/var/www/studiolive_dev" />
 	<property name="build.uploadPath" value="/var/www/studiolive" />
 
@@ -45,8 +48,33 @@
 	<target name="prepare">
 		<mkdir dir="${build.output}" />
 	</target>
+	
+	<target name="makelib-php" depends="prepare">
+		<exec executable="/usr/bin/php">
+			<arg value="build/makephar.php" />
+			<arg value="--src" />
+			<arg value="src/api" />
+			<arg value="-x" />
+			<arg value="studiolive.php Config.php" />
+			<arg value="--phar" />
+			<arg value="${build.libPhpFile}" />
+		</exec>
+	</target>
+	
+	<target name="makelib-js" depends="prepare">
+		<concat destfile="${build.libJsFile}" overwrite="yes" fixlastline="yes">
+			<fileset dir="src/app-ng"
+				includes="**/*.js"
+			/>
+		</concat>
+		<exec executable="/usr/bin/yui-compressor">
+			<arg value="-o" />
+			<arg value="${build.minJsFile}" />
+			<arg value="${build.libJsFile}" />
+		</exec>
+	</target>
 
-	<target name="build" />
+	<target name="build" depends="makelib-js,makelib-php" />
 
 	<target name="copyWeb">
 		<copy todir="${build.output}/package/htdocs">

@@ -20,7 +20,7 @@ $parser->addOption('src', array(
 		'short_name'  => '-s',
 		'long_name'   => '--src',
 		'action'      => 'StoreString',
-		'default'     => '../src',
+		'default'     => '../src/api',
 		'description' => "Source files directory\n(./src)"
 ));
 
@@ -49,7 +49,7 @@ $parser->addOption('quiet', array(
 $parser->addOption('phar', array(
 		'long_name'   => '--phar',
 		'action'      => 'StoreString',
-		'default'     => './output.phar',
+		'default'     => '../src/api/studiolive.phar',
 		'description' => "Output Phar archive filename\n(./output.phar)",
 ));
 
