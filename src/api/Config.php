@@ -1,5 +1,5 @@
 <?php
-define('USE_PHAR', true);
+define('USE_PHAR', false);
 
 if (USE_PHAR) {
 	$pharFile = realpath(dirname(__FILE__) . '/studiolive.phar');
