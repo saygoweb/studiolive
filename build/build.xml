@@ -114,7 +114,7 @@
 	<target name="package" depends="prepare,copy-web" >
 		<tar 
 			destfile="${build.packageFile}"
-			basedir="${build.output}/package"
+			basedir="${build.output}/package/htdocs"
 			excludes="${build.packageFile}"
 			longfile="gnu"
 			compression="gzip" />
