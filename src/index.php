@@ -40,6 +40,7 @@ function main() {
 	} else {
 		$vars['scripts'][] = '/app-ng/studiolive/studiolive-min.js';
 	}
+	$vars['version'] = VERSION . ' ' . BUILD_DATE;
 	renderView('app-ng/studiolive/app-ng.html.php', $vars);
 }
 
