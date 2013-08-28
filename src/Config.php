@@ -1,5 +1,5 @@
 <?php
-define('USE_LIBS', true);
+define('USE_LIBS', false);
 
 if (USE_LIBS) {
 	$pharFile = realpath(dirname(__FILE__) . '/api/studiolive.phar');
