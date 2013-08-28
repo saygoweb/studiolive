@@ -49,6 +49,14 @@
 		<mkdir dir="${build.output}" />
 	</target>
 	
+	<target name="test-php" depends="prepare">
+		 <echo>##teamcity[importData type='junit' path='${build.output}/AllTests.xml']</echo>
+		 <exec executable="php" dir="test" output="${build.output}/AllTests.xml"  error="${build.output}/error.log" failonerror="true">
+			 <arg line="AllTests_NoApi.php" />
+			 <arg value="-j" />
+		 </exec>
+	 </target>
+
 	<target name="makelib-php" depends="prepare">
 		<exec executable="/usr/bin/php">
 			<arg value="build/makephar.php" />
@@ -74,8 +82,6 @@
 		</exec>
 	</target>
 
-	<target name="build" depends="makelib-js,makelib-php" />
-
 	<target name="copy-web" depends="makelib-js,makelib-php">
 		<copy todir="${build.output}/package/htdocs/api" file="${build.libPhpFile}" />
 		<copy todir="${build.output}/package/htdocs/api" file="src/api/studiolive.php" />
@@ -89,6 +95,10 @@
 		</copy>
 	</target>
 	
+	<target name="build" depends="makelib-js,makelib-php" />
+
+	<target name="test" depends="test-php" />
+
 	<target name="package" depends="prepare,copy-web" >
 		<tar 
 			destfile="${build.packageFile}"
