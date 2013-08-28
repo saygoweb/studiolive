@@ -93,6 +93,7 @@
 				includes="app-ng/**/*.html,app-ng/**/*.css,js/**,css/**,images/**"
 			/>
 		</copy>
+		<replace file="${build.output}/package/htdocs/Config.php" token="define('USE_LIBS', false);" value="define('USE_LIBS', true);" />
 	</target>
 	
 	<target name="build" depends="makelib-js,makelib-php" />

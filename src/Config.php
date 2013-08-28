@@ -5,7 +5,6 @@ if (USE_LIBS) {
 	$pharFile = realpath(dirname(__FILE__) . '/api/studiolive.phar');
 	$rootPath = 'phar://' . $pharFile . '/';
 	
-	//define('SRC_PATH', $rootPath . 'src/');
 	define('API_PATH', $rootPath);
 	
 	require_once(API_PATH . 'libraries/palaso/Loader.php');
@@ -20,7 +19,7 @@ if (USE_LIBS) {
 }
 
 
-define('CASPAR_HOST', 'videotest');
+define('CASPAR_HOST', 'localhost');
 define('CASPAR_PORT', '5250');
 
 if (!defined('SL_DATABASE')) {
