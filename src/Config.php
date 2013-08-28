@@ -1,8 +1,8 @@
 <?php
-define('USE_PHAR', false);
+define('USE_LIBS', true);
 
-if (USE_PHAR) {
-	$pharFile = realpath(dirname(__FILE__) . '/studiolive.phar');
+if (USE_LIBS) {
+	$pharFile = realpath(dirname(__FILE__) . '/api/studiolive.phar');
 	$rootPath = 'phar://' . $pharFile . '/';
 	
 	//define('SRC_PATH', $rootPath . 'src/');
@@ -11,7 +11,7 @@ if (USE_PHAR) {
 	require_once(API_PATH . 'libraries/palaso/Loader.php');
 
 } else {
-	$rootPath = realpath(dirname(__FILE__) . '/../../') . '/';
+	$rootPath = realpath(dirname(__FILE__) . '/../') . '/';
 	
 	define('SRC_PATH', $rootPath . 'src/');
 	define('API_PATH', $rootPath . 'src/api/');

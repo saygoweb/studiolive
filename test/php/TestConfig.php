@@ -10,7 +10,7 @@ define('SIMPLE_TEST_PATH', $rootPath . 'test/lib/simpletest/');
 
 define('SL_DATABASE', 'studiolive_test');
 
-require_once($rootPath . 'src/api/Config.php');
+require_once($rootPath . 'src/Config.php');
 
 
 ?>
