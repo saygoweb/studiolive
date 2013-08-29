@@ -97,7 +97,8 @@
 		<copy todir="${build.output}/package/htdocs" file="src/Config.php" />
 		<copy todir="${build.output}/package/htdocs">
 			<fileset dir="src"
-				includes="app-ng/**/*.html,app-ng/**/*.css,js/**,css/**,images/**"
+				includes="app-ng/**/*,js/**,css/**,images/**"
+				excludes="app-ng/**/*.js"
 			/>
 		</copy>
 		<replace file="${build.output}/package/htdocs/Config.php">
