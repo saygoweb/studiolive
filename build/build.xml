@@ -90,12 +90,12 @@
 	</target>
 
 	<target name="copy-web" depends="build-date,version,makelib-js,makelib-php">
-		<copy todir="${build.output}/package/htdocs/api" file="${build.libPhpFile}" />
 		<copy todir="${build.output}/package/htdocs/api" file="src/api/studiolive.php" />
+		<copy todir="${build.output}/package/htdocs/api" file="${build.libPhpFile}" />
+		<copy todir="${build.output}/package/htdocs/app-ng/studiolive" file="${build.minJsFile}" />
 		<copy todir="${build.output}/package/htdocs" file="src/index.php" />
 		<copy todir="${build.output}/package/htdocs" file="src/Config.php" />
-		<copy todir="${build.output}/package/htdocs/app-ng/studiolive" file="${build.minJsFile}" />
-		<copy todir="${build.output}/package/htdocs/app-ng">
+		<copy todir="${build.output}/package/htdocs">
 			<fileset dir="src"
 				includes="app-ng/**/*.html,app-ng/**/*.css,js/**,css/**,images/**"
 			/>
