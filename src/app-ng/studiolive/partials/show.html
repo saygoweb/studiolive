@@ -1,7 +1,10 @@
-<h1>Show: {{show.name}}</h1>
+<ul class="breadcrumb">
+	<li><a href="#/shows">All Shows</a><span class="divider">/</span></li>
+	<li class="active">{{show.name}}</li>
+</ul>
 <tabset>
 <tab heading="Scenes">
-<div ng-controller="ShowScenesCtrl">
+<div ng-controller="ShowScenesCtrl" active="debug.setTab">
 <!-- <p>{{show.id}}</p> -->
 <a ng-click="newSceneCollapsed = !newSceneCollapsed">Create a New Scene</a>
 </p>
@@ -38,7 +41,7 @@
 <tab heading="Data">
 </tab>
  -->
-<tab heading="Actions" active="debug.setTab">
+<tab heading="Actions">
 <div ng-controller="ShowActionsCtrl">
 <!-- <p>{{show.id}}</p> -->
 	<form class="control-bar form-inline well">

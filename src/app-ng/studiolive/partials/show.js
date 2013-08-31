@@ -136,7 +136,10 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 		if (!newValue) {
 			return;
 		}
-		$scope.currentAction = newValue[0];
+		for (var key in newValue) {
+			$scope.currentAction = newValue[key];
+			break;
+		}
 	});
 	
 	// Watch action select

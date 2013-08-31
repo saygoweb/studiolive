@@ -134,7 +134,7 @@
 		</exec>
 	</target>
 	
-	<target name="upload" depends="package,cleanUpload">
+	<target name="upload-rsync" depends="package,cleanUpload">
 		<untar src="${build.packageFile}" dest="${build.uploadPath}" compression="gzip" />
 		<exec dir="${build.installPath}" executable="rsync" failonerror="true">
 			<arg value="-vazHAX" />
