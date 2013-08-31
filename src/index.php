@@ -34,6 +34,12 @@ function getScripts() {
 }
 
 function main() {
+	if (USE_BOOT && !isset($_GET['skipboot'])) {
+		if (file_exists('boot.php')) {
+			require_once('boot.php');
+			Boot::ensureMongoLoaded();
+		}
+	}
 	$vars = array();
 	if (!USE_LIBS) {
 		$vars['scripts'] = getScripts();

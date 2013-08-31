@@ -2,6 +2,7 @@
 define('VERSION', '0.0.0');
 define('BUILD_DATE', '8 October 2013');
 define('USE_LIBS', false);
+define('USE_BOOT', true);
 
 if (USE_LIBS) {
 	$pharFile = realpath(dirname(__FILE__) . '/api/studiolive.phar');

@@ -145,4 +145,14 @@
 	
 	<!-- Development targets to help developers, not used for production -->
 	
+	<property name="dev.studioLiveWinPath" value="../StudioLive-Win" />
+
+	<target name="copyToWin">
+		<copy todir="${dev.studioLiveWinPath}/web_root">
+			<fileset dir="src"
+				includes="**/*"
+			/>
+		</copy>
+	</target>
+	
 </project>
