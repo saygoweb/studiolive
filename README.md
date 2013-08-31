@@ -1,6 +1,8 @@
 # StudioLive #
 ## In a NutSHell ##
-StudioLive is an HTML5 web client for the CasparCG progressional graphics Server.  [CasparCG](http://www.casparcg.com/features) is a professional graphics overlay and video playout server.  
+StudioLive is an HTML5 web client for the CasparCG progressional graphics Server.  [CasparCG](http://www.casparcg.com/features) is a professional graphics overlay and video playout server.
+
+StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.  An open source project, pull requests welcome.  
 
 ## Features ##
 * Live preview of 2 channels.
@@ -11,6 +13,12 @@ StudioLive is an HTML5 web client for the CasparCG progressional graphics Server
 * Easy to use 'Show Time' page to operate during an event. 
 
 ## Installation Notes ##
+The latest version is [available here](https://drive.google.com/folderview?id=0B1aEHU7j2cRhdTVOdHp0VjdRUkE&usp=sharing).
+
+### Windows Quick Start ###
+* Just installed? Keep reading then [Click to Start StudioLive](http://localhost:8080/).
+* For the video preview to work you must install the [VLC (Video Lan)](http://www.videolan.org/vlc/index.html) media player on the client system. 
+
 ### Windows ###
 The Windows Installer should 'just work' out of the box.  It starts a web server on localhost:8080 and starts the MondoDB database server. Browse to http://localhost:8080 and you should be good to go.
 
@@ -23,3 +31,13 @@ The StudioLive system does not need to run on the same server as CasparCG.  In f
 
 ### Linux ###
 The StudioLive system is developed and tested on a Debian Wheezy system. There is no pre-built package available so for now you would have to download from the github repository and setup Apache and MongoDB yourself.
+
+## Status ##
+StudioLive is under active development and is currently at Alpha level.  This means that the client works, but there are quite likely bugs and areas that need fixing.  There are also features that may be under development and not yet fully implemented.
+
+* Checkout the [Trello things to do list](https://trello.com/b/dChvuzOw/saygo-studiolive) for more details.
+
+### How to Help ###
+* Report issues you find in our [GitHub Issue Tracker](https://github.com/saygoweb/studiolive/issues).  Please report with as much detail as you can.  Simply saying "It doesn't work" will gain you sympathy, but not a lot else.
+* Join the discussion on the [CasparCG Forum](http://casparcg.com/forum/viewtopic.php?f=3&t=1646).  Your thoughts and ideas are welcome.
+* Want do contribute code?  Go right ahead, fork the project on [GitHub](https://github.com/saygoweb/studiolive), pull requests are welcome.
