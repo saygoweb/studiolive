@@ -145,6 +145,12 @@ var app = angular.module(
 			});
 		};
 
+		// PREVIEW
+		$scope.previews = 
+		[
+		 {name: 'preview1', channel: '1', url: 'udp://@:12345'},
+		 {name: 'preview2', channel: '2', url: 'udp://@:12346'},
+		];
 
 		
 	}])

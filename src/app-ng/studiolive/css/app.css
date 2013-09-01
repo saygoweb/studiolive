@@ -126,8 +126,6 @@ ul.actionList li {
 /* Show Time */
 .st-preview {
 	width: 482px;
-	height: 272px;
-	border: 1px solid #ccc;
 	margin-bottom: 8px;
 }
 
@@ -173,4 +171,25 @@ table.grid input[type="text"] {
 	-moz-border-radius: 0px;
 	border-radius: 0px;
 	margin-bottom: 0px;
+}
+
+/* Scene Preview */
+div.st-preview button {
+	width: 37px;
+}
+
+div.st-preview input {
+	width: 90px;
+}
+
+div#previews {
+	margin-top: 0px;
+}
+
+div#previews > p {
+	padding-top: 8px;
+	padding-bottom: 9px;
+	line-height: 20px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
 }

@@ -44,15 +44,16 @@
 </tabset>
 </div>
 </div>
-<div class="right">
-<div class="st-preview">
-	<embed type="application/x-vlc-plugin" name="preview1"
+<div id="previews" class="right">
+<p>Previews</p>
+<div class="st-preview" ng-repeat="preview in previews">
+	<form class="control-bar form-inline">
+		<button class="btn" ng-click="previewPlay(preview)"><i class="icon-play"></i></button>
+		<button class="btn" ng-click="previewStop(preview)"><i class="icon-stop"></i></button>
+		<input ng-model="preview.channel" type="number" min="0" max="100" placeholder="Channel #" ></input>
+	</form>
+	<embed type="application/x-vlc-plugin" name="{{preview.name}}"
          autoplay="yes" loop="no" height="270" width="480"
-         target="udp://@:12345" /></div>
-<div class="st-preview">
-	<embed type="application/x-vlc-plugin" name="preview2"
-         autoplay="yes" loop="no" height="270" width="480"
-         target="udp://@:12346" /></div>
+         target="{{preview.url}}" />
 </div>
 </div>
-<div id="st-log" style="clear: both;">Logs...</div>
