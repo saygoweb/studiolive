@@ -1,6 +1,6 @@
 # StudioLive #
 ## In a NutSHell ##
-StudioLive is an HTML5 web client for the CasparCG progressional graphics Server.  [CasparCG](http://www.casparcg.com/features) is a professional graphics overlay and video playout server.
+StudioLive is an HTML5 web client for the CasparCG professional graphics Server.  [CasparCG](http://www.casparcg.com/features) is a professional graphics overlay and video playout server.
 
 StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.  An open source project, pull requests welcome.  
 
