@@ -2,7 +2,7 @@
 ## In a NutSHell ##
 StudioLive is an HTML5 web client for the CasparCG professional graphics Server.  [CasparCG](http://www.casparcg.com/features) is a professional graphics overlay and video playout server.
 
-StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.  An open source project, pull requests welcome.  
+StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.  Its an open source project, pull requests are welcome.  
 
 ## Features ##
 * Live preview of 2 channels.
@@ -13,7 +13,9 @@ StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.
 * Easy to use 'Show Time' page to operate during an event. 
 
 ## Installation Notes ##
-The latest version is [available here](https://drive.google.com/folderview?id=0B1aEHU7j2cRhdTVOdHp0VjdRUkE&usp=sharing).
+The latest Windows version is [available here](https://drive.google.com/folderview?id=0B1aEHU7j2cRhdTVOdHp0VjdRUkE&usp=sharing).
+
+**Minimum Requirements:** Windows 7 64 bit.  Home Premium is known to work well.
 
 ### Windows Quick Start ###
 * Just installed? Keep reading then [Click to Start StudioLive](http://localhost:8080/).
