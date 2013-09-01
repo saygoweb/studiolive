@@ -52,14 +52,9 @@ li.typeahead-item p.email {
 
 /* listview */
 div.listview {
-	margin-top: 8px;
+	margin-top: 0px;
 }
 
 div.listview tr.active {
 	background-color: #ffc;
-}
-
-/* Control bar for use at top of listview */
-form.control-bar {
-	margin-bottom: 0px;
 }

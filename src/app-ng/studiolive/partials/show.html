@@ -6,19 +6,18 @@
 <tab heading="Scenes">
 <div ng-controller="ShowScenesCtrl" active="debug.setTab">
 <!-- <p>{{show.id}}</p> -->
-<a ng-click="newSceneCollapsed = !newSceneCollapsed">Create a New Scene</a>
-</p>
+<form class="control-bar form-inline">
+<button class="btn" ng-click="removeScenes()"><i class="icon-remove"></i>Remove</button>
+<button class="btn" ng-click=""><i class="icon-copy"></i>Copy</button>
+<button class="btn" ng-click="newSceneCollapsed = !newSceneCollapsed"><i class="icon-plus"></i>New Scene</button>
+</form>
 <div collapse="!newSceneCollapsed">
 	<form class="well form-inline">
 	<label>Name</label>
 	<input name="sceneName" ng-model="sceneName" type="text" placeholder="Scene Name" />
-	<button class="btn" ng-click="addScene()"><i class="icon-plus"></i>Add New</button>
+	<button class="btn" ng-click="addScene()"><i class="icon-pencil"></i>Save</button>
 	</form>
 </div>
-<form class="control-bar form-inline">
-<button class="btn" ng-click="removeScenes()"><i class="icon-remove"></i>Remove</button>
-<button class="btn" ng-click=""><i class="icon-copy"></i>Copy</button>
-</form>
 <div listview search="" select="">
 <table class="table" style="width: 100%">
 	<thead>
