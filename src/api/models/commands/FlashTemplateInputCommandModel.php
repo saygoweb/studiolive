@@ -51,7 +51,7 @@ class FlashTemplateInputCommandModel extends InputResourceCommandModel
 	
 	public function casparCommandOut() {
 		// Note Flash layer not yet supported
-		$result = sprintf('STOP %d-%d 1', $this->channel, $this->layer);
+		$result = sprintf('CG %d-%d STOP 1', $this->channel, $this->layer);
 		return $result;
 	}
 	
