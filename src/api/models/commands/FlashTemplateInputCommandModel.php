@@ -26,6 +26,37 @@ class FlashTemplateInputCommandModel extends InputResourceCommandModel
 	}
 	
 	public function casparCommandIn($userData) {
+		$templateData = $this->buildTemplateData($userData);
+		// Note:  FlashLayer and the other '1' not yet supported.
+		$result = sprintf(
+			'CG %d-%d ADD 1 "%s" 1 "%s"', 
+			$this->channel, $this->layer, $this->resourceName, $templateData
+		);
+		return $result;
+	}
+	
+	public function casparCommandOut() {
+		// Note Flash layer not yet supported
+		$result = sprintf('CG %d-%d STOP 1', $this->channel, $this->layer);
+		return $result;
+	}
+	
+	public function casparCommandUpdate($userData) {
+		$templateData = $this->buildTemplateData($userData);
+		// Note:  FlashLayer and the other '1' not yet supported.
+		$result = sprintf(
+				'CG %d-%d UPDATE 1 "%s"',
+				$this->channel, $this->layer, $templateData
+		);
+		return $result;
+	}
+
+	/**
+	 * Returns the XML formatted template data for passing to Caspar.
+	 * @param array $userData
+	 * @return string
+	 */
+	private function buildTemplateData($userData) {
 		$templateData = '<templateData>';
 		foreach ($this->dataSet->data as $dataItem) {
 			$value = $dataItem->value;
@@ -40,19 +71,7 @@ class FlashTemplateInputCommandModel extends InputResourceCommandModel
 			$templateData .= $componentData;
 		}
 		$templateData .= '</templateData>';
-		
-		// Note:  FlashLayer and the other '1' not yet supported.
-		$result = sprintf(
-			'CG %d-%d ADD 1 "%s" 1 "%s"', 
-			$this->channel, $this->layer, $this->resourceName, $templateData
-		);
-		return $result;
-	}
-	
-	public function casparCommandOut() {
-		// Note Flash layer not yet supported
-		$result = sprintf('CG %d-%d STOP 1', $this->channel, $this->layer);
-		return $result;
+		return $templateData;
 	}
 	
 	public $dataSet;

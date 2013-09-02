@@ -1,6 +1,8 @@
 <?php
 namespace commands;
 
+use models\SceneActionDataItem;
+
 use libraries\palaso\CodeGuard;
 use models\ActionModel;
 use models\ShowModel;
@@ -33,23 +35,28 @@ class CasparCommands {
 	
 	/**
 	 * Executes the $operation using the action defined by the JSON $object with the given $sceneUserData.
-	 * @param array $object
+	 * @param array $object JSON array
 	 * @param string $operation
 	 * @param array $sceneUserData
 	 */
 	public static function executeAction($object, $operation, $sceneUserData = null) {
 		$action = new ActionModel();
 		JsonDecoder::decode($action, $object);
-		self::executeActionFromModel($action, $operation, $sceneUserData);
+		$sceneUserDataModel = new SceneActionDataItem();
+		JsonDecoder::decode($sceneUserDataModel, $sceneUserData);
+		self::executeActionFromModel($action, $operation, $sceneUserDataModel->data->data);
 	}
 	
 	/**
 	 * Executes the $operation using the $action with the given $sceneUserData. 
 	 * @param array $object
 	 * @param string $operation
-	 * @param array $sceneUserData
+	 * @param array $sceneUserData array('f0' => 'value0', ...)
 	 */
 	public static function executeActionFromModel($action, $operation, $sceneUserData = null) {
+		if ($sceneUserData !== null) {
+			CodeGuard::checkTypeAndThrow($sceneUserData, 'array');
+		}
 		switch ($operation) {
 			case 'in':
 				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
@@ -65,6 +72,15 @@ class CasparCommands {
 					$caspar->sendString($casparString);
 				}
 				break;
+			case 'update':
+				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
+				foreach ($action->commands->data as $command) {
+					$casparString = $command->casparCommandUpdate($sceneUserData);
+					$caspar->sendString($casparString);
+				}
+				break;
+			default:
+				throw new \Exception("Unsupported Caspar operation '$operation'");
 		}
 	}
 	

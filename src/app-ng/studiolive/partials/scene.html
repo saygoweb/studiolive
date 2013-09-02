@@ -22,9 +22,10 @@
 	<table width="100%">
 	<tr><td>
 	<h3>{{actionItem.name}}</h3>
-	</td><td width="110px">
+	</td><td width="160px">
 	<button ng-click="stInClick(aid)" class="btn preview">In</button>
 	<button ng-click="stOutClick(aid)" class="btn preview">Out</button>
+	<button ng-click="dataRefreshClick(aid, actionItem)" class="btn preview">Ref</button>
 	</td></tr>
 	</table>
 	<tr ng:repeat="(did, data) in actionItem.data">

@@ -129,16 +129,26 @@ var app = angular.module(
 			//console.log('dataSet', $scope.scene.dataSet);
 		};
 		
+		$scope.dataRefreshClick = function(actionId, actionItem) {
+			var action = $scope.show.actions[actionId];
+			console.log("dataRefresh: ", actionId, actionItem, action);
+			sceneService.previewAction(action, 'update', actionItem, function(result) {
+				if (result.ok) {
+					console.log('dataRefresh ok');
+				}
+			});
+		};
+
 		// SHOW TIME
 		$scope.stInClick = function(actionId) {
-			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'in', function(result) {
+			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'in', null, function(result) {
 				if (result.ok) {
 					console.log('in click ok');
 				}
 			});
 		};
 		$scope.stOutClick = function(actionId) {
-			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'out', function(result) {
+			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'out', null, function(result) {
 				if (result.ok) {
 					console.log('out click ok');
 				}

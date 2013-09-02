@@ -26,7 +26,7 @@ angular.module('sl.services', ['jsonRpc'])
 			jsonRpc.call('show_removeAction', [showId, actionId], callback);
 		};
 		this.previewAction = function(action, operation, callback) {
-			jsonRpc.call('caspar_executeAction', [action, operation], callback);
+			jsonRpc.call('caspar_executeAction', [action, operation, null], callback);
 		};
 	}])
 	.service('sceneService', ['jsonRpc', function(jsonRpc) {
@@ -52,6 +52,9 @@ angular.module('sl.services', ['jsonRpc'])
 		};
 		this.executeCommand = function(command, operation, callback) {
 			jsonRpc.call('caspar_executeCommand', [command, operation], callback);
+		};
+		this.previewAction = function(action, operation, sceneUserData, callback) {
+			jsonRpc.call('caspar_executeAction', [action, operation, sceneUserData], callback);
 		};
 	}])
 	;
