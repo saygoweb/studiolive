@@ -13,7 +13,7 @@
 </form>
 <div collapse="!newSceneCollapsed">
 	<form class="well form-inline">
-	<label>Name</label>
+	<label>Name:</label>
 	<input name="sceneName" ng-model="sceneName" type="text" placeholder="Scene Name" />
 	<button class="btn" ng-click="addScene()"><i class="icon-pencil"></i>Save</button>
 	</form>
@@ -42,22 +42,26 @@
  -->
 <tab heading="Actions">
 <div ng-controller="ShowActionsCtrl">
-<!-- <p>{{show.id}}</p> -->
-	<form class="control-bar form-inline well">
-		<select ng-model="currentAction" ng-options="action.name for (id, action) in show.actions" ng-disabled="show.actions.length == 0"></select>
+	<div id="actionControls" class="well">
+	<form class="control-bar form-inline">
 		<button class="btn" ng-click="removeAction()"><i class="icon-remove"></i>Remove</button>
-		<input ng-model="newActionName" type="text" placeholder="Action Name" />
-		<button class="btn" ng-click="addAction()"><i class="icon-plus"></i>Add New</button>
+		<select ng-model="currentAction" ng-options="action.name for (id, action) in show.actions" ng-disabled="show.actions.length == 0"></select>
+		<button ng-click="actionInClick()" class="btn preview">In</button>
+		<button ng-click="actionOutClick()" class="btn preview">Out</button>
+		<button class="btn" ng-click="newActionCollapsed = !newActionCollapsed"><i class="icon-plus"></i>Add New</button>
 		<button class="btn" ng-click="saveShow()"><i class="icon-save"></i>Save</button>
 	</form>
+	<form class="form-inline" collapse="!newActionCollapsed">
+		<label>Name:</label>
+		<input ng-model="newActionName" type="text" placeholder="Action Name" />
+		<button class="btn" ng-click="addAction()"><i class="icon-pencil"></i>Save</button>
+	</form>
+	</div>
 	<fieldset>
 	<h2>Action Properties</h2>
 	<form id="actionProperties" class="span12 form-inline well">
 		<label>Action name:</label>
 		<input ng-model="currentAction.name" type="text" placeholder="Action Name" />
-		<label>Preview:</label>
-		<button ng-click="actionInClick()" class="btn">In</button>
-		<button ng-click="actionOutClick()" class="btn">Out</button>
 	</form>
 	<div style="clear:both;">
 	<h2>Action Commands</h2>

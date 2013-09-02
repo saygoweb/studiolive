@@ -174,9 +174,23 @@ table.grid input[type="text"] {
 }
 
 /* Show - Action Properties */
-form#actionProperties button {
+div#actionControls button.preview {
 	width: 50px;
 }
+
+div#actionControls form {
+	margin-bottom: 16px;
+}
+
+div#actionControls form.collapse {
+	margin-top: 16px;
+	margin-bottom: 8px;
+}
+
+div#actionControls.well {
+	padding-bottom: 0px;
+}
+
 
 /* Scene Preview */
 div.st-preview button {
