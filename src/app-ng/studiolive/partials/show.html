@@ -52,12 +52,12 @@
 	</form>
 	<fieldset>
 	<h2>Action Properties</h2>
-	<form class="span12 form-inline well">
+	<form id="actionProperties" class="span12 form-inline well">
 		<label>Action name:</label>
 		<input ng-model="currentAction.name" type="text" placeholder="Action Name" />
 		<label>Preview:</label>
-		<button ng-click="stInClick(currentAction.id)" class="btn">In</button>
-		<button ng-click="stOutClick(currentAction.id)" class="btn">Out</button>
+		<button ng-click="actionInClick()" class="btn">In</button>
+		<button ng-click="actionOutClick()" class="btn">Out</button>
 	</form>
 	<div style="clear:both;">
 	<h2>Action Commands</h2>

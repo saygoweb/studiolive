@@ -102,7 +102,11 @@ class StudioLiveAPI
 	}
 	
 	public function scene_executeAction($showId, $sceneId, $actionId, $operation) {
-		CasparCommands::executeAction($showId, $sceneId, $actionId, $operation);
+		CasparCommands::executeActionFromShow($showId, $sceneId, $actionId, $operation);
+	}
+	
+	public function caspar_executeAction($action, $operation) {
+		CasparCommands::executeAction($action, $operation);
 	}
 	
 	public function caspar_executeCommand($command, $operation) {

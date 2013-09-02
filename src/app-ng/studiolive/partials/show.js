@@ -171,6 +171,21 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 		});
 	};
 	
+	// Preview Action
+	$scope.actionInClick = function() {
+		console.log("action in");
+		showService.previewAction($scope.currentAction, 'in', function($result) {
+			console.log("action in ok");
+		});
+	};
+	
+	$scope.actionOutClick = function() {
+		console.log("action out");
+		showService.previewAction($scope.currentAction, 'out', function($result) {
+			console.log("action out ok");
+		});
+	};
+	
 	//---------------------------------------------------------------
 	// Commands
 	//---------------------------------------------------------------

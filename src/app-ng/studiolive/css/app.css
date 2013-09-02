@@ -173,6 +173,11 @@ table.grid input[type="text"] {
 	margin-bottom: 0px;
 }
 
+/* Show - Action Properties */
+form#actionProperties button {
+	width: 50px;
+}
+
 /* Scene Preview */
 div.st-preview button {
 	width: 37px;

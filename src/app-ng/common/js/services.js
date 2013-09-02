@@ -25,6 +25,9 @@ angular.module('sl.services', ['jsonRpc'])
 		this.removeAction = function(showId, actionId, callback) {
 			jsonRpc.call('show_removeAction', [showId, actionId], callback);
 		};
+		this.previewAction = function(action, operation, callback) {
+			jsonRpc.call('caspar_executeAction', [action, operation], callback);
+		};
 	}])
 	.service('sceneService', ['jsonRpc', function(jsonRpc) {
 		jsonRpc.connect('/api/studiolive.php'); // Note this doesn't actually 'connect', it simply sets the connection url.
