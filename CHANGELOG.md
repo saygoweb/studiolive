@@ -1,4 +1,10 @@
 # StudioLive Change Log#
+## 0.9.5 ##
+
+- Added in / out preview to Show | Actions tab.
+- The 'New Action' button now uses an initially hidden form in a similar manner to other controls.
+- Add in / out / and refresh (update) buttons on Scene | Data tab.
+
 ## 0.9.4 ##
 
 - Added Preview Controls. Play, Stop, and Channel selection.
