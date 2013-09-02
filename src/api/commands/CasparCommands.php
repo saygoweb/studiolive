@@ -76,17 +76,17 @@ class CasparCommands {
 	public static function executeCommand($object, $operation) {
 		$type = $object['type'];
 		CodeGuard::checkTypeAndThrow($type, 'string');
-		$objectModel = CommandModel::createCommand($type);
-		JsonDecoder::decode($objectModel, $object);
+		$command = CommandModel::createCommand($type);
+		JsonDecoder::decode($command, $object);
 		switch ($operation) {
 			case 'in':
 				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
-				$casparString = $commandModel->casparCommandIn(null);
+				$casparString = $command->casparCommandIn(null);
 				$caspar->sendString($casparString);
 				break;
 			case 'out':
 				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
-				$casparString = $commandModel->casparCommandOut();
+				$casparString = $command->casparCommandOut();
 				$caspar->sendString($casparString);
 				break;
 		}
