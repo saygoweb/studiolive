@@ -22,7 +22,7 @@ if (USE_LIBS) {
 }
 
 
-define('CASPAR_HOST', 'localhost');
+define('CASPAR_HOST', 'videotest');
 define('CASPAR_PORT', '5250');
 
 if (!defined('SL_DATABASE')) {

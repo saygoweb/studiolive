@@ -47,5 +47,8 @@ angular.module('sl.services', ['jsonRpc'])
 		this.executeAction = function(showId, sceneId, actionId, operation, callback) {
 			jsonRpc.call('scene_executeAction', [showId, sceneId, actionId, operation], callback);
 		};
+		this.executeCommand = function(command, operation, callback) {
+			jsonRpc.call('caspar_executeCommand', [command, operation], callback);
+		};
 	}])
 	;

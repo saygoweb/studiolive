@@ -147,11 +147,39 @@ var app = angular.module(
 
 		// PREVIEW
 		$scope.previews = 
-		[
-		 {name: 'preview1', channel: '1', url: 'udp://@:12345'},
-		 {name: 'preview2', channel: '2', url: 'udp://@:12346'},
-		];
-
+			[
+			 {name: 'preview1', channel: 1, urlRx: 'udp://@:12345', urlTx: 'udp://127.0.0.1:12345'},
+			 {name: 'preview2', channel: 2, urlRx: 'udp://@:12346', urlTx: 'udp://127.0.0.1:12346'},
+			];
+//		$scope.previews = 
+//			[
+//			 {name: 'preview1', channel: 1, urlRx: 'udp://@239.7.7.1:12345', urlTx: 'udp://239.7.7.1:12345'},
+//			 {name: 'preview2', channel: 2, urlRx: 'udp://@239.7.7.1:12346', urlTx: 'udp://239.7.7.1:12346'},
+//			];
+		
+		$scope.previewPlay = function(preview) {
+			var model = {};
+			model.type = 'StreamOut';
+			model.channel = preview.channel;
+			model.resourceName = preview.urlTx;
+			sceneService.executeCommand(model, 'in', function(result) {
+				if (result.ok) {
+					console.log('play click ok');
+				}
+			});
+		};
+		
+		$scope.previewStop = function(preview) {
+			var model = {};
+			model.type = 'StreamOut';
+			model.channel = preview.channel;
+			model.resourceName = preview.urlTx;
+			sceneService.executeCommand(model, 'out', function(result) {
+				if (result.ok) {
+					console.log('stop click ok');
+				}
+			});			
+		};
 		
 	}])
 	;

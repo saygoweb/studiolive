@@ -39,7 +39,10 @@ class CommandModel
 			case 'Grid':
 				return new GridMixerCommandModel();
 			case 'File':
-				return new VideoFileOutputCommandModel();
+			case 'FileOut':
+				return new OutputResourceCommandModel(OutputResourceCommandModel::FILE);
+			case 'StreamOut':
+				return new OutputResourceCommandModel(OutputResourceCommandModel::STREAM);
 			default:
 				throw new \Exception("Unsupported type '$type'");
 		}

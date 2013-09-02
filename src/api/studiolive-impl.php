@@ -1,11 +1,9 @@
 <?php
 
-use models\mapper\caspar\CasparConnection;
-
-use models\ActionModel;
-
+use commands\CasparCommands;
 use commands\ShowCommands;
 use libraries\palaso\JsonRpcServer;
+use models\ActionModel;
 use models\SceneModel;
 use models\ShowModel;
 use models\ShowSceneIndexModel;
@@ -104,32 +102,11 @@ class StudioLiveAPI
 	}
 	
 	public function scene_executeAction($showId, $sceneId, $actionId, $operation) {
-		$showModel = new ShowModel($showId);
-		$action = $showModel->actions->data[$actionId];
-		switch ($operation) {
-			case 'in':
-				$sceneUserData = null;
-				if ($sceneId) {
-					$scene = $showModel->scenes->data[$sceneId];
-					if (key_exists($actionId, $scene->dataSet->data)) {
-						$actionDataItem = $scene->dataSet->data[$actionId];
-						$sceneUserData = $actionDataItem->data->data;
-					}
-				}
-				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
-				foreach ($action->commands->data as $command) {
-					$casparString = $command->casparCommandIn($sceneUserData);
-					$caspar->sendString($casparString);
-				}
-				break;
-			case 'out':
-				$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
-				foreach ($action->commands->data as $command) {
-					$casparString = $command->casparCommandOut();
-					$caspar->sendString($casparString);
-				}
-				break;
-		} 
+		CasparCommands::executeAction($showId, $sceneId, $actionId, $operation);
+	}
+	
+	public function caspar_executeCommand($command, $operation) {
+		CasparCommands::executeCommand($command, $operation);
 	}
 
 }
