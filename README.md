@@ -18,7 +18,7 @@ StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.
 - The 'New Action' button now uses an initially hidden form in a similar manner to other controls.
 - Add in / out / and refresh (update) buttons on Scene | Data tab.
 
-See the Change Log for more details.
+See the [Change Log](https://github.com/saygoweb/studiolive/blob/master/CHANGELOG.md) for more details.
 
 ## Installation Notes ##
 The latest Windows version is [available here](https://drive.google.com/folderview?id=0B1aEHU7j2cRhdTVOdHp0VjdRUkE&usp=sharing).
