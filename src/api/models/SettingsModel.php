@@ -44,7 +44,7 @@ class SettingsModel extends mapper\MapperModel
 	 */
 	public function readOrCreate($id) {
 		if (!$this->exists($id)) {
-			$this->resetDefault();
+			$this->resetDefault($id);
 		} else {
 			$this->read($id);
 		}
