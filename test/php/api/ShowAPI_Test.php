@@ -65,6 +65,7 @@ class TestShowAPI extends UnitTestCase {
 		
 		// Read
 		$result = $api->show_read($id);
+		$result = $result['show'];
 		$this->assertNotNull($result['id']);
 		$this->assertEqual('SomeShow', $result['name']);
 		
@@ -76,6 +77,7 @@ class TestShowAPI extends UnitTestCase {
 		
 		// Read back
 		$result = $api->show_read($id);
+		$result = $result['show'];
 		$this->assertNotNull($result['id']);
 		$this->assertEqual('OtherShow', $result['name']);
 		
@@ -106,6 +108,7 @@ class TestShowAPI extends UnitTestCase {
 		
 		// List (via show)
 		$result = $api->show_read($showId);
+		$result = $result['show'];
 		$this->assertNotNull($result['id']);
 		$this->assertEqual(0, count($result['actions']));
 
@@ -120,6 +123,7 @@ class TestShowAPI extends UnitTestCase {
 		
 		// Read back (via show)
 		$result = $api->show_read($showId);
+		$result = $result['show'];
 		$result = $result['actions'][$actionId];
 		$this->assertEqual('Some Action', $result['name']);
 		
@@ -130,6 +134,7 @@ class TestShowAPI extends UnitTestCase {
 		
 		// Read back (via show)
 		$result = $api->show_read($showId);
+		$result = $result['show'];
 		$this->assertEqual('Other Action', $result['actions'][$actionId]['name']);
 		
 		// List (via show above)
@@ -140,6 +145,7 @@ class TestShowAPI extends UnitTestCase {
 			
 		// List to check delete
 		$result = $api->show_read($showId);
+		$result = $result['show'];
 		$this->assertEqual(0, count($result['actions']));
 	}
 	

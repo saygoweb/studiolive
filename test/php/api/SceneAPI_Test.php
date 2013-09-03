@@ -52,6 +52,7 @@ class TestSceneAPI extends UnitTestCase {
 		
 		// List
 		$result = $api->show_read($showId);
+		$result = $result['show'];
 		$sceneCount = count($result['scenes']);
 		$this->assertTrue($sceneCount >= 0);
 		
@@ -82,6 +83,7 @@ class TestSceneAPI extends UnitTestCase {
 				
 		// List
 		$result = $api->show_read($showId);
+		$result = $result['show'];
 		$this->assertEqual($sceneCount + 1, count($result['scenes']));
 		
 		// Delete
@@ -90,7 +92,8 @@ class TestSceneAPI extends UnitTestCase {
  		
  		// List to check delete
 		$result = $api->show_read($showId);
- 		$this->assertEqual($sceneCount, count($result['scenes']));
+ 		$result = $result['show'];
+		$this->assertEqual($sceneCount, count($result['scenes']));
 	}
 	
 /*
