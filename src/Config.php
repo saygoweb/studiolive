@@ -32,7 +32,7 @@ if (USE_LIBS) {
 	require_once(API_PATH . 'libraries/palaso/Loader.php');
 }
 
-define('USE_LIBS', false);
+define('USE_LIBS', true);
 
 define('VERSION', '0.0.0');
 define('BUILD_DATE', '8 October 2013');
