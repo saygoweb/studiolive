@@ -29,6 +29,9 @@ The latest Windows version is [available here](https://drive.google.com/foldervi
 * Just installed? Keep reading then [Click to Start StudioLive](http://localhost:8080/).
 * For the video preview to work you must install the [VLC (Video Lan)](http://www.videolan.org/vlc/index.html) media player on the client system. 
 
+### Configuration ###
+For now the configuration is not built in to the application.  You have to edit www_root/Config.php using a text editor. You will most likely want to set CASPAR\_HOST to the hostname of your Caspar server.  If running on the same machine as the server you can leave this set to 'localhost'.
+
 ### Windows ###
 The Windows Installer should 'just work' out of the box.  It starts a web server on localhost:8080 and starts the MondoDB database server. Browse to http://localhost:8080 and you should be good to go.
 
