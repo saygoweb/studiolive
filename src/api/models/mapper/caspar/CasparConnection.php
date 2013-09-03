@@ -49,6 +49,7 @@ class CasparConnection
 	public function sendString($casparCommand) {
 		$casparCommand .= "\r\n";
 		$socket = $this->getConnectedSocket();
+		socket_set_option($socket,SOL_SOCKET, SO_RCVTIMEO, array("sec"=>5, "usec"=>0));
 		socket_write($socket, $casparCommand, strlen($casparCommand));
 		while ($response = socket_read($socket, 1024, PHP_NORMAL_READ)) {
 			// unlikely to get a long or fragmented response, so we igore that for now.

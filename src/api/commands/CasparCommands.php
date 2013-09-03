@@ -42,9 +42,14 @@ class CasparCommands {
 	public static function executeAction($object, $operation, $sceneUserData = null) {
 		$action = new ActionModel();
 		JsonDecoder::decode($action, $object);
-		$sceneUserDataModel = new SceneActionDataItem();
-		JsonDecoder::decode($sceneUserDataModel, $sceneUserData);
-		self::executeActionFromModel($action, $operation, $sceneUserDataModel->data->data);
+// 		var_dump($sceneUserData);
+		if ($sceneUserData !== null) {
+			$sceneUserDataModel = new SceneActionDataItem();
+			JsonDecoder::decode($sceneUserDataModel, $sceneUserData);
+			self::executeActionFromModel($action, $operation, $sceneUserDataModel->data->data);
+		} else {
+			self::executeActionFromModel($action, $operation);
+		}
 	}
 	
 	/**
