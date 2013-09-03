@@ -1,4 +1,10 @@
 # StudioLive Change Log#
+## 0.9.6 ##
+
+- Added application settings for camera setup.
+- Initial work on customizable settings for preview.
+- Fixed bug in executeAction where only Flash Templates were working, but not other actions.
+
 ## 0.9.5 ##
 
 - Added in / out preview to Show | Actions tab.
