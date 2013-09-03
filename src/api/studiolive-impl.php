@@ -1,5 +1,7 @@
 <?php
 
+use models\dto\ShowDto;
+
 use models\SettingsModel;
 
 use commands\CasparCommands;
@@ -25,13 +27,14 @@ class StudioLiveAPI
 	//---------------------------------------------------------------
 	public function settings_update($object) {
 		$id = $object['id'];
-		$settings = new SettingsModel(); // Note this will read the DEFAULT_PROFILE
+		$settings = new SettingsModel(SettingsModel::DEFAULT_PROFILE);
 		JsonDecoder::decode($settings, $object);
 		$settings->write();
 	}
 	
 	public function settings_read() {
-		$settings = new SettingsModel(); // Note this will read the DEFAULT_PROFILE
+		$settings = new SettingsModel();
+		$settings->readOrCreate(SettingsModel::DEFAULT_PROFILE);
 		return JsonEncoder::encode($settings);
 	}	
 	
@@ -52,11 +55,12 @@ class StudioLiveAPI
 	}
 
 	/**
-	 * Read a show from the given $id
+	 * Read a ShowDto from the given $id
 	 * @param string $id
+	 * @see ShowDto
 	 */
 	public function show_read($id) {
-		$show = new \models\ShowModel($id);
+		$show = new ShowDto($id);
 		return JsonEncoder::encode($show);
 	}
 	

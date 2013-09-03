@@ -212,3 +212,8 @@ div#previews > p {
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 20px;
 }
+
+/* Settings */
+ul.breadcrumb li.right a {
+	text-decoration: none;
+}

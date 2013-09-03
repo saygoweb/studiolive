@@ -11,13 +11,15 @@ module.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', '$timeo
 		$scope.debug.setTab = true;  
 	}, 0);
 
+	$scope.settings = {};
 	$scope.show = {};
 	$scope.show.id = $routeParams.showId;
 	// Read
 	$scope.queryShow = function() {
 		sceneService.readShow($scope.show.id, function(result) {
 			if (result.ok) {
-				$scope.show = result.data;
+				$scope.show = result.data.show;
+				$scope.settings = result.data.settings;
 			}
 		});
 	};
@@ -190,12 +192,6 @@ module.controller('ShowActionsCtrl', ['$scope', 'showService', '$routeParams', f
 	// Commands
 	//---------------------------------------------------------------
 	$scope.currentCommand = undefined;
-	
-	$scope.settings = {
-		cameras: ["dshow://video=Sony Visual Communication Camera",
-		          "dshow://video=Microsoft LifeCam Studio"
-		         ]	
-	};
 	
 	$scope.allCommands = 
 		[

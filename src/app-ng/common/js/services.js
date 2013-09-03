@@ -28,6 +28,12 @@ angular.module('sl.services', ['jsonRpc'])
 		this.previewAction = function(action, operation, callback) {
 			jsonRpc.call('caspar_executeAction', [action, operation, null], callback);
 		};
+		this.settingsRead = function(callback) {
+			jsonRpc.call('settings_read', [], callback);
+		};
+		this.settingsUpdate = function(settings, callback) {
+			jsonRpc.call('settings_update', [ settings ], callback);
+		};
 	}])
 	.service('sceneService', ['jsonRpc', function(jsonRpc) {
 		jsonRpc.connect('/api/studiolive.php'); // Note this doesn't actually 'connect', it simply sets the connection url.

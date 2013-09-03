@@ -11,6 +11,7 @@ var app = angular.module(
 			$scope.debug.setTab = true;  
 		}, 0);
 
+		$scope.settings = {};
 		$scope.show = {};
 		$scope.show.id = $routeParams.showId;
 		$scope.scene = {};
@@ -20,7 +21,8 @@ var app = angular.module(
 		$scope.queryShow = function() {
 			sceneService.readShow($scope.show.id, function(result) {
 				if (result.ok) {
-					$scope.show = result.data;
+					$scope.show = result.data.show;
+					$scope.settings = result.data.settings;
 				}
 			});
 		};

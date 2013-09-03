@@ -5,13 +5,29 @@ var module = angular.module(
 	'sl.settings',
 	[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 );
-module.controller('SettingsCtrl', ['$scope', 'sceneService', '$routeParams', '$timeout', function($scope, sceneService, $routeParams, $timeout) {
+module.controller('SettingsCtrl', ['$scope', 'showService', '$timeout', function($scope, showService, $timeout) {
 	$scope.debug = {};
 	$timeout(function() {
 		$scope.debug.setTab = true;  
 	}, 0);
 
 	$scope.settings = {};
+	this.read = function() {
+		showService.settingsRead(function(result) {
+			if (result.ok) {
+				$scope.settings = result.data;
+			}
+		});
+	};
+	this.read();
+	
+	$scope.update = function() {
+		showService.settingsUpdate($scope.settings, function(result) {
+			if (result.ok) {
+				console.log('settings update ok');
+			}
+		});
+	};
 	
 	// Cameras
 	$scope.addCamera = function() {

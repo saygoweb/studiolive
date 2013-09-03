@@ -4,6 +4,7 @@
 </ul>
 <tabset>
 <tab heading="Settings">
+	<button class="btn" ng-click="update()"><i class="icon-pencil"></i>Save</button>
 	<h2>Cameras</h2>
 	<form class="well">
 		<fieldset>
@@ -14,8 +15,8 @@
 			<th style="width:75px"><button class="btn" ng-click="addCamera()"><i class="icon-plus"></i>Add</button></th>
 		</thead><tbody>
 		<tr ng-repeat="camera in settings.cameras">
-			<td><input style="width:100px" ng-model="camera.name" type="text" placeholder="name" /></td>
-			<td><input style="width:200px" ng-model="camera.uri" type="text" placeholder="device uri" /></td>
+			<td><input style="width:140px" ng-model="camera.name" type="text" placeholder="name" /></td>
+			<td><input style="width:322px" ng-model="camera.uri" type="text" placeholder="device uri" /></td>
 			<td><a ng-click="removeCamera($index)"><i class="icon-remove"></i>Remove</a></td>
 		</tr>
 		</tbody>
