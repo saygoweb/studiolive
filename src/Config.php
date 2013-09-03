@@ -15,6 +15,7 @@ if (!defined('SL_DATABASE')) {
 // -------------------------------------------------------------------
 // Changing anything below this line may well break things quite badly.
 // -------------------------------------------------------------------
+define('USE_LIBS', true);
 if (USE_LIBS) {
 	$pharFile = realpath(dirname(__FILE__) . '/api/studiolive.phar');
 	$rootPath = 'phar://' . $pharFile . '/';
@@ -31,8 +32,6 @@ if (USE_LIBS) {
 
 	require_once(API_PATH . 'libraries/palaso/Loader.php');
 }
-
-define('USE_LIBS', true);
 
 define('VERSION', '0.0.0');
 define('BUILD_DATE', '8 October 2013');
