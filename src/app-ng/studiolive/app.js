@@ -3,7 +3,8 @@
 // Declare app level module which depends on filters, and services
 angular.module('sgwStudioLive', 
 		[
-		 'sl.services', 
+		 'sl.services',
+		 'sl.settings',
 		 'sl.shows',
 		 'sl.show',
 		 'sl.scene',
@@ -25,12 +26,19 @@ angular.module('sgwStudioLive',
 	    		}
 	    	);
 		    $routeProvider.when(
-		    		'/show/:showId/:sceneId', 
-		    		{
-		    			templateUrl: '/app-ng/studiolive/partials/scene.html', 
-		    			controller: 'SceneCtrl'
-		    		}
-		    	);
+	    		'/show/:showId/:sceneId', 
+	    		{
+	    			templateUrl: '/app-ng/studiolive/partials/scene.html', 
+	    			controller: 'SceneCtrl'
+	    		}
+	    	);
+		    $routeProvider.when(
+	    		'/settings', 
+	    		{
+	    			templateUrl: '/app-ng/studiolive/partials/settings.html', 
+	    			controller: 'SettingsCtrl'
+	    		}
+		    );
 	    $routeProvider.otherwise({redirectTo: '/shows'});
 	}])
 	;

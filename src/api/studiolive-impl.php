@@ -1,5 +1,7 @@
 <?php
 
+use models\SettingsModel;
+
 use commands\CasparCommands;
 use commands\ShowCommands;
 use libraries\palaso\JsonRpcServer;
@@ -18,6 +20,21 @@ class StudioLiveAPI
 		ini_set('display_errors', 0);
 	}
 
+	//---------------------------------------------------------------
+	// SETTINGS API
+	//---------------------------------------------------------------
+	public function settings_update($object) {
+		$id = $object['id'];
+		$settings = new SettingsModel(); // Note this will read the DEFAULT_PROFILE
+		JsonDecoder::decode($settings, $object);
+		$settings->write();
+	}
+	
+	public function settings_read() {
+		$settings = new SettingsModel(); // Note this will read the DEFAULT_PROFILE
+		return JsonEncoder::encode($settings);
+	}	
+	
 	//---------------------------------------------------------------
 	// SHOW API
 	//---------------------------------------------------------------

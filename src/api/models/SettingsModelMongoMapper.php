@@ -2,12 +2,12 @@
 
 namespace models;
 
-class ShowModelMongoMapper extends mapper\MongoMapper
+class SettingsModelMongoMapper extends mapper\MongoMapper
 {
 	public static function instance() {
 		static $instance = null;
 		if (null === $instance) {
-			$instance = new ShowModelMongoMapper(SL_DATABASE, 'shows');
+			$instance = new SettingsModelMongoMapper(SL_DATABASE, 'settings');
 		}
 		return $instance;
 	}

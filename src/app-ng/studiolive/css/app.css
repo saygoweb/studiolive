@@ -166,7 +166,7 @@ table.grid th, table.grid td {
 	padding: 0;
 }
 
-table.grid input[type="text"] {
+table.grid input[type="text"], table.grid input[type="number"] {
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;

@@ -1,0 +1,46 @@
+<ul class="breadcrumb">
+	<li><a href="#/shows">All Shows</a><span class="divider">/</span></li>
+	<li class="active">Settings</li>
+</ul>
+<tabset>
+<tab heading="Settings">
+	<h2>Cameras</h2>
+	<form class="well">
+		<fieldset>
+		<table class="grid">
+		<thead>
+			<th>Name</th>
+			<th>Device Name</th>
+			<th style="width:75px"><button class="btn" ng-click="addCamera()"><i class="icon-plus"></i>Add</button></th>
+		</thead><tbody>
+		<tr ng-repeat="camera in settings.cameras">
+			<td><input style="width:100px" ng-model="camera.name" type="text" placeholder="name" /></td>
+			<td><input style="width:200px" ng-model="camera.uri" type="text" placeholder="device uri" /></td>
+			<td><a ng-click="removeCamera($index)"><i class="icon-remove"></i>Remove</a></td>
+		</tr>
+		</tbody>
+		</table>
+		</fieldset>
+	</form>
+	<h2>Previews</h2>
+	<form class="well">
+		<fieldset>
+		<table class="grid">
+		<thead>
+			<th>Channel</th>
+			<th>Receive URI</th>
+			<th>Send URI</th>
+			<th style="width:75px"><button class="btn" ng-click="addCamera()"><i class="icon-plus"></i>Add</button></th>
+		</thead><tbody>
+		<tr ng-repeat="preview in settings.previews">
+			<td><input style="width:48px" ng-model="preview.channel" type="number" placeholder="#" /></td>
+			<td><input style="width:200px" ng-model="preview.urlRx" type="text" placeholder="e.g. udp://@239.7.7.1:12345" /></td>
+			<td><input style="width:200px" ng-model="preview.urlTx" type="text" placeholder="e.g. udp://239.7.7.1:12345" /></td>
+			<td><a ng-click="removeCamera($index)"><i class="icon-remove"></i>Remove</a></td>
+		</tr>
+		</tbody>
+		</table>
+		</fieldset>
+	</form>
+</tab>
+</tabset>
