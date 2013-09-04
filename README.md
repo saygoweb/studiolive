@@ -12,7 +12,7 @@ StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.
 * Conflates the data used by Flash Templates per show, making it easy to update data for multiple templates from a single UI. 
 * Easy to use 'Show Time' page to operate during a live event or studio recording. 
 
-## What's New as of 0.9.8 ##
+## What's New as of 0.9.9 ##
 
 - Added application settings page accessible from the gear icon in the top right of all pages. This allows setup of cameras and previews.
 - Added in / out preview to Show | Actions tab.

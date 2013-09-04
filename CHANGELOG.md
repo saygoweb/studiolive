@@ -1,4 +1,8 @@
 # StudioLive Change Log#
+## 0.9.9 ##
+
+- Fixed a bug in the windows installer where the Caspar Communications was not working. Added php_sockets.dll and php.ini change.
+
 ## 0.9.8 ##
 
 - Add application settings for previews.
