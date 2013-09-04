@@ -7,6 +7,9 @@ use libraries\palaso\CodeGuard;
 class CasparConnection
 {
 	
+	const SINGLE_LINE_RESPONSE = 1;
+	const MULTI_LINE_RESPONSE  = 2;
+	
 	static $_instance = null;
 	
 	/**
@@ -47,7 +50,7 @@ class CasparConnection
 	 * @param string $casparCommand
 	 * @return array<string> Reponse from server.
 	 */
-	public function sendString($casparCommand) {
+	public function sendString($casparCommand, $endMarker = self::SINGLE_LINE_RESPONSE) {
 		$casparCommand .= "\r\n";
 		$socket = $this->getConnectedSocket();
 		socket_set_option($socket,SOL_SOCKET, SO_RCVTIMEO, array("sec"=>1, "usec"=>0));
@@ -76,6 +79,9 @@ class CasparConnection
 						$result[] = $line;
 						$col = 0;
 						$line = '';
+						if ($endMarker == self::SINGLE_LINE_RESPONSE) {
+							$stop = true;
+						}
 					}
 					break;
 				default:

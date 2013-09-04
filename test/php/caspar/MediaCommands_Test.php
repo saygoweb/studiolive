@@ -17,6 +17,16 @@ class TestMediaCommands extends UnitTestCase {
 		var_dump($result);
 	}
 	
+	function testListVideo_ListsVideo() {
+		$result = MediaCommands::listVideo();
+		var_dump($result);
+	}
+	
+	function testListFlash_ListsFlash() {
+		$result = MediaCommands::listFlash();
+		var_dump($result);
+	}
+	
 }
 
 ?>
