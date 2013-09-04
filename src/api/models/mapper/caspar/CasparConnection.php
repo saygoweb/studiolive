@@ -45,18 +45,45 @@ class CasparConnection
 	
 	/**
 	 * @param string $casparCommand
+	 * @return array<string> Reponse from server.
 	 */
 	public function sendString($casparCommand) {
 		$casparCommand .= "\r\n";
 		$socket = $this->getConnectedSocket();
-		socket_set_option($socket,SOL_SOCKET, SO_RCVTIMEO, array("sec"=>5, "usec"=>0));
+		socket_set_option($socket,SOL_SOCKET, SO_RCVTIMEO, array("sec"=>1, "usec"=>0));
 		socket_write($socket, $casparCommand, strlen($casparCommand));
-		while ($response = socket_read($socket, 1024, PHP_NORMAL_READ)) {
-			// unlikely to get a long or fragmented response, so we igore that for now.
-			break;
+		$result = array();
+		$line = '';
+		$col = 0;
+		$stop = false;
+		while (!$stop) {
+			$c = socket_read($socket, 1);
+			if ($c === false) {
+				$stop = true;
+				continue;
+			}
+			switch ($c) {
+				case "\r":
+// 					var_dump("skip");
+					break;
+				case "\n":
+					if ($col == 0) {
+// 						var_dump("end");
+						$stop = true;
+					} else {
+// 						var_dump("eol");
+// 						var_dump($line);
+						$result[] = $line;
+						$col = 0;
+						$line = '';
+					}
+					break;
+				default:
+					$line .= $c;
+					$col++;
+			}
 		}
-		// TODO REVIEW Do we need to flush any remainder?
-		return $response;		
+		return $result;		
 	}
 	
 	private function getConnectedSocket() {
