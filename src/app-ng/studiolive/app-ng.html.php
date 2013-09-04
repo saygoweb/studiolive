@@ -13,7 +13,7 @@
 <body>
   <div ng-view></div>
 
-  <div id="version">Studio Live: <span><?php echo $version;?></span></div>
+  <div id="version" style="clear: both">Studio Live: <span><?php echo $version;?></span></div>
 
 <script	src="/js/lib/angular_stable_1.0.7/angular.js"></script>
 <script	src="/js/lib/ng-ui-bootstrap-tpls-0.4.0.js"></script>

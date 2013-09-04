@@ -1,3 +1,16 @@
+<?php
+use models\SettingsModel;
+
+require_once(dirname(__FILE__) . '/../../../Config.php');
+
+$settings = new SettingsModel(SettingsModel::DEFAULT_PROFILE);
+$hasPreview = false;
+if (HAS_PREVIEW) {
+	$hasPreview = true;
+	$previews = $settings->previews->data;
+}
+
+?>
 <ul class="breadcrumb">
 	<li><a href="#/shows">All Shows</a><span class="divider">/</span></li>
 	<li><a href="#/show/{{show.id}}">{{show.name}}</a><span class="divider">/</span></li>
@@ -54,26 +67,20 @@
 </tabset>
 </div>
 </div>
+<?php if ($hasPreview):?>
 <div id="previews" class="right">
 <p>Previews</p>
+<?php for ($i = 0, $c = count($previews); $i < $c; $i++): ?>
 <div class="st-preview">
 	<form class="control-bar form-inline">
-		<button class="btn" ng-click="previewPlay(previews[0])"><i class="icon-play"></i></button>
-		<button class="btn" ng-click="previewStop(previews[0])"><i class="icon-stop"></i></button>
+		<button class="btn" ng-click="previewPlay(previews[<?php echo $i; ?>])"><i class="icon-play"></i></button>
+		<button class="btn" ng-click="previewStop(previews[<?php echo $i; ?>])"><i class="icon-stop"></i></button>
 		<input ng-model="previews[0].channel" type="number" min="0" max="100" placeholder="Channel #" ></input>
 	</form>
 	<embed type="application/x-vlc-plugin" name="preview0"
          autoplay="yes" loop="no" height="270" width="480"
-         target="udp://@239.7.7.1:12345" />
+         target="<?php echo $previews[$i]->urlRx; ?>" />
 </div>
-<div class="st-preview">
-	<form class="control-bar form-inline">
-		<button class="btn" ng-click="previewPlay(previews[1])"><i class="icon-play"></i></button>
-		<button class="btn" ng-click="previewStop(previews[1])"><i class="icon-stop"></i></button>
-		<input ng-model="previews[1].channel" type="number" min="0" max="100" placeholder="Channel #" ></input>
-	</form>
-	<embed type="application/x-vlc-plugin" name="preview1"
-         autoplay="yes" loop="no" height="270" width="480"
-         target="udp://@239.7.7.1:12346" />
+<?php endfor; ?>
 </div>
-</div>
+<?php endif; ?>

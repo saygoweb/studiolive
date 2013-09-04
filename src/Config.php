@@ -3,6 +3,9 @@
 define('CASPAR_HOST', 'localhost');
 define('CASPAR_PORT', '5250');
 
+// Set to false to remove the preview feature entirely.
+define('HAS_PREVIEW', true);
+
 define('USE_BOOT', true);
 
 // -------------------------------------------------------------------

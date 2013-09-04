@@ -28,7 +28,7 @@ angular.module('sgwStudioLive',
 		    $routeProvider.when(
 	    		'/show/:showId/:sceneId', 
 	    		{
-	    			templateUrl: '/app-ng/studiolive/partials/scene.html', 
+	    			templateUrl: '/app-ng/studiolive/partials/scene.html.php', 
 	    			controller: 'SceneCtrl'
 	    		}
 	    	);
