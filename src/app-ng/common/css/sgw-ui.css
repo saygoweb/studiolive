@@ -33,6 +33,10 @@ li.typeahead-item {
 	margin: 0 0 4px 0;
 }
 
+li.typeahead-item.active {
+	background-color: #ffc;
+}
+
 li.typeahead-item p {
 	line-height: 1.2em;
 	margin-top: 0px;
@@ -52,9 +56,22 @@ li.typeahead-item p.email {
 
 /* listview */
 div.listview {
-	margin-top: 0px;
+	margin-top: 8px;
 }
 
-div.listview tr.active {
+div.listview div.paginationblock div {
+	display: inline-block;
+}
+
+div.listview .active {
 	background-color: #ffc;
+}
+
+div.listview div.pagination select {
+	width: 70px;
+}
+
+/* Control bar for use at top of listview */
+form.control-bar {
+	margin-bottom: 0px;
 }

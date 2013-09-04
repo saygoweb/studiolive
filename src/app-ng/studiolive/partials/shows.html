@@ -14,7 +14,7 @@
 	<button class="btn" ng-click="addShow()"><i class="icon-pencil"></i>Save</button>
 	</form>
 </div>
-<div listview search="queryShows()" select="">
+<div listview items="shows" visible-items="visibleShows" search="queryShows()" select="">
 <table class="table" style="width: 100%">
 	<thead>
 	<tr>
@@ -23,7 +23,7 @@
 	</tr>
 	</thead>
 	<tbody>
-	<tr ng-repeat="show in shows" ng-class="{active: isSelected(show)}" ng-click="selectShow(show)" >
+	<tr ng-repeat="show in visibleShows" ng-class="{active: isSelected(show)}" ng-click="selectShow(show)" >
 		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(show)" ng-click="updateSelection($event, show)" /></td>
 		<td><a href="#/show/{{show.id}}">{{show.name}}</a></td>
 	</tr>
