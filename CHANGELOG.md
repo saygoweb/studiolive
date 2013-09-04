@@ -1,4 +1,9 @@
 # StudioLive Change Log#
+## 0.9.8 ##
+
+- Add application settings for previews.
+- Add master preview enable in Config.php which disables the preview div entirely.
+
 ## 0.9.6 ##
 
 - Added application settings for camera setup.
