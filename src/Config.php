@@ -36,7 +36,7 @@ if (USE_LIBS) {
 	require_once(API_PATH . 'libraries/palaso/Loader.php');
 }
 
-define('VERSION', '0.0.0');
+define('VERSION', '0.0.0 DEV');
 define('BUILD_DATE', '8 October 2013');
 
 ?>

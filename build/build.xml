@@ -2,7 +2,7 @@
 <project name="StudioLive" default="build" basedir="..">
 
 	<property name="application.name" value="studiolive" />
-
+	<property name="release" value="BETA" />
 	<property name="build.number" value="0.0.1.0" />
 	<property name="build.output" value="output" />
 	<property name="build.packageFile" value="${build.output}/${application.name}.tgz" />
@@ -105,7 +105,7 @@
 		</copy>
 		<replace file="${build.output}/package/htdocs/Config.php">
 			<replacefilter token="define('USE_LIBS', false);" value="define('USE_LIBS', true);" />
-			<replacefilter token="define('VERSION', '0.0.0');" value="define('VERSION', '${version}');" />
+			<replacefilter token="define('VERSION', '0.0.0 DEV');" value="define('VERSION', '${version} ${release}');" />
 			<replacefilter token="define('BUILD_DATE', '8 October 2013');" value="define('BUILD_DATE', '${build.date}');" />
 		</replace>
 	</target>
