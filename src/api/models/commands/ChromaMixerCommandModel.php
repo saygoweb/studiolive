@@ -14,7 +14,7 @@ class ChromaMixerCommandModel extends InputCommandModel
 	}
 	
 	public function casparCommandOut() {
-		$result = sprintf('MIXER %d-%d CHROMA none', $this->channel, $this->layer);
+		$result = sprintf('MIXER %d-%d CLEAR', $this->channel, $this->layer);
 		return $result;
 	}
 	
