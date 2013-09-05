@@ -1,10 +1,12 @@
 <?php
 namespace models\dto;
 
-use commands\MediaCommands;
+use models\ResourceModel;
 
+use models\mapper\ArrayOf;
+
+use commands\ResourceCommands;
 use models\SettingsModel;
-
 use models\ShowModel;
 
 class ShowDto {
@@ -12,7 +14,10 @@ class ShowDto {
 		$this->show = new ShowModel($showId);
 		$this->settings = new SettingsModel();
 		$this->settings->readOrCreate(SettingsModel::DEFAULT_PROFILE);
-// 		$this->resources = MediaCommands::listResources();
+ 		$this->resources = new ArrayOf(ArrayOf::OBJECT, function($data) {
+ 			return new ResourceModel();
+ 		});
+ 		$this->resources->data = ResourceCommands::listResources();
 	}
 	
 	public $show;

@@ -20,10 +20,30 @@ module.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', '$timeo
 			if (result.ok) {
 				$scope.show = result.data.show;
 				$scope.settings = result.data.settings;
+				$scope.updateResources(result.data.resources);
 			}
 		});
 	};
 	$scope.queryShow();
+	
+	$scope.updateResources= function(resources) {
+		$scope.videoResources = [];
+		$scope.imageResources = [];
+		$scope.flashResources = [];
+		for (var i = 0, c = resources.length; i < c; i++) {
+			switch (resources[i].type) {
+			case 1:
+				$scope.videoResources.push(resources[i]);
+				break;
+			case 2:
+				$scope.imageResources.push(resources[i]);
+				break;
+			case 3:
+				$scope.flashResources.push(resources[i]);
+				break;
+			}
+		}
+	};
 }]);
 module.controller('ShowScenesCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
 	// Selection

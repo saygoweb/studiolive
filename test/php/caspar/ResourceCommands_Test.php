@@ -1,5 +1,5 @@
 <?php
-use commands\MediaCommands;
+use commands\ResourceCommands;
 
 use models\ShowSceneIndexModel;
 use commands\ShowCommands;
@@ -7,28 +7,28 @@ use commands\ShowCommands;
 require_once(dirname(__FILE__) . '/../TestConfig.php');
 require_once(SIMPLE_TEST_PATH . 'autorun.php');
 
-class TestMediaCommands extends UnitTestCase {
+class TestResourceCommands extends UnitTestCase {
 
 	function __construct() {
 	}
 /*
 	function testListImages_ListsImages() {
-		$result = MediaCommands::listImages();
+		$result = ResourceCommands::listImages();
 		var_dump($result);
 	}
 	
 	function testListVideo_ListsVideo() {
-		$result = MediaCommands::listVideo();
+		$result = ResourceCommands::listVideo();
 		var_dump($result);
 	}
 	
 	function testListFlash_ListsFlash() {
-		$result = MediaCommands::listFlash();
+		$result = ResourceCommands::listFlash();
 		var_dump($result);
 	}
 	*/
 	function testListResources_works() {
-		$result = MediaCommands::listResources();
+		$result = ResourceCommands::listResources();
 		var_dump($result);
 	}
 	

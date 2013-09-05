@@ -7,13 +7,13 @@ use models\mapper\JsonDecoder;
 
 class ResourceModel extends mapper\MapperModel
 {
-	const TYPE_MOVIE = 1;
+	const TYPE_VIDEO = 1;
 	const TYPE_IMAGE = 2;
 	const TYPE_FLASH = 3;
 	
 	public function __construct($id = '') {
 		$this->id = new Id();
-		parent::__construct(CacheMongoMapper::instance(), $id);
+		parent::__construct(ResourceMongoMapper::instance(), $id);
 	}
 	
 	/**

@@ -1,11 +1,13 @@
 <?php
 namespace commands;
 
+use models\ResourceModel;
+
 use libraries\palaso\CodeGuard;
 use models\mapper\caspar\CasparConnection;
 use models\mapper\JsonDecoder;
 
-class MediaCommands {
+class ResourceCommands {
 	
 	/**
 	 * @return array array<string>
@@ -49,6 +51,11 @@ class MediaCommands {
 	}
 	
 	private static function listCasparWithType($command) {
+		static $map = array(
+				'STILL' => ResourceModel::TYPE_IMAGE,
+				'MOVIE' => ResourceModel::TYPE_VIDEO,
+				'FLASH' => ResourceModel::TYPE_FLASH
+		);
 		$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
 		$response = $caspar->sendString($command, CasparConnection::MULTI_LINE_RESPONSE);
 		if ($response[0] != "200 $command OK") {
@@ -64,7 +71,11 @@ class MediaCommands {
 			} else {
 				$type = 'FLASH';
 			}
-			$result[] = array(trim($tokens[0], '"'), $type);
+			$model = new ResourceModel();
+			$model->resourceName = trim($tokens[0], '"');
+			$type = ($command == 'CLS') ? $tokens[1] : 'FLASH';
+			$model->type = $map[$type];
+			$result[] = $model;
 		}
 		return $result;
 	}
