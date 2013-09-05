@@ -15,7 +15,8 @@ var app = angular.module(
 		$scope.show = {};
 		$scope.show.id = $routeParams.showId;
 		$scope.scene = {};
-		$scope.scene.id = $routeParams.sceneId;
+		$scope.state = {};
+		$scope.state.sceneId = $routeParams.sceneId;
 
 		// Read
 		$scope.queryShow = function() {
@@ -52,11 +53,21 @@ var app = angular.module(
 		
 		// Show actions / Scene actions
 		$scope.$watch("show", function(newValue, oldValue) {
-			//console.log("watch show", newValue);
+			console.log("watch show", newValue);
+			$scope.updateScene();
+			$scope.updateSceneList();
+		});
+		
+		$scope.$watch("state.sceneId", function(newValue, oldValue) {
+			console.log("watch currentSceneId", newValue);
+			$scope.updateScene();
+		});
+		
+		$scope.updateScene = function() {
 			if ($scope.show.scenes == undefined) {
 				return;
 			}
-			$scope.scene = $scope.show.scenes[$scope.scene.id];
+			$scope.scene = $scope.show.scenes[$scope.state.sceneId];
 			var showActions = [];
 			var sceneActions = [];
 			for (var i = 0, l = $scope.scene.actions.length; i < l; i++) {
@@ -73,8 +84,28 @@ var app = angular.module(
 			$scope.sceneActions = sceneActions;
 
 			$scope.updateDataSet($scope.sceneActions);
-		});
+
+
+		};
 		
+		// Scene List
+		$scope.updateSceneList = function() {
+			console.log('update scene list: ', $scope.show);
+			if ($scope.show.scenesIndex == undefined) {
+				return;
+			}
+			$scope.scenes = [];
+			for (var i = 0, c = $scope.show.scenesIndex.length; i < c; i++) {
+				var scene = $scope.show.scenes[$scope.show.scenesIndex[i]]; 
+				var model = {};
+				model.id = scene.id;
+				model.name = scene.name;
+				$scope.scenes.push(model);
+			}
+			console.log('scene list: ', $scope.scenes);
+		};
+		
+		// Scene Actions
 		$scope.$watch("sceneActions", function(newValue, oldValue) {
 			//console.log('watch sceneActions', newValue);
 			if ($scope.canUpdate == undefined) {
@@ -87,6 +118,7 @@ var app = angular.module(
 			$scope.scene.actions = sceneActions;
 			//console.log('updating sceneActions');
 			$scope.saveScene();
+			
 			$scope.updateDataSet($scope.sceneActions);
 			
 		}, true);

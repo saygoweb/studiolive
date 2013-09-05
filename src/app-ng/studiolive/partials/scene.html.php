@@ -20,6 +20,7 @@ if (HAS_PREVIEW) {
 <div id="st-wrapper">
 <div id="st-controls" class="">
 <tabset>
+<div id="sceneSelect" class="right"><select ng-model="state.sceneId" ng-options="scene.id as scene.name for scene in scenes"></select></div>
 <tab heading="Show Time">
 	<div class="well">
 	<div class="st-control" ng-repeat="action in sceneActions">
