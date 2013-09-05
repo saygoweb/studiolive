@@ -10,6 +10,7 @@ class MediaCommands {
 	/**
 	 * @return array array<string>
 	 */
+	/*
 	public static function listImages() {
 		return self::listCaspar('CLS', 'STILL');
 	}
@@ -39,6 +40,36 @@ class MediaCommands {
 		}
 		return $result;
 	}
+	*/
+
+	public static function listResources() {
+		$resultCLS = self::listCasparWithType('CLS');
+		$resultTLS = self::listCasparWithType('TLS');
+		return array_merge($resultCLS, $resultTLS);
+	}
+	
+	private static function listCasparWithType($command) {
+		$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
+		$response = $caspar->sendString($command, CasparConnection::MULTI_LINE_RESPONSE);
+		if ($response[0] != "200 $command OK") {
+			throw new \Exception("Caspar Error: " . $response[0]);
+		}
+		unset($response[0]);
+		$result = [];
+		foreach ($response as $line) {
+			$tokens = $array = preg_split('/(?: +|(=))(?=(?:[^"]*"[^"]*")*[^"]*$)/', $line, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+			// 			var_dump($tokens);
+			if ($command == 'CLS') {
+				$type = $tokens[1];
+			} else {
+				$type = 'FLASH';
+			}
+			$result[] = array(trim($tokens[0], '"'), $type);
+		}
+		return $result;
+	}
+	
+	
 	
 }
 
