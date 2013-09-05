@@ -12,12 +12,12 @@ StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.
 * Conflates the data used by Flash Templates per show, making it easy to update data for multiple templates from a single UI. 
 * Easy to use 'Show Time' page to operate during a live event or studio recording. 
 
-## What's New as of 0.9.9 ##
+## What's New as of 0.9.10 ##
 
-- Added application settings page accessible from the gear icon in the top right of all pages. This allows setup of cameras and previews.
-- Added in / out preview to Show | Actions tab.
-- The 'New Action' button now uses an initially hidden form in a similar manner to other controls.
-- Add in / out / and refresh (update) buttons on Scene | Data tab.
+- Added a scene select dropdown on the scene page.
+- Media files for images, templates, and video can now be selected by a drop down, with the drop down options being obtained from the Caspar server.
+- Updated the listview component so that paging, and count per page work on all lists (shows and scenes).
+- Fixed a bug where the preview channel selectors where changing together.
 
 See the [Change Log](https://github.com/saygoweb/studiolive/blob/master/CHANGELOG.md) for more details.
 

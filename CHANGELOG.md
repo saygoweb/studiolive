@@ -1,4 +1,11 @@
 # StudioLive Change Log#
+## 0.9.10 ##
+
+- Added a scene select dropdown on the scene page.
+- Media files for images, templates, and video can now be selected by a drop down, with the drop down options being obtained from the Caspar server.
+- Updated the listview component so that paging, and count per page work on all lists (shows and scenes).
+- Fixed a bug where the preview channel selectors where changing together.
+
 ## 0.9.9 ##
 
 - Fixed a bug in the windows installer where the Caspar Communications was not working. Added php_sockets.dll and php.ini change.

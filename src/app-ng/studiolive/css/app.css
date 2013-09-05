@@ -217,3 +217,9 @@ div#previews > p {
 ul.breadcrumb li.right a {
 	text-decoration: none;
 }
+
+/* Scene */
+div#sceneSelect select {
+	margin-bottom: 0px;
+	width: 190px;
+}
