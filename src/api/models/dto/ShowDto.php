@@ -17,7 +17,7 @@ class ShowDto {
  		$this->resources = new ArrayOf(ArrayOf::OBJECT, function($data) {
  			return new ResourceModel();
  		});
- 		$this->resources->data = ResourceCommands::listResources();
+ 		//$this->resources->data = ResourceCommands::listResources();
 	}
 	
 	public $show;

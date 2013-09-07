@@ -5,7 +5,9 @@ var module = angular.module(
 	'sl.show',
 	[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 );
-module.controller('ShowCtrl', ['$scope', 'sceneService', '$routeParams', '$timeout', function($scope, sceneService, $routeParams, $timeout) {
+module.controller('ShowCtrl', ['$scope', 'sceneService', 'breadcrumbService', '$routeParams', '$timeout', 
+                               function($scope, sceneService, breadcrumbService, $routeParams, $timeout) {
+	breadcrumbService.push('top', {href: '#/show/{{show.id}}', label: '{{show.name}}'});
 	$scope.debug = {};
 	$timeout(function() {
 		$scope.debug.setTab = true;  

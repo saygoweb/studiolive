@@ -1,5 +1,7 @@
 <?php
 
+use commands\ResourceCommands;
+
 use models\dto\ShowDto;
 
 use models\SettingsModel;
@@ -126,12 +128,26 @@ class StudioLiveAPI
 		CasparCommands::executeActionFromShow($showId, $sceneId, $actionId, $operation);
 	}
 	
+	//---------------------------------------------------------------
+	// CASPAR API
+	//---------------------------------------------------------------
+	
 	public function caspar_executeAction($action, $operation, $sceneUserData) {
 		CasparCommands::executeAction($action, $operation, $sceneUserData);
 	}
 	
 	public function caspar_executeCommand($command, $operation) {
 		CasparCommands::executeCommand($command, $operation);
+	}
+	
+	public function caspar_listResources() {
+		$resources = ResourceCommands::listResources();
+		return JsonEncoder::encode($resources);
+	}
+	
+	public function caspar_ping() {
+		$state = CasparCommands::state();
+		return JsonEncoder::encode($state);
 	}
 
 }

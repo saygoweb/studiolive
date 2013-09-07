@@ -5,7 +5,8 @@ var app = angular.module(
 		'sl.shows',
 		[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 	)
-	.controller('ShowsCtrl', ['$scope', 'showService', function($scope, showService) {
+	.controller('ShowsCtrl', ['$scope', 'showService', 'casparService', function($scope, showService, casparService) {
+		
 		// Selection
 		$scope.selected = [];
 		$scope.updateSelection = function(event, item) {

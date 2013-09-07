@@ -214,12 +214,34 @@ div#previews > p {
 }
 
 /* Settings */
-ul.breadcrumb li.right a {
+ul.indicator li {
+	margin: 0px 4px 0px 4px;
+}
+
+li.settings a {
 	text-decoration: none;
 }
+
+li.connection i.icon-circle-blank {
+	color: red;
+	margin-left: 4px;
+}
+
+li.connection i.icon-circle {
+	color: green;
+	margin-left: 4px;
+}
+
+li.connection
 
 /* Scene */
 div#sceneSelect select {
 	margin-bottom: 0px;
 	width: 190px;
+}
+
+/* Breadcrumbs */
+.breadcrumb > li .divider {
+padding: 0 5px;
+color: #ccc;
 }

@@ -1,11 +1,11 @@
 <?php
 namespace commands;
 
-use models\SceneActionDataItem;
-
 use libraries\palaso\CodeGuard;
 use models\ActionModel;
+use models\SceneActionDataItem;
 use models\ShowModel;
+use models\StateModel;
 use models\mapper\caspar\CasparConnection;
 use models\mapper\JsonDecoder;
 use models\commands\CommandModel;
@@ -111,6 +111,18 @@ class CasparCommands {
 				$caspar->sendString($casparString);
 				break;
 		}
+	}
+	
+	public static function state() {
+		$state = new StateModel();
+		try {
+			$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
+			$caspar->sendString("\r\n", CasparConnection::SINGLE_LINE_RESPONSE);
+			$state->connected = true;
+		} catch (\Exception $e) {
+			$state->connected = false;
+		}
+		return $state;
 	}
 	
 }

@@ -5,7 +5,9 @@ var module = angular.module(
 	'sl.settings',
 	[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 );
-module.controller('SettingsCtrl', ['$scope', 'showService', '$timeout', function($scope, showService, $timeout) {
+module.controller('SettingsCtrl', ['$scope', 'showService', 'breadcrumbService', '$timeout', function($scope, showService, breadcrumbService, $timeout) {
+	breadcrumbService.push('top', {href: 'settings', label: 'Settings'});
+	
 	$scope.debug = {};
 	$timeout(function() {
 		$scope.debug.setTab = true;  
