@@ -62,6 +62,9 @@ angular.module('sl.services', ['jsonRpc'])
 		this.previewAction = function(action, operation, sceneUserData, callback) {
 			jsonRpc.call('caspar_executeAction', [action, operation, sceneUserData], callback);
 		};
+		this.resourcesList = function(callback) {
+			jsonRpc.call('caspar_listResources', [], callback);
+		};
 	}])
 	.factory('casparService', ['jsonRpc', '$timeout', function(jsonRpc, $timeout) {
 		jsonRpc.connect('/api/studiolive.php'); // Note this doesn't actually 'connect', it simply sets the connection url.
@@ -78,7 +81,7 @@ angular.module('sl.services', ['jsonRpc'])
 //					console.log('caspar_ping ok: ', result.data);
 					service.state = result.data;
 				}
-				$timeout(service.ping, 4000, false);
+				$timeout(service.ping, 30000, false);
 			});
 		};
 		service.ping();

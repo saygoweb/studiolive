@@ -20,27 +20,14 @@ module.controller('ShowCtrl', ['$scope', 'sceneService', 'breadcrumbService', '$
 	breadcrumbService.set('top',
 			[
 			 {href: '#/shows', label: 'All Shows'},
-			 {href: '#/shows/' + $scope.show.id, label: ''},
+			 {href: '#/show/' + $scope.show.id, label: ''},
 			]
 	);
 	var updateBreadcrumbs = function() {
 		breadcrumbService.updateCrumb('top', 1, { label: $scope.show.name });
 	};
 	
-	// Read
-	$scope.queryShow = function() {
-		sceneService.readShow($scope.show.id, function(result) {
-			if (result.ok) {
-				$scope.show = result.data.show;
-				$scope.settings = result.data.settings;
-//				$scope.updateResources(result.data.resources);
-				updateBreadcrumbs();
-			}
-		});
-	};
-	$scope.queryShow();
-	
-	$scope.updateResources= function(resources) {
+	var updateResources= function(resources) {
 		$scope.videoResources = [];
 		$scope.imageResources = [];
 		$scope.flashResources = [];
@@ -58,6 +45,26 @@ module.controller('ShowCtrl', ['$scope', 'sceneService', 'breadcrumbService', '$
 			}
 		}
 	};
+
+	// Read
+	$scope.queryShow = function() {
+		sceneService.readShow($scope.show.id, function(result) {
+			if (result.ok) {
+				console.log('resourceList');
+				sceneService.resourcesList(function(result2) {
+					if (result2.ok) {
+						console.log('resourceList ok');
+						updateResources(result2.data.resources);
+					}
+					$scope.show = result.data.show;
+					$scope.settings = result.data.settings;
+					updateBreadcrumbs();
+				});
+			}
+		});
+	};
+	$scope.queryShow();
+	
 }]);
 module.controller('ShowScenesCtrl', ['$scope', 'sceneService', '$routeParams', function($scope, sceneService, $routeParams) {
 	// Selection
@@ -121,7 +128,7 @@ module.controller('ShowScenesCtrl', ['$scope', 'sceneService', '$routeParams', f
 		$scope.scenesIndex = index;
 	});
 	$scope.$watch("scenesIndex", function(newValue, oldValue) {
-//		console.log('watch scenesIndex', newValue);
+		console.log('watch scenesIndex', newValue);
 		if ($scope.show.scenesIndex == undefined) {
 			return;
 		}
@@ -129,10 +136,11 @@ module.controller('ShowScenesCtrl', ['$scope', 'sceneService', '$routeParams', f
 		for (var i = 0, l = $scope.scenesIndex.length; i < l; i++) {
 			index.push($scope.scenesIndex[i].id);
 		}
+		console.log('index udpate');
 		sceneService.updateScenesIndex($scope.show.id, index, function(result) {
 			if (result.ok) {
 				// TODO notify CP 2013-07
-//				console.log('index udpate ok');
+				console.log('index udpate ok');
 			}
 		});
 		

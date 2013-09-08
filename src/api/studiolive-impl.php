@@ -1,18 +1,15 @@
 <?php
 
-use commands\ResourceCommands;
-
-use models\dto\ShowDto;
-
-use models\SettingsModel;
-
 use commands\CasparCommands;
 use commands\ShowCommands;
 use libraries\palaso\JsonRpcServer;
 use models\ActionModel;
 use models\SceneModel;
+use models\SettingsModel;
 use models\ShowModel;
 use models\ShowSceneIndexModel;
+use models\dto\ResourceDto;
+use models\dto\ShowDto;
 use models\mapper\JsonDecoder;
 use models\mapper\JsonEncoder;
 
@@ -141,7 +138,7 @@ class StudioLiveAPI
 	}
 	
 	public function caspar_listResources() {
-		$resources = ResourceCommands::listResources();
+		$resources = new ResourceDto();
 		return JsonEncoder::encode($resources);
 	}
 	

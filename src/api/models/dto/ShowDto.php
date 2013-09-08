@@ -14,16 +14,11 @@ class ShowDto {
 		$this->show = new ShowModel($showId);
 		$this->settings = new SettingsModel();
 		$this->settings->readOrCreate(SettingsModel::DEFAULT_PROFILE);
- 		$this->resources = new ArrayOf(ArrayOf::OBJECT, function($data) {
- 			return new ResourceModel();
- 		});
  		//$this->resources->data = ResourceCommands::listResources();
 	}
 	
 	public $show;
 	
 	public $settings;
-	
-	public $resources;
 	
 }

@@ -22,8 +22,8 @@ var app = angular.module(
 		breadcrumbService.set('top',
 				[
 				 {href: '#/shows', label: 'All Shows'},
-				 {href: '#/shows/' + $scope.show.id, label: ''},
-				 {href: '#/shows/' + $routeParams.showId + '/' + $routeParams.sceneId, label: ''},
+				 {href: '#/show/' + $scope.show.id, label: ''},
+				 {href: '#/show/' + $routeParams.showId + '/' + $routeParams.sceneId, label: ''},
 				]
 		);
 		var updateBreadcrumbs = function() {

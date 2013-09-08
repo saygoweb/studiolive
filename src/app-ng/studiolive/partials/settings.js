@@ -20,14 +20,14 @@ module.controller('SettingsCtrl', ['$scope', 'breadcrumbService', 'showService',
 	}, 0);
 
 	$scope.settings = {};
-	this.read = function() {
+	var read = function() {
 		showService.settingsRead(function(result) {
 			if (result.ok) {
 				$scope.settings = result.data;
 			}
 		});
 	};
-	this.read();
+	read();
 	
 	$scope.update = function() {
 		showService.settingsUpdate($scope.settings, function(result) {
