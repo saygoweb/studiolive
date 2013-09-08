@@ -5,7 +5,14 @@ var app = angular.module(
 		'sl.shows',
 		[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 	)
-	.controller('ShowsCtrl', ['$scope', 'showService', 'casparService', function($scope, showService, casparService) {
+	.controller('ShowsCtrl', ['$scope', 'breadcrumbService', 'showService', 'casparService',
+	                          function($scope, breadcrumbService, showService, casparService) {
+		
+		breadcrumbService.set('top',
+				[
+				 {href: '#/shows', label: 'All Shows'},
+				]
+		);
 		
 		// Selection
 		$scope.selected = [];

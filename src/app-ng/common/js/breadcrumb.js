@@ -7,19 +7,23 @@ angular.module('sgw.ui.breadcrumb', [])
 		}
 	};
 	return {
-		push : function(id, item) {
+		updateCrumb: function(id, index, update) {
 			ensureIdIsRegistered(id);
-			service[id].push(item);
-			// $log.log( "$broadcast" );
-			// $rootScope.$broadcast(
-			// 'breadcrumbsRefresh' );
+			var crumb = service[id][index];
+			for (var property in update) {
+				crumb[property] = update[property];
+			}
 		},
-		get : function(id) {
+		set: function(id, crumbs) {
+			ensureIdIsRegistered(id);
+			service[id] = crumbs;
+		},
+		get: function(id) {
 			ensureIdIsRegistered(id);
 //			return angular.copy(service[id]);
 			return service[id];
 		},
-		setLastIndex : function(id, index) {
+		setLastIndex: function(id, index) {
 			ensureIdIsRegistered(id);
 			if (service[id].length > 1 + index) {
 				service[id].splice(1 + index, service[id].length - index);

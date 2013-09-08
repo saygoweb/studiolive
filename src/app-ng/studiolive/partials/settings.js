@@ -5,8 +5,14 @@ var module = angular.module(
 	'sl.settings',
 	[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 );
-module.controller('SettingsCtrl', ['$scope', 'showService', 'breadcrumbService', '$timeout', function($scope, showService, breadcrumbService, $timeout) {
-	breadcrumbService.push('top', {href: 'settings', label: 'Settings'});
+module.controller('SettingsCtrl', ['$scope', 'breadcrumbService', 'showService', '$timeout',
+                                   function($scope, breadcrumbService, showService, $timeout) {
+	breadcrumbService.set('top',
+			[
+			 {href: '#/shows', label: 'All Shows'},
+			 {href: '#/settings', label: 'Settings'},
+			]
+	);
 	
 	$scope.debug = {};
 	$timeout(function() {

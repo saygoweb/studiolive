@@ -5,7 +5,8 @@ var app = angular.module(
 		'sl.scene',
 		[ 'sl.services', 'palaso.ui.listview', 'ui.bootstrap' ]
 	)
-	.controller('SceneCtrl', ['$scope', 'sceneService', '$routeParams', '$timeout', function($scope, sceneService, $routeParams, $timeout) {
+	.controller('SceneCtrl', ['$scope', 'breadcrumbService', 'sceneService', '$routeParams', '$timeout', 
+	                          function($scope, breadcrumbService, sceneService, $routeParams, $timeout) {
 		$scope.debug = {};
 		$timeout(function() {
 			$scope.debug.setTab = true;  
@@ -18,6 +19,17 @@ var app = angular.module(
 		$scope.state = {};
 		$scope.state.sceneId = $routeParams.sceneId;
 
+		breadcrumbService.set('top',
+				[
+				 {href: '#/shows', label: 'All Shows'},
+				 {href: '#/shows/' + $scope.show.id, label: ''},
+				 {href: '#/shows/' + $routeParams.showId + '/' + $routeParams.sceneId, label: ''},
+				]
+		);
+		var updateBreadcrumbs = function() {
+			breadcrumbService.updateCrumb('top', 1, { label: $scope.show.name });
+			breadcrumbService.updateCrumb('top', 2, { label: $scope.scene.name });
+		};
 		// Read
 		$scope.queryShow = function() {
 			sceneService.readShow($scope.show.id, function(result) {
@@ -56,6 +68,7 @@ var app = angular.module(
 			console.log("watch show", newValue);
 			$scope.updateScene();
 			$scope.updateSceneList();
+			updateBreadcrumbs();
 		});
 		
 		$scope.$watch("state.sceneId", function(newValue, oldValue) {

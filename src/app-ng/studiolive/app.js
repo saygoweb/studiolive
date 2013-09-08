@@ -42,9 +42,7 @@ angular.module('sgwStudioLive',
 	    );
     $routeProvider.otherwise({redirectTo: '/shows'});
 }])
-.controller('StudioLiveCtrl', ['$scope', 'breadcrumbService', 'casparService', function($scope, breadcrumbService, casparService) {
-	breadcrumbService.push('top', { href: '#/shows', label: 'All Shows' });
-	
+.controller('StudioLiveCtrl', ['$scope', 'casparService', function($scope, casparService) {
 	$scope.$watch(function() { return casparService.state; }, function(state) {
 		console.log('casparService state change: ', state);
 		$scope.connected = (state.connected) ? 'icon-circle' : 'icon-circle-blank';

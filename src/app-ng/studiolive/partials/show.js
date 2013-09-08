@@ -7,7 +7,7 @@ var module = angular.module(
 );
 module.controller('ShowCtrl', ['$scope', 'sceneService', 'breadcrumbService', '$routeParams', '$timeout', 
                                function($scope, sceneService, breadcrumbService, $routeParams, $timeout) {
-	breadcrumbService.push('top', {href: '#/show/{{show.id}}', label: '{{show.name}}'});
+	
 	$scope.debug = {};
 	$timeout(function() {
 		$scope.debug.setTab = true;  
@@ -16,13 +16,25 @@ module.controller('ShowCtrl', ['$scope', 'sceneService', 'breadcrumbService', '$
 	$scope.settings = {};
 	$scope.show = {};
 	$scope.show.id = $routeParams.showId;
+
+	breadcrumbService.set('top',
+			[
+			 {href: '#/shows', label: 'All Shows'},
+			 {href: '#/shows/' + $scope.show.id, label: ''},
+			]
+	);
+	var updateBreadcrumbs = function() {
+		breadcrumbService.updateCrumb('top', 1, { label: $scope.show.name });
+	};
+	
 	// Read
 	$scope.queryShow = function() {
 		sceneService.readShow($scope.show.id, function(result) {
 			if (result.ok) {
 				$scope.show = result.data.show;
 				$scope.settings = result.data.settings;
-				$scope.updateResources(result.data.resources);
+//				$scope.updateResources(result.data.resources);
+				updateBreadcrumbs();
 			}
 		});
 	};

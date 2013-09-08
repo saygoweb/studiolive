@@ -11,12 +11,6 @@ if (HAS_PREVIEW) {
 }
 
 ?>
-<ul class="breadcrumb">
-	<li><a href="#/shows">All Shows</a><span class="divider">/</span></li>
-	<li><a href="#/show/{{show.id}}">{{show.name}}</a><span class="divider">/</span></li>
-	<li class="active">{{scene.name}}</li>
-	<li class="right"><a href="#/settings"><i class="icon-gear"></i></a></li>
-</ul>
 <div id="st-wrapper">
 <div id="st-controls" class="">
 <tabset>
