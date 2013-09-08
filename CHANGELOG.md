@@ -1,4 +1,9 @@
 # StudioLive Change Log#
+## 0.9.12 ##
+
+- Added a caspar connected indicator to the top right.
+- Refactored the breadcrumbs to use a breadcrumbService.
+
 ## 0.9.10 ##
 
 - Added a scene select dropdown on the scene page.
