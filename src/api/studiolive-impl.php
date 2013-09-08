@@ -147,6 +147,14 @@ class StudioLiveAPI
 		return JsonEncoder::encode($state);
 	}
 
+	public function snap($channel, $fileName) {
+		return CasparCommands::snap($channel, $fileName);
+	}
+	
+	public function snap_update($fileName, $newFileName, $assignees) {
+		throw new \Exception("NYI");
+	}
+
 }
 
 function main() {

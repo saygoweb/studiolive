@@ -8,6 +8,8 @@ define('TEST_PATH', $rootPath . 'test/php/');
 define('TEST_LIB_PATH', $rootPath . 'test/lib/');
 define('SIMPLE_TEST_PATH', $rootPath . 'test/lib/simpletest/');
 
+define('CASPAR_PATH_SNAP', '/var/www/host/CasparCG/data');
+
 define('SL_DATABASE', 'studiolive_test');
 
 require_once($rootPath . 'src/Config.php');

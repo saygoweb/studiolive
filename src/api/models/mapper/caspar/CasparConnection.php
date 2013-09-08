@@ -17,9 +17,13 @@ class CasparConnection
 	 * @param string $port
 	 * @return CasparConnection
 	 */
-	public static function connect($host, $port) {
+	public static function connect($host, $port, $provider = null) {
 		if (self::$_instance == null) {
-			self::$_instance = new CasparConnection($host, $port);
+			if ($provider !== null) {
+				self::$_instance = $provider;
+			} else {
+				self::$_instance = new CasparConnection($host, $port);
+			}
 		}
 		return self::$_instance;
 	}

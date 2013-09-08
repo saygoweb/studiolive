@@ -65,6 +65,12 @@ angular.module('sl.services', ['jsonRpc'])
 		this.resourcesList = function(callback) {
 			jsonRpc.call('caspar_listResources', [], callback);
 		};
+		this.snap = function(channel, fileName, callback) {
+			jsonRpc.call('snap', [channel, fileName], callback);
+		};
+		this.snapUpdate = function(fileName, newFileName, assignees, callback) {
+			jsonRpc.call('snap', [fileName, newFileName, assignees], callback);
+		};
 	}])
 	.factory('casparService', ['jsonRpc', '$timeout', function(jsonRpc, $timeout) {
 		jsonRpc.connect('/api/studiolive.php'); // Note this doesn't actually 'connect', it simply sets the connection url.

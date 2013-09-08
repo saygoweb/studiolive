@@ -125,6 +125,16 @@ class CasparCommands {
 		return $state;
 	}
 	
+	/**
+	 * 
+	 * @param int $channel
+	 */
+	public static function snap($channel) {
+		$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
+		$caspar->sendString("PRINT $channel\r\n", CasparConnection::SINGLE_LINE_RESPONSE);
+		
+	}
+	
 }
 
 ?>

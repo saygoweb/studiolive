@@ -229,7 +229,7 @@ var app = angular.module(
 		
 		$scope.previewSnap = function(preview) {
 			$scope.snap = !$scope.snap;
-//			sceneService.casparSnap(preview.channel, '', function(result) {
+//			sceneService.snap(preview.channel, '', function(result) {
 //				if (result.ok) {
 //					
 //				}
