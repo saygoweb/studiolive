@@ -3,6 +3,15 @@
 define('CASPAR_HOST', 'localhost');
 define('CASPAR_PORT', '5250');
 
+$webRoot = realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
+
+if (!defined('CASPAR_PATH_SNAP')) {
+	define('CASPAR_PATH_SNAP', 'C:\CasparCG\CommunityServer\data');
+}
+if (!defined('SL_PATH_SNAP')) {
+	define('SL_PATH_SNAP', $webRoot . 'images/snap');
+}
+
 // Set to false to remove the preview feature entirely.
 define('HAS_PREVIEW', true);
 
