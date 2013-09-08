@@ -99,7 +99,7 @@
 		<copy todir="${build.output}/package/htdocs" file="README.md" />
 		<copy todir="${build.output}/package/htdocs">
 			<fileset dir="src"
-				includes="app-ng/**/*,js/**,css/**,images/**"
+				includes="app-ng/**/*,js/**,css/**,images/**,font/**"
 				excludes="app-ng/**/*.js"
 			/>
 		</copy>

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Studio Live</title>
 	<link rel="stylesheet" href="/css/bootstrap.css" />
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/app-ng/studiolive/css/app.css" />
 	<link rel="stylesheet" href="/app-ng/common/css/sgw-ui.css" />
 	<script src="/js/lib/jquery-1.8.3.min.js"></script>
