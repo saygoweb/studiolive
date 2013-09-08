@@ -68,10 +68,23 @@ if (HAS_PREVIEW) {
 <?php for ($i = 0, $c = count($previews); $i < $c; $i++): ?>
 <div class="st-preview">
 	<form class="control-bar form-inline">
-		<button class="btn" ng-click="previewPlay(previews[<?php echo $i; ?>])"><i class="icon-play"></i></button>
-		<button class="btn" ng-click="previewStop(previews[<?php echo $i; ?>])"><i class="icon-stop"></i></button>
-		<input ng-model="previews[<?php echo $i; ?>].channel" type="number" min="0" max="100" placeholder="Channel #" ></input>
+		<button class="btn" ng-click="previewPlay(settings.previews[<?php echo $i; ?>])"><i class="icon-play"></i></button>
+		<button class="btn" ng-click="previewStop(settings.previews[<?php echo $i; ?>])"><i class="icon-stop"></i></button>
+		<input ng-model="settings.previews[<?php echo $i; ?>].channel" type="number" min="0" max="100" placeholder="Channel #" ></input>
+		<button class="btn" ng-click="previewSnap(settings.previews[<?php echo $i; ?>])"><i class="icon-camera"></i></button>
 	</form>
+	<div class="overlay" ng-show="snap">
+		<form class="">
+		<label>Image name:</label>
+		<input type="text" />
+		<label>Attach to:</label>
+		<input type="text" />
+		<div>
+		<button class="btn btn-primary" ng-click="previewSnapSave(settings.previews[<?php echo $i; ?>])">Save</button>
+		<button class="btn" ng-click="previewSnapSave(settings.previews[<?php echo $i; ?>])">Cancel</button>
+		</div>
+		</form>
+	</div>
 	<embed type="application/x-vlc-plugin" name="preview0"
          autoplay="yes" loop="no" height="270" width="480"
          target="<?php echo $previews[$i]->urlRx; ?>" />

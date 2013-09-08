@@ -203,17 +203,6 @@ var app = angular.module(
 		};
 
 		// PREVIEW
-//		$scope.previews = 
-//			[
-//			 {name: 'preview1', channel: 1, urlRx: 'udp://@:12345', urlTx: 'udp://127.0.0.1:12345'},
-//			 {name: 'preview2', channel: 2, urlRx: 'udp://@:12346', urlTx: 'udp://127.0.0.1:12346'},
-//			];
-		$scope.previews = 
-			[
-			 {name: 'preview1', channel: 1, urlRx: 'udp://@239.7.7.1:12345', urlTx: 'udp://239.7.7.1:12345'},
-			 {name: 'preview2', channel: 2, urlRx: 'udp://@239.7.7.1:12346', urlTx: 'udp://239.7.7.1:12346'},
-			];
-		
 		$scope.previewPlay = function(preview) {
 			var model = {};
 			model.type = 'StreamOut';
@@ -236,6 +225,15 @@ var app = angular.module(
 					console.log('stop click ok');
 				}
 			});			
+		};
+		
+		$scope.previewSnap = function(preview) {
+			$scope.snap = !$scope.snap;
+//			sceneService.casparSnap(preview.channel, '', function(result) {
+//				if (result.ok) {
+//					
+//				}
+//			})
 		};
 		
 	}])
