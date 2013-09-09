@@ -1,4 +1,8 @@
 # StudioLive Change Log#
+## 0.10.1 ##
+
+- Added a screen snapshot to the previews on the scene page.  A screenshot can be captured and assigned as a thumbnail to the show and / or scene.
+
 ## 0.9.12 ##
 
 - Added a caspar connected indicator to the top right.
