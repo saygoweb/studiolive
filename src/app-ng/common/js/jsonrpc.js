@@ -68,6 +68,8 @@ json_rpc.factory('jsonRpc', ['$http', 'error', function($http, error) {
 			if (data.error != null) {
 				// TODO error handling for jsonRpc CP 2013-07
 				error.error('RPC Error', data.error);
+				result.ok = false;
+				callback(result);
 				return;
 			}
 			if (data.error == null) {
