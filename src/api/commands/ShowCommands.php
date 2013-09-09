@@ -58,6 +58,31 @@ class ShowCommands
 		}
 		return $sceneId;
 	}
+	
+	public static function updateSnap($fileName, $newFileName, $object) {
+		if ($newFileName != $fileName) {
+			rename($fileName, $newFileName);
+		}
+		foreach ($object as $target) {
+			$targetType = $target['type'];
+			$id = $target['id'];
+			switch ($targetType) {
+				case 'show':
+					$model = new ShowModel($id);
+					$model->snapUrl = $newFileName;
+					$model->write();
+					break;
+				case 'scene':
+					$showId = $target['showId'];
+					$model = ShowModel::readScene($showId, $id);
+					$model->snapUrl = $newFileName;
+					ShowModel::writeScene($showId, $model);
+					break;
+				default:
+					throw new \Exception("Unsupported type '$targetType'");
+			}
+		}
+	}
 
 }
 

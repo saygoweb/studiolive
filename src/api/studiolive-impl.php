@@ -155,7 +155,7 @@ class StudioLiveAPI
 	}
 	
 	public function snap_update($fileName, $newFileName, $assignees) {
-		throw new \Exception("NYI");
+		ShowCommands::updateSnap($fileName, $newFileName, $assignees);
 	}
 
 }

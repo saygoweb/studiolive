@@ -120,6 +120,8 @@ class ShowModel extends mapper\MapperModel
 	
 	public $scenesIndex;
 	
+	public $snapUrl;
+	
 	public $actions;
 	
 	public $scenes;

@@ -18,12 +18,14 @@
 	<thead>
 	<tr>
 		<th width="16px"></th>
+		<th></th>
 		<th>Scene</th>
 	</tr>
 	</thead>
 	<tbody ui-sortable ng-model="scenesIndex">
 	<tr ng-repeat="proxy in scenesIndex" ng-class="{active: isSelected(proxy.id)}" ng-click="selectScene(proxy.id)" >
 		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(proxy.id)" ng-click="updateSelection($event, proxy.id)" /></td>
+		<td width="168px"><img ng-src="{{proxy.snapUrl}}" style="width: 160px; height: auto" /></td>
 		<td><a href="#/show/{{show.id}}/{{proxy.id}}">{{proxy.name}}</a></td>
 	</tr>
 	</tbody>

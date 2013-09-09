@@ -245,7 +245,7 @@ var app = angular.module(
 			$scope.snap.isVisible[index] = true;
 			$scope.snap.addToScene = true;
 			$scope.snap.addToShow = false;
-			$scope.snap.imageUrl = '/images/snap/20130908T223151.png';
+			$scope.snap.imageUrl = '/images/goodnightkiwi.png';
 			sceneService.snap($scope.settings.previews[index].channel, '', function(result) {
 				if (result.ok) {
 					$scope.snap.oldFileName = result.data;
@@ -256,7 +256,26 @@ var app = angular.module(
 		};
 		
 		$scope.previewSnapSave = function(index) {
-			$scope.snap.isVisible[index] = false;
+			var assignees = [];
+			if ($scope.snap.addToScene) {
+				var model = {};
+				model.type = 'scene';
+				model.showId = $scope.show.id;
+				model.id = $scope.scene.id;
+				assignees.push(model);
+			}
+			if ($scope.snap.addToShow) {
+				var model = {};
+				model.type = 'show';
+				model.id = $scope.show.id;
+				assignees.push(model);
+			}
+			sceneService.snapUpdate($scope.snap.oldFileName, $scope.snap.newFileName, assignees, function(result) {
+				if (result.ok) {
+					
+				}
+				$scope.snap.isVisible[index] = false;
+			});
 		};
 		
 		$scope.previewSnapCancel = function(index) {

@@ -20,6 +20,8 @@ class SceneModel
 
 	public $name;
 	
+	public $snapUrl;
+	
 	public $actions;
 
 	public $dataSet;

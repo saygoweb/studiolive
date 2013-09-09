@@ -69,7 +69,7 @@ angular.module('sl.services', ['jsonRpc'])
 			jsonRpc.call('snap', [channel, fileName], callback);
 		};
 		this.snapUpdate = function(fileName, newFileName, assignees, callback) {
-			jsonRpc.call('snap', [fileName, newFileName, assignees], callback);
+			jsonRpc.call('snap_update', [fileName, newFileName, assignees], callback);
 		};
 	}])
 	.factory('casparService', ['jsonRpc', '$timeout', function(jsonRpc, $timeout) {

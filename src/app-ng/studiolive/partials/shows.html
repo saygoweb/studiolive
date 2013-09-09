@@ -15,12 +15,14 @@
 	<thead>
 	<tr>
 		<th width="16px"></th>
+		<th></th>
 		<th>Show</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr ng-repeat="show in visibleShows" ng-class="{active: isSelected(show)}" ng-click="selectShow(show)" >
 		<td width="16px" align="center"><input type="checkbox" ng-checked="isSelected(show)" ng-click="updateSelection($event, show)" /></td>
+		<td width="168px"><img ng-src="{{show.snapUrl}}" style="width: 160px; height: auto" /></td>
 		<td><a href="#/show/{{show.id}}">{{show.name}}</a></td>
 	</tr>
 	</tbody>

@@ -122,7 +122,11 @@ module.controller('ShowScenesCtrl', ['$scope', 'sceneService', '$routeParams', f
 		var index = [];
 		for (var i = 0, l = $scope.show.scenesIndex.length; i < l; i++) {
 			var id = $scope.show.scenesIndex[i];
-			var model = {'id': id, 'name':$scope.show.scenes[id].name};
+			var model = {
+				'id': id, 
+				'name': $scope.show.scenes[id].name,
+				'snapUrl': $scope.show.scenes[id].snapUrl
+			};
 			index.push(model);
 		}
 		$scope.scenesIndex = index;
