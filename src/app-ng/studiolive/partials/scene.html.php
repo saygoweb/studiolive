@@ -71,17 +71,22 @@ if (HAS_PREVIEW) {
 		<button class="btn" ng-click="previewPlay(settings.previews[<?php echo $i; ?>])"><i class="icon-play"></i></button>
 		<button class="btn" ng-click="previewStop(settings.previews[<?php echo $i; ?>])"><i class="icon-stop"></i></button>
 		<input ng-model="settings.previews[<?php echo $i; ?>].channel" type="number" min="0" max="100" placeholder="Channel #" ></input>
-		<button class="btn" ng-click="previewSnap(settings.previews[<?php echo $i; ?>])"><i class="icon-camera"></i></button>
+		<button class="btn" ng-click="previewSnap(<?php echo $i; ?>)"><i class="icon-camera"></i></button>
 	</form>
-	<div class="overlay" ng-show="snap">
+	<div class="overlay" ng-show="snap.isVisible[<?php echo $i; ?>]">
+		<img ng-src="{{snap.imageUrl}}" class="right" style="width: 160px;height: auto;border: 1px solid white;" />
 		<form class="">
 		<label>Image name:</label>
-		<input type="text" />
-		<label>Attach to:</label>
-		<input type="text" />
+		<input type="text" ng-model="snap.newFileName" />
+		<label class="checkbox">
+		<input type="checkbox" ng-model="snap.addToScene" />Add to scene {{scene.name}}
+		</label>
+		<label class="checkbox">
+		<input type="checkbox" ng-model="snap.addToShow" />Add to show {{show.name}}
+		</label>
 		<div>
-		<button class="btn btn-primary" ng-click="previewSnapSave(settings.previews[<?php echo $i; ?>])">Save</button>
-		<button class="btn" ng-click="previewSnapSave(settings.previews[<?php echo $i; ?>])">Cancel</button>
+			<button class="btn btn-primary" ng-click="previewSnapSave(<?php echo $i; ?>)">Save</button>
+			<button class="btn" ng-click="previewSnapCancel(<?php echo $i; ?>)">Cancel</button>
 		</div>
 		</form>
 	</div>

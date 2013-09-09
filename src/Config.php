@@ -6,7 +6,8 @@ define('CASPAR_PORT', '5250');
 $webRoot = realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
 
 if (!defined('CASPAR_PATH_SNAP')) {
-	define('CASPAR_PATH_SNAP', 'C:\CasparCG\CommunityServer\data');
+	//define('CASPAR_PATH_SNAP', 'C:\CasparCG\CommunityServer\data');
+	define('CASPAR_PATH_SNAP', '/var/www/host/CasparCG/data');
 }
 if (!defined('SL_PATH_SNAP')) {
 	define('SL_PATH_SNAP', $webRoot . 'images/snap');

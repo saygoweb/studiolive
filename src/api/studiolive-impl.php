@@ -1,5 +1,7 @@
 <?php
 
+use commands\CasparSnapCommand;
+
 use commands\CasparCommands;
 use commands\ShowCommands;
 use libraries\palaso\JsonRpcServer;
@@ -148,7 +150,8 @@ class StudioLiveAPI
 	}
 
 	public function snap($channel, $fileName) {
-		return CasparCommands::snap($channel, $fileName);
+		$snapper = new CasparSnapCommand();
+		return $snapper->snap($channel);
 	}
 	
 	public function snap_update($fileName, $newFileName, $assignees) {

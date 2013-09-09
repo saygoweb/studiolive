@@ -220,7 +220,7 @@ div#previews > p {
 .overlay {
 	position: absolute;
 	top: 30px;
-	left: -480px;
+	left: -450px;
 	right: 490px;
 	bottom: 5px;
 	padding: 19px;

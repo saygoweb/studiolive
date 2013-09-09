@@ -26,10 +26,20 @@ var app = angular.module(
 				 {href: '#/show/' + $routeParams.showId + '/' + $routeParams.sceneId, label: ''},
 				]
 		);
+		
 		var updateBreadcrumbs = function() {
 			breadcrumbService.updateCrumb('top', 1, { label: $scope.show.name });
 			breadcrumbService.updateCrumb('top', 2, { label: $scope.scene.name });
 		};
+		
+		var updateSnap = function() {
+			$scope.snap = {};
+			$scope.snap.isVisible = [];
+			for (var i = 0, c = $scope.settings.previews.length; i < c; i++) {
+				$scope.snap.isVisible.push(false);
+			}
+		};
+
 		// Read
 		$scope.queryShow = function() {
 			sceneService.readShow($scope.show.id, function(result) {
@@ -40,6 +50,17 @@ var app = angular.module(
 			});
 		};
 		$scope.queryShow();
+		
+		$scope.$watch("show", function(newValue, oldValue) {
+			if (newValue.name == undefined) {
+				return;
+			}
+			console.log("watch show", newValue);
+			$scope.updateScene();
+			$scope.updateSceneList();
+			updateBreadcrumbs();
+			updateSnap();
+		});
 		
 		$scope.saveScene = function() {
 			console.log('scene update...');
@@ -64,13 +85,6 @@ var app = angular.module(
 		};
 		
 		// Show actions / Scene actions
-		$scope.$watch("show", function(newValue, oldValue) {
-			console.log("watch show", newValue);
-			$scope.updateScene();
-			$scope.updateSceneList();
-			updateBreadcrumbs();
-		});
-		
 		$scope.$watch("state.sceneId", function(newValue, oldValue) {
 			console.log("watch currentSceneId", newValue);
 			$scope.updateScene();
@@ -227,13 +241,26 @@ var app = angular.module(
 			});			
 		};
 		
-		$scope.previewSnap = function(preview) {
-			$scope.snap = !$scope.snap;
-//			sceneService.snap(preview.channel, '', function(result) {
-//				if (result.ok) {
-//					
-//				}
-//			})
+		$scope.previewSnap = function(index) {
+			$scope.snap.isVisible[index] = true;
+			$scope.snap.addToScene = true;
+			$scope.snap.addToShow = false;
+			$scope.snap.imageUrl = '/images/snap/20130908T223151.png';
+			sceneService.snap($scope.settings.previews[index].channel, '', function(result) {
+				if (result.ok) {
+					$scope.snap.oldFileName = result.data;
+					$scope.snap.newFileName = result.data;
+					$scope.snap.imageUrl = result.data;
+				}
+			});
+		};
+		
+		$scope.previewSnapSave = function(index) {
+			$scope.snap.isVisible[index] = false;
+		};
+		
+		$scope.previewSnapCancel = function(index) {
+			$scope.snap.isVisible[index] = false;
 		};
 		
 	}])

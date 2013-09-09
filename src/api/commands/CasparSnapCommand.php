@@ -36,7 +36,6 @@ class CasparSnapCommand
 	public function sendSnapCommand($channel) {
 		$caspar = CasparConnection::connect(CASPAR_HOST, CASPAR_PORT);
 		$response = $caspar->sendString("PRINT $channel\r\n");
-		var_dump($response);
 		$response = trim($response[0]);
 		if ($response != '202 PRINT OK') {
 			throw new \Exception("Caspar error: $response");
@@ -55,7 +54,6 @@ class CasparSnapCommand
 			throw new \Exception(sprintf("Snap file not found in '%s'", CASPAR_PATH_SNAP));
 		}
 		krsort($fileNames, SORT_NUMERIC);
-		var_dump($fileNames);
 		foreach ($fileNames as $fileName) {
 			return $fileName;
 		}
@@ -70,7 +68,7 @@ class CasparSnapCommand
 	}
 	
 	private static function relativeUrl($fileName) {
-		return sprintf('/images/media/snap/%s', $fileName);
+		return sprintf('/images/snap/%s', $fileName);
 	}
 }
 
