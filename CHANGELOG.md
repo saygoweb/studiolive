@@ -1,4 +1,9 @@
 # StudioLive Change Log#
+## 1.0.1 ##
+
+- Added record to file feature.
+- Changed show time buttons to a button group which indicate green when the action is live. However, this does not track the actual server state. So if an action is stopped by some other means the indicators are no longer accurate.
+
 ## 0.10.1 ##
 
 - Added a screen snapshot to the previews on the scene page.  A screenshot can be captured and assigned as a thumbnail to the show and / or scene.

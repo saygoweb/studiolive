@@ -8,17 +8,14 @@ StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.
 * Live preview of a configurable number of channels.
 * Multiple users can use the client from any web browser.
 * Define sets of Actions to be executed together (per show).
-* Screen Shot feature for captureing thumbnails to represent shows and scenes graphically.
-* Define any number of scenes per show.
+* Screen Shot feature for capturing thumbnails to represent shows and scenes graphically.
 * Conflates the data used by Flash Templates per show, making it easy to update data for multiple templates from a single UI. 
 * Easy to use 'Show Time' page to operate during a live event or studio recording. 
+* Define any number of scenes per show.
 
-## What's New as of 0.10.1 ##
+## What's New as of 1.0 ##
 
-- Added a screen snapshot to the previews on the scene page.  A screenshot can be captured and assigned as a thumbnail to the show and / or scene.
-- Added a caspar connected indicator to the top right.
-- Added a scene select dropdown on the scene page.
-- Media files for images, templates, and video can now be selected by a drop down, with the drop down options being obtained from the Caspar server.
+- Everything.
 
 See the [Change Log](https://github.com/saygoweb/studiolive/blob/master/CHANGELOG.md) for more details.
 
