@@ -17,20 +17,32 @@ class OutputResourceCommandModel extends CommandModel
 	
 	public function casparCommandIn($userData) {
 		// TODO Add support for arbitrary args
-		$result = sprintf('ADD %d %s "%s" %s', $this->channel, $this->_type, $this->resourceName, $this->options);
+		$options = '';
+		$result = sprintf('ADD %d %s "%s" %s', $this->channel, $this->_type, $this->resourceName, $options);
 		return $result;
 	}
 	
 	public function casparCommandOut() {
-		$result = sprintf('REMOVE %d %s "%s"', $this->channel, $this->_type, $this->resourceName);
+		$resourceName = $this->resourceName;
+		if ($this->_type == self::FILE) {
+			// Hmmm, 'REMOVE 1 FILE $this->resourceName' throws, but any non existent name works. 
+			$resourceName = '_x';
+		}
+		$result = sprintf('REMOVE %d %s "%s"', $this->channel, $this->_type, $resourceName);
 		return $result;
 	}
 	
 	public $channel;
 	
 	public $resourceName;
+
+	/*
+	public $size;
 	
-	public $options;
+	public $videoCodec;
+	
+	public $audioCodec;
+	*/
 	
 }
 
