@@ -17,8 +17,11 @@ if (HAS_PREVIEW) {
 <div id="sceneSelect" class="right"><select ng-model="state.sceneId" ng-options="scene.id as scene.name for scene in scenes"></select></div>
 <tab heading="Show Time">
 	<div class="well">
-	<div class="st-control" ng-repeat="action in sceneActions">
-	{{action.name}}<div class="right"><button ng-click="stInClick(action.id)" class="btn btn-large">In</button><button ng-click="stOutClick(action.id)" class="btn btn-large">Out</button></div>
+	<div class="st-control" ng-repeat="action in sceneActions">{{action.name}}
+		<div id="stButtons" class="btn-group right">
+			<button ng-model="state.sceneActionsState[action.id]" btn-radio="'in'" ng-click="stInClick(action.id)" class="btn btn-large">In</button>
+			<button ng-model="state.sceneActionsState[action.id]" btn-radio="'out'" ng-click="stOutClick(action.id)" class="btn btn-large">Out</button>
+		</div>
 	</div>
 	</div>
 </tab>

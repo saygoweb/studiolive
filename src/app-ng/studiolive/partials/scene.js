@@ -18,6 +18,8 @@ var app = angular.module(
 		$scope.scene = {};
 		$scope.state = {};
 		$scope.state.sceneId = $routeParams.sceneId;
+		$scope.state.sceneActionsState = {};
+		$scope.sceneActions = [];
 
 		breadcrumbService.set('top',
 				[
@@ -134,10 +136,25 @@ var app = angular.module(
 		
 		// Scene Actions
 		$scope.$watch("sceneActions", function(newValue, oldValue) {
-			//console.log('watch sceneActions', newValue);
+			if ($scope.sceneActions == undefined) {
+				return;
+			}
+//			console.log('watch sceneActions', newValue);
+
+			var sceneActions = [];
+			for (var i = 0, l = $scope.sceneActions.length; i < l; i++) {
+				var id = $scope.sceneActions[i].id;
+				sceneActions.push(id);
+				if ($scope.state.sceneActionsState[id] == undefined) {
+					$scope.state.sceneActionsState[id] = 'out';
+				}
+			}
+	
+			// Save the scene if we can update (i.e. this is after the initial scene load).
 			if ($scope.canUpdate == undefined) {
 				return;
 			}
+//			console.log('watch sceneActions canUpdate', newValue);
 			var sceneActions = [];
 			for (var i = 0, l = $scope.sceneActions.length; i < l; i++) {
 				sceneActions.push($scope.sceneActions[i].id);
@@ -202,15 +219,19 @@ var app = angular.module(
 
 		// SHOW TIME
 		$scope.stInClick = function(actionId) {
-			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'in', null, function(result) {
+//			$scope.state.sceneActionsState[actionId] = 'in';
+			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'in', function(result) {
 				if (result.ok) {
+					$scope.state.sceneActionsState[actionId] = 'in';
 					console.log('in click ok');
 				}
 			});
 		};
 		$scope.stOutClick = function(actionId) {
-			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'out', null, function(result) {
+//			$scope.state.sceneActionsState[actionId] = 'out';
+			sceneService.executeAction($scope.show.id, $scope.scene.id, actionId, 'out', function(result) {
 				if (result.ok) {
+					$scope.state.sceneActionsState[actionId] = 'out';
 					console.log('out click ok');
 				}
 			});

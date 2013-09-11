@@ -124,6 +124,10 @@ ul.actionList li {
 }
 
 /* Show Time */
+div#stButtons .btn.active:first-child {
+	background-color: rgb(152, 252, 148);
+}
+
 .st-preview {
 	width: 482px;
 	margin-bottom: 8px;
