@@ -45,7 +45,9 @@ The StudioLive system does not need to run on the same server as CasparCG.  In f
 The StudioLive system is developed and tested on a Debian Wheezy system. There is no pre-built package available so for now you would have to download from the github repository and setup Apache and MongoDB yourself.
 
 ## Status ##
-StudioLive is under active development and is currently at Alpha level.  This means that the client works, but there are quite likely bugs and areas that need fixing.  There are also features that may be under development and not yet fully implemented.
+StudioLive has a stable release 1.0.
+
+Future development plans are discussed on the Caspar Forum.
 
 * Checkout the [Trello things to do list](https://trello.com/b/dChvuzOw/saygo-studiolive) for more details.
 
