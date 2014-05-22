@@ -19,6 +19,10 @@ StudioLive uses AngularJS for the front end and PHP with MongoDB on the backend.
 
 See the [Change Log](https://github.com/saygoweb/studiolive/blob/master/CHANGELOG.md) for more details.
 
+## Known Issues ##
+
+* The preview panes use the VLC mozilla plugin. This is known not to work on Chrome browsers. Therefore this feature is Firefox only. If anyone knows a better method of displaying a udp video stream do let me know via an issue.
+
 ## Installation Notes ##
 The latest Windows version is [available here](https://drive.google.com/folderview?id=0B1aEHU7j2cRhdTVOdHp0VjdRUkE&usp=sharing).
 
